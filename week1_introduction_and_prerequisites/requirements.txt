@@ -17,13 +17,16 @@ cli-helpers==2.3.0
 click==8.1.7
 comm==0.2.1
 configobj==5.0.8
+cramjam==2.8.0
 debugpy==1.8.0
 decorator==5.1.1
 defusedxml==0.7.1
 exceptiongroup==1.2.0
 executing==2.0.1
 fastjsonschema==2.19.1
+fastparquet==2023.10.1
 fqdn==1.5.1
+fsspec==2023.12.2
 greenlet==3.0.3
 idna==3.6
 importlib-metadata==7.0.1
@@ -80,6 +83,7 @@ psycopg2==2.9.9
 psycopg2-binary==2.9.9
 ptyprocess==0.7.0
 pure-eval==0.2.2
+pyarrow==14.0.2
 pycparser==2.21
 Pygments==2.17.2
 python-dateutil==2.8.2
@@ -108,6 +112,7 @@ time-machine==2.13.0
 tinycss2==1.2.1
 tomli==2.0.1
 tornado==6.4
+tqdm==4.66.1
 traitlets==5.14.1
 types-python-dateutil==2.8.19.20240106
 typing_extensions==4.9.0
