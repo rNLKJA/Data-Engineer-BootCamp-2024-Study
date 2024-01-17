@@ -10,4 +10,4 @@ python dataset_to_postgres_parquet.py \
     --download_path "./data" \
     --year 2021 \
     --start_month 1 \
-    --end_month 12 
+    --end_month 1 
