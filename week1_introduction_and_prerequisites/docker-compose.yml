@@ -1,16 +1,6 @@
 version: "3.8"
 
 services:
-  python-app:
-    image: python:3.9
-    container_name: python-app
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: bash -c "pip install -r requirements.txt"
-    networks:
-      - pg-network
-
   pg-database:
     image: postgres:13
     container_name: pg-database-1
@@ -25,9 +15,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    depends_on:
-      python-app:
-        condition: service_started
+
     networks:
       - pg-network
     restart: on-failure
