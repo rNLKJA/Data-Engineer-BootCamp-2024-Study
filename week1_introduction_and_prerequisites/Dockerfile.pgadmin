@@ -1,0 +1,7 @@
+FROM dpage/pgadmin4
+
+# Copy the setup script into the container
+COPY setup-pgadmin.py setup-pgadmin.py
+
+# Run the setup script after pgAdmin starts
+CMD ["python3", "setup-pgadmin.py"]
