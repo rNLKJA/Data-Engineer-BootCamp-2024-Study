@@ -1,32 +1,50 @@
 version: "3.8"
 
 services:
-  pg-database:
-    image: postgres:13
-    container_name: pg-database-1
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=ny_taxi
+  python-app:
+    image: python:3.9
+    container_name: python-app
     volumes:
-      - ./ny_taxi_postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      - .:/app
+    working_dir: /app
+    command: bash -c "pip install -r requirements.txt"
     networks:
       - pg-network
 
-  pgadmin-2:
+  pg-database:
+    image: postgres:13
+    container_name: pg-database-1
+    env_file:
+      - database.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d ny_taxi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      python-app:
+        condition: service_started
+    networks:
+      - pg-network
+    restart: on-failure
+
+  pg-admin:
     image: dpage/pgadmin4
     container_name: pgadmin-1
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=root
+    env_file:
+      - pgadmin.env
     ports:
       - "8080:80"
     depends_on:
-      - pg-database
+      pg-database:
+        condition: service_healthy
     networks:
       - pg-network
+    restart: on-failure
 
 networks:
   pg-network:
