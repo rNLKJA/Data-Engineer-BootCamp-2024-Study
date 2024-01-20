@@ -2,8 +2,8 @@
 
 # Introduction & Pre-requisites
 
-
 ## Containerisation and Docker
+
 Containers offer several benefits for software development, streamlining the development process and offering a more efficient and consistent environment for both development and deployment. Here are some of the key advantages:
 
 1. **Consistency Across Environments**: Containers encapsulate an application and its environment. This means that they run the same regardless of where they are deployed, be it a developer's local machine, a test environment, or production. This consistency reduces the "it works on my machine" syndrome.
@@ -18,7 +18,7 @@ Containers offer several benefits for software development, streamlining the dev
 10. **Local Development Environments**: Developers can easily replicate production environments on their local machines without needing to manually configure their development environment.
 11. **Cost-Effectiveness**: Since containers make more efficient use of hardware than traditional or virtual machine-based solutions, they can reduce infrastructure costs.
 12. **Cloud-Native Compatibility**: Containers are often designed to be cloud-native, meaning they are optimized for cloud environments, which can provide additional scalability, resilience, and distribution benefits.
-In summary, containers simplify the development process by creating a portable and consistent environment for applications to run in, which helps in reducing the time and effort required for dealing with environmental inconsistencies and dependency management. This allows teams to focus more.
+    In summary, containers simplify the development process by creating a portable and consistent environment for applications to run in, which helps in reducing the time and effort required for dealing with environmental inconsistencies and dependency management. This allows teams to focus more.
 
 ---
 
@@ -36,25 +36,29 @@ Some commonly used Docker commands include:
 - `docker exec` : To run a command inside a running container.
 - `docker stop` : To stop a running container.
 
-
 Certainly! Detaching and attaching to Docker containers are common tasks when managing multiple containers. Here's a guide on how to do it:
 
 ### Detaching from a Docker Container:
+
 When you run a Docker container and want it to keep running in the background, you can start it in detached mode or detach from it after starting it in interactive mode.
 
 **Starting a Container in Detached Mode:**
 
-1. Use the `-d`  flag with `docker run`  to start a new container in detached mode: Replace `<image-name>`  with the name of your Docker image.docker run -d <image-name>
-**Detaching from an Interactive Container:**
+1. Use the `-d` flag with `docker run` to start a new container in detached mode: Replace `<image-name>` with the name of your Docker image.docker run -d <image-name>
+   **Detaching from an Interactive Container:**
 
-1. If you start a container in interactive mode using `-it`  flags:docker run -it <image-name>
-2. You can detach from it and leave it running using the escape sequence `Ctrl+p`  followed by `Ctrl+q` .
+1. If you start a container in interactive mode using `-it` flags:docker run -it <image-name>
+1. You can detach from it and leave it running using the escape sequence `Ctrl+p` followed by `Ctrl+q` .
+
 ### Attaching to a Running Docker Container:
+
 To attach to a running container that is in detached mode, you can use the `docker attach` command:
 
 1. First, find the container ID or name using:docker ps
-2. Then attach to the container using: Replace `<container-id-or-name>`  with the actual ID or name of your container.docker attach <container-id-or-name>
+2. Then attach to the container using: Replace `<container-id-or-name>` with the actual ID or name of your container.docker attach <container-id-or-name>
+
 ### Running Multiple Containers in the Background:
+
 You can run multiple containers in detached mode by issuing the `docker run -d <image-name>` command for each container you want to run.
 
 Here's an example command to run three containers from the same image in detached mode:
@@ -64,71 +68,108 @@ docker run -d <image-name>
 docker run -d <image-name>
 docker run -d <image-name>
 ```
+
 ### Managing Containers:
+
 - To list all running containers, use:docker ps
 - To list all containers, including stopped ones, use:docker ps -a
+
 ### Stopping Containers:
+
 When you want to stop a running container, use:
 
 ```sh
 docker stop <container-id-or-name>
 ```
+
 ### Restarting Containers:
+
 To restart a stopped container, use:
 
 ```sh
 docker start <container-id-or-name>
 ```
+
 Remember that you can always use Docker Compose to manage multiple containers as part of a single service stack, which can be more convenient for complex applications.
 
 ### Run Docker at the backend and attach it to the local host port
+
 1. **Pull the Docker Image** (if you haven't already):
-    1. Replace `<image-name>`  with the name of the Docker image you want to use. `docker pull <image-name>` 
-2. **Run the Container in Detached Mode** with Port Mapping:
-    1. `docker run -d -p <local-port>:<container-port> <image-name>` 
-    2. `-d`  flag runs the container in detached mode.
-    3. `-p`  flag maps a port on your local machine to a port in the container.
-    4. `<local-port>`  is the port on your local machine you want to use.
-    5. `<container-port>`  is the port inside the container that your application listens on.
-    6. `<image-name>`  is the name of your Docker image.
-For example, if you have an application inside your container that listens on port 5000, and you want to access it via port 8080 on your local machine, you would run:
+   1. Replace `<image-name>` with the name of the Docker image you want to use. `docker pull <image-name>`
+2. **Run the Container in Detached Mode** with Port Mapping: 1. `docker run -d -p <local-port>:<container-port> <image-name>` 2. `-d` flag runs the container in detached mode. 3. `-p` flag maps a port on your local machine to a port in the container. 4. `<local-port>` is the port on your local machine you want to use. 5. `<container-port>` is the port inside the container that your application listens on. 6. `<image-name>` is the name of your Docker image.
+   For example, if you have an application inside your container that listens on port 5000, and you want to access it via port 8080 on your local machine, you would run:
 
 ```sh
 docker run -d -p 8080:5000 <image-name>
 ```
+
 After running this command, your Docker container will start in the background. You can access your application by going to `http://localhost:8080` in your web browser or using any other tool that makes HTTP requests.
 
 Remember to replace `<image-name>` with the actual image you want to use and adjust the port numbers according to your specific needs.
 
 ## Running Database
+
 I strongly recommend setting up a virtual Python environment.
 
-- `pip3 install virtualenv` 
-- `python3 -m venv my_venv` 
-- `source my_venv/bin/activate` 
-- `pip3 install -r requirements.txt` 
+- `pip3 install virtualenv`
+- `python3 -m venv my_venv`
+- `source my_venv/bin/activate`
+- `pip3 install -r requirements.txt`
 
+For dataset download, you can follow the Github link or use the download script; this download script will download the parquet file.
 
-For dataset download, you can follow the Github link or use the download script; this download script will download the parquet file. 
-
-- `python nyc_yellow_taxi_data_downloader.py --year=2021 --start_month=1 --end_month=1` 
-- `python nyc_yellow_taxi_data_downloader.py -y=2021 -s=1 -e=1` 
-
+- `python nyc_yellow_taxi_data_downloader.py --year=2021 --start_month=1 --end_month=1`
+- `python nyc_yellow_taxi_data_downloader.py -y=2021 -s=1 -e=1`
 
 Then you can run python scripts:
 
-- Run database docker container: `./postgres.sh` 
-- Run pgcli without enter password: .`/pgcli.sh` 
-- Loading nyc_taxi dataset to database: `python3 dataset_to_postgres.py -f [file_path] -t [table_name]` 
-    - For parquet: `python3 dataset_to_postgres.py -f='yellow_tripdata_2021-01.csv' -t='yellow_taxi_data'` 
-    - For csv: `python3 dataset_to_postgres_parquet.py -f='yellow_tripdata_2021-01.csv' -t='yellow_taxi_data'`  
-After loading the dataset, you can remove the csv files.
-
-
-
-
-
-
-
+- Run database docker container: `./postgres.sh`
+- Run pgcli without enter password: .`/pgcli.sh`
+- Loading nyc_taxi dataset to database: `python3 dataset_to_postgres.py -f [file_path] -t [table_name]` - For parquet: `python3 dataset_to_postgres.py -f='yellow_tripdata_2021-01.csv' -t='yellow_taxi_data'` - For csv: `python3 dataset_to_postgres_parquet.py -f='yellow_tripdata_2021-01.csv' -t='yellow_taxi_data'`  
+  After loading the dataset, you can remove the csv files.
 
 <!--- Eraser file: https://app.eraser.io/workspace/ZSIAOd9qx7MOGPlmxEgK --->
+
+## Using Docker Compose to Automate PostgreSQL and pgAdmin Setup
+
+Docker Compose allows you to define and manage multi-container Docker applications. In this case, we will use it to automate the setup of our PostgreSQL database and pgAdmin.
+
+First, create a `docker-compose.yml` file in your project root with the following content:
+
+````yaml
+version: '3'
+services:
+    db:
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: yourpassword
+        volumes:
+            - ./data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+    pgadmin:
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: your-email@example.com
+            PGADMIN_DEFAULT_PASSWORD: yourpassword
+        ports:
+            - "8080:80"
+        depends_on:
+            - db
+
+
+To start the service, navigate to the directory containing your docker-compose.yml file and run:
+
+```bash
+docker-compose up
+````
+
+This will start your PostgreSQL and pgAdmin services in the background.
+
+To stop the service, you can use:
+
+```bash
+docker-compose down
+```
+
+This will stop and remove the containers, networks, and volumes defined in your docker-compose.yml file.
