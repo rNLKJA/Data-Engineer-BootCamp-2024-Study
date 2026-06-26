@@ -1,6 +1,8 @@
 <p><a target="_blank" href="https://app.eraser.io/workspace/ZSIAOd9qx7MOGPlmxEgK" id="edit-in-eraser-github-link"><img alt="Edit in Eraser" src="https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fgithub%2FOpen%20in%20Eraser.svg?alt=media&amp;token=968381c8-a7e7-472a-8ed6-4a6626da5501"></a></p>
 
-# Introduction & Pre-requisites
+# Week 1 — Introduction & Prerequisites
+
+> Part of my [Data Engineering Zoomcamp 2024 study repo](../README.md). These are my notes on containers and Docker plus a working pipeline that loads NYC yellow-taxi data into a local Postgres database via Docker Compose. See the [root README](../README.md#week-1--getting-started) for the quick-start run steps.
 
 ## Containerisation and Docker
 

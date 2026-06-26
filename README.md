@@ -1,20 +1,42 @@
 <p><a target="_blank" href="https://app.eraser.io/workspace/bqYqyZzge8nO3UiGLlIt" id="edit-in-eraser-github-link"><img alt="Edit in Eraser" src="https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fgithub%2FOpen%20in%20Eraser.svg?alt=media&amp;token=968381c8-a7e7-472a-8ed6-4a6626da5501"></a></p>
 
-# Data-Engineer-BootCamp-2024-Study
+<div align="center">
 
-[Data Engineer BootCamp 2024](https://dezoomcamp.streamlit.app/)
+# Data Engineering Zoomcamp 2024 — Study
 
-- [Data-Engineer-BootCamp-2024-Study](#data-engineer-bootcamp-2024-study)
-  - [Syllabus](#syllabus)
-    - [Week 1: Introduction \& Prerequisites](#week-1-introduction--prerequisites)
-    - [Week 2: Workflow Orchestration](#week-2-workflow-orchestration)
-    - [Week 3: Data Warehouse](#week-3-data-warehouse)
-    - [Week4: Analytics Engineering](#week4-analytics-engineering)
-    - [Week 5: Batch Processing](#week-5-batch-processing)
-    - [Week 6: Streaming Processing](#week-6-streaming-processing)
-    - [Week 7: Project](#week-7-project)
+My working notes and code as I follow the [DataTalksClub Data Engineering Zoomcamp 2024](https://dezoomcamp.streamlit.app/). A learn-in-public record, built up week by week.
+
+[![DataTalksClub](https://img.shields.io/badge/DataTalksClub-Zoomcamp%202024-FF6B35?style=flat-square)](https://dezoomcamp.streamlit.app/)
+[![Python](https://img.shields.io/badge/Python-3.9-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![GCP](https://img.shields.io/badge/Google%20Cloud-Terraform%20%2F%20BigQuery-4285F4?style=flat-square&logo=googlecloud&logoColor=white)](https://cloud.google.com)
+
+</div>
+
+## Overview
+
+The [Data Engineering Zoomcamp](https://dezoomcamp.streamlit.app/) is a free, hands-on course run by [DataTalksClub](https://datatalks.club/). Over seven weeks it builds an end-to-end data pipeline on the [NYC yellow taxi](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) dataset — containerising services with Docker, loading data into Postgres, warehousing in BigQuery, orchestrating with a workflow tool, transforming with dbt, then batch and stream processing with Spark and Kafka.
+
+This repository is **my personal study record** as I work through the course. It is a learning project, not a finished product: code, notes and explanations are written for my own understanding and may differ from the official course materials. I am building it up one week at a time.
+
+## Progress / Status
+
+Honest snapshot of where this repo actually is. Only **Week 1** has real content and working code; the remaining weeks are scaffolded folders waiting to be filled in.
+
+| Week   | Topic                        | Status         | Notes                                                                        |
+| ------ | ---------------------------- | -------------- | ---------------------------------------------------------------------------- |
+| Week 1 | Introduction & Prerequisites | ✅ Done        | Docker + Postgres notes, working ingestion pipeline and docker-compose stack |
+| Week 2 | Workflow Orchestration       | ⬜ Not started | Empty stub folder                                                            |
+| Week 3 | Data Warehouse               | ⬜ Not started | Empty stub folder                                                            |
+| Week 4 | Analytics Engineering        | ⬜ Not started | Empty stub folder                                                            |
+| Week 5 | Batch Processing             | ⬜ Not started | Empty stub folder                                                            |
+| Week 6 | Stream Processing            | ⬜ Not started | Empty stub folder                                                            |
+| Week 7 | Project                      | ⬜ Not started | Empty stub folder                                                            |
 
 ## Syllabus
+
+The seven-week outline from the course, kept here for reference.
 
 ### Week 1: Introduction & Prerequisites
 
@@ -29,10 +51,10 @@
 
 - Data Lake
 - Workflow orchestration
-- Introduction to Perfect
-- ETL with GCP & Perfect
-- Parametrizing workflows
-- Perfect Cloud and additional resources
+- Introduction to the orchestration tool
+- ETL with GCP
+- Parametrising workflows
+- Cloud and additional resources
 
 ### Week 3: Data Warehouse
 
@@ -44,7 +66,7 @@
 - Integrating BigQuery with Airflow
 - BigQuery Machine Learning
 
-### Week4: Analytics Engineering
+### Week 4: Analytics Engineering
 
 - Basics of analytics engineering
 - dbt (data build tool)
@@ -53,7 +75,7 @@
 - dbt models
 - Testing and documenting
 - Deployment to the cloud and locally
-- Visualizing the data with Google Data Studio and metabase
+- Visualising the data with Google Data Studio and Metabase
 
 ### Week 5: Batch Processing
 
@@ -63,7 +85,7 @@
 - Spark SQL
 - Internals: GroupBy and joins
 
-### Week 6: Streaming Processing
+### Week 6: Stream Processing
 
 - Introduction to Kafka
 - Schemas (Avro)
@@ -72,6 +94,53 @@
 
 ### Week 7: Project
 
-- Working on your project
+- Working on your end-to-end project
+
+## Week 1 — Getting Started
+
+Week 1 is the implemented part of this repo. It spins up Postgres and pgAdmin with Docker Compose, downloads NYC yellow-taxi parquet files, and loads them into the local database with SQLAlchemy. Full notes live in [`week1_introduction_and_prerequisites/README.md`](./week1_introduction_and_prerequisites/README.md).
+
+```bash
+cd week1_introduction_and_prerequisites
+
+# 1. Create and activate a virtual environment
+python3 -m venv my_venv
+source my_venv/bin/activate
+pip3 install -r app/requirements.txt
+
+# 2. Start Postgres + pgAdmin (pgAdmin at http://localhost:8080)
+docker-compose up -d
+
+# 3. Download taxi data and load it into Postgres
+#    (downloads parquet, then loads month-by-month via SQLAlchemy)
+python3 dataset_to_postgres_parquet.py \
+    --table_name yellow_taxi_trip \
+    --user root --password root \
+    --host localhost --port 5432 \
+    --database ny_taxi \
+    --download_path ./data \
+    --year 2021 --start_month 1 --end_month 2
+
+# 4. When you are done
+docker-compose down
+```
+
+The `database.env` and `pgadmin.env` values (`root` / `root`, `admin@admin.com`) are the **standard DataTalksClub local-Docker tutorial defaults** — they are for a throwaway local container only, not real credentials. Do not reuse them anywhere that matters.
+
+## Tech Stack
+
+| Area                | Tools                                      |
+| ------------------- | ------------------------------------------ |
+| Language            | Python 3.9                                 |
+| Data handling       | pandas, pyarrow / fastparquet, SQLAlchemy  |
+| Database            | PostgreSQL 13                              |
+| Database admin      | pgAdmin 4                                  |
+| Containerisation    | Docker, Docker Compose                     |
+| Cloud (later weeks) | Google Cloud Platform, Terraform, BigQuery |
+| Data source         | NYC TLC yellow-taxi trip records           |
+
+---
+
+_Following the [DataTalksClub Data Engineering Zoomcamp 2024](https://dezoomcamp.streamlit.app/). This is a personal study repository._
 
 <!--- Eraser file: https://app.eraser.io/workspace/bqYqyZzge8nO3UiGLlIt --->
