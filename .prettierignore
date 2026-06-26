@@ -1,0 +1,18 @@
+# Archived / earlier-iteration scripts — keep as-is
+_archive/
+week1_introduction_and_prerequisites/archive/
+
+# Non-prettier-managed file types
+*.sql
+*.env
+Dockerfile*
+
+# Data and environments
+data/
+my_venv/
+
+# Lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+poetry.lock
