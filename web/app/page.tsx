@@ -110,7 +110,9 @@ export default function Home() {
             {weeks.map((item, index) => {
               const isComplete = item.status === "complete";
               const statusColor = isComplete ? "teal" : "slate";
-              const bgOpacity = isComplete ? "bg-teal/10 dark:bg-teal/5" : "bg-graphite/5 dark:bg-graphite/10";
+              const bgOpacity = isComplete
+                ? "bg-teal/10 dark:bg-teal/5"
+                : "bg-graphite/5 dark:bg-graphite/10";
               const borderColor = isComplete
                 ? "border-teal/30 dark:border-teal/20"
                 : "border-graphite/20 dark:border-graphite/30";
