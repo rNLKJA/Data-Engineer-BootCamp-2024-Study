@@ -6,24 +6,24 @@ export const metadata: Metadata = {
 };
 
 export default function TourPage() {
-  const features = [
+  const screenshots = [
     {
-      title: "Pipeline Curriculum View",
-      description:
-        "The curriculum is presented as a data pipeline timeline, with Week 1 marked as complete and subsequent weeks scaffolded by stage. Each week shows its topics and learning outcomes.",
-      topics: ["Week-by-week progression", "Status indicators", "Topic overview"],
+      title: "Hero Section",
+      description: "The landing page hero introducing the Data Engineer BootCamp with the value proposition and course overview.",
+      src: "/tour/hero.png",
+      alt: "Hero section with Data Engineer BootCamp title and course description",
     },
     {
-      title: "Hero and Navigation",
-      description:
-        "A clean, spacious hero section introduces the bootcamp with a teal accent colour. The sticky header provides navigation to home and the GitHub repository.",
-      topics: ["Clear value proposition", "Accessible navigation", "Dark mode support"],
+      title: "Curriculum Pipeline",
+      description: "Six weeks of data engineering topics presented as a pipeline timeline. Week 1 is marked as complete with the teal accent colour, while subsequent weeks are scaffolded by stage.",
+      src: "/tour/curriculum.png",
+      alt: "Curriculum cards showing Week 1 through Week 6 with topics and status indicators",
     },
     {
-      title: "Course Resources",
-      description:
-        "The About section explains the course philosophy and links to the original learning materials and the Guided Tour. All links are accessible and clearly marked.",
-      topics: ["Course overview", "Resource links", "Call-to-action buttons"],
+      title: "About and Call-to-Action",
+      description: "Course philosophy and learning resources section with links to the original materials and the guided tour.",
+      src: "/tour/about.png",
+      alt: "About section with course description and call-to-action button",
     },
   ];
 
@@ -38,47 +38,31 @@ export default function TourPage() {
             </h1>
           </div>
           <p className="max-w-2xl text-lg leading-relaxed text-slate">
-            Explore the Data Engineer BootCamp through an interactive walkthrough of the key
-            features and course structure. This tour covers the curriculum layout, navigation, and
+            Explore the Data Engineer BootCamp through visual screenshots of the key
+            features and course structure. This tour covers the curriculum layout, design, and
             learning resources.
           </p>
         </div>
       </section>
 
-      {/* Tour Features */}
+      {/* Screenshots */}
       <section className="px-6 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-12">
-            <h2 className="text-2xl font-bold leading-tight">Key Features</h2>
+            <h2 className="text-2xl font-bold leading-tight">Design Tour</h2>
           </div>
 
-          <div className="space-y-8">
-            {features.map((feature, idx) => (
-              <div
-                key={idx}
-                className="overflow-hidden rounded-lg border border-card-border bg-card-bg p-8"
-              >
-                <div className="space-y-4">
-                  <div>
-                    <div className="text-sm font-mono text-teal uppercase tracking-wider">
-                      Part {idx + 1}
-                    </div>
-                    <h3 className="mt-2 text-2xl font-semibold text-foreground">{feature.title}</h3>
-                  </div>
-                  <p className="text-lg leading-relaxed text-slate">{feature.description}</p>
-                  <div className="pt-4">
-                    <p className="text-sm font-mono uppercase tracking-wider text-graphite mb-2">
-                      Highlights
-                    </p>
-                    <ul className="space-y-2">
-                      {feature.topics.map((topic) => (
-                        <li key={topic} className="flex items-start gap-3 text-sm text-slate">
-                          <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" />
-                          <span>{topic}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+          <div className="space-y-16">
+            {screenshots.map((screenshot, idx) => (
+              <div key={idx} className="overflow-hidden rounded-lg border border-card-border bg-card-bg">
+                <img
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  className="w-full"
+                />
+                <div className="space-y-2 p-6">
+                  <h3 className="text-xl font-semibold text-foreground">{screenshot.title}</h3>
+                  <p className="text-slate">{screenshot.description}</p>
                 </div>
               </div>
             ))}
@@ -105,7 +89,7 @@ export default function TourPage() {
               {
                 week: "Week 3",
                 title: "Data Warehouse",
-                topics: "BigQuery and data modeling",
+                topics: "BigQuery and data modelling",
               },
               {
                 week: "Week 4",
