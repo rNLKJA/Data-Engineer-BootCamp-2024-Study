@@ -67,8 +67,28 @@ header {
   padding-right: 1.5rem;
 }
 
+section {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+footer {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 @media (min-width: 40rem) {
   header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  footer {
     padding-left: 2rem;
     padding-right: 2rem;
   }
