@@ -1,4 +1,9 @@
-'use client';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Guided Tour - Data Engineer BootCamp',
+  description: 'Explore the Data Engineer BootCamp curriculum through an interactive walkthrough.',
+};
 
 export default function TourPage() {
   return (
