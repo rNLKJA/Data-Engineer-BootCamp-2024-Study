@@ -1,30 +1,32 @@
-import { Metadata } from 'next';
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Guided Tour - Data Engineer BootCamp',
-  description: 'Explore the Data Engineer BootCamp curriculum through an interactive walkthrough.',
+  title: "Guided Tour - Data Engineer BootCamp",
+  description: "Explore the Data Engineer BootCamp curriculum through an interactive walkthrough.",
 };
 
 export default function TourPage() {
   const videos = [
     {
-      title: 'Landing Page Tour',
-      description: 'Explore the Data Engineer BootCamp landing page and hero section.',
-      src: '/tour-videos/video-1.mp4',
-      transcript: 'Landing page introduction, curriculum preview, and call-to-action navigation.'
+      title: "Landing Page Tour",
+      description: "Explore the Data Engineer BootCamp landing page and hero section.",
+      src: "/tour-videos/video-1.mp4",
+      transcript: "Landing page introduction, curriculum preview, and call-to-action navigation.",
     },
     {
-      title: 'Curriculum Deep Dive',
-      description: 'Discover all six weeks of data engineering topics.',
-      src: '/tour-videos/video-2.mp4',
-      transcript: 'Week-by-week curriculum overview covering infrastructure, orchestration, warehousing, analytics, batch and stream processing.'
+      title: "Curriculum Deep Dive",
+      description: "Discover all six weeks of data engineering topics.",
+      src: "/tour-videos/video-2.mp4",
+      transcript:
+        "Week-by-week curriculum overview covering infrastructure, orchestration, warehousing, analytics, batch and stream processing.",
     },
     {
-      title: 'About and Resources',
-      description: 'Learn about the course structure and access learning materials.',
-      src: '/tour-videos/video-3.mp4',
-      transcript: 'Course philosophy, learning resources, and how to get started with the bootcamp materials.'
-    }
+      title: "About and Resources",
+      description: "Learn about the course structure and access learning materials.",
+      src: "/tour-videos/video-3.mp4",
+      transcript:
+        "Course philosophy, learning resources, and how to get started with the bootcamp materials.",
+    },
   ];
 
   return (
@@ -32,7 +34,8 @@ export default function TourPage() {
       <section className="mx-auto max-w-4xl px-4">
         <h1 className="mb-8 text-4xl font-black">Guided Tour</h1>
         <p className="mb-8 text-gray-600">
-          Explore the Data Engineer BootCamp curriculum through interactive walkthroughs of the key features and content areas.
+          Explore the Data Engineer BootCamp curriculum through interactive walkthroughs of the key
+          features and content areas.
         </p>
 
         <div className="space-y-12">
@@ -97,8 +100,8 @@ export default function TourPage() {
           <div className="border-t border-gray-300 pt-8">
             <h2 className="mb-4 text-2xl font-black">Learning Resources</h2>
             <p className="mb-6 text-gray-700">
-              All course materials are available in the repository. Start with the
-              week-by-week README files to understand the concepts and practicals.
+              All course materials are available in the repository. Start with the week-by-week
+              README files to understand the concepts and practicals.
             </p>
             <a
               href="https://github.com/rNLKJA/Data-Engineer-BootCamp-2024-Study"
