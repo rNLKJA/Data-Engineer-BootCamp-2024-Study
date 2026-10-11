@@ -137,7 +137,7 @@ export default function Home() {
                             isComplete ? "bg-teal" : "bg-graphite"
                           }`}
                         />
-                        <span className="text-sm font-mono font-semibold uppercase tracking-wider text-teal">
+                        <span className="text-sm font-mono font-semibold tracking-wider text-teal">
                           {item.week}
                         </span>
                         {isComplete && (
