@@ -38,9 +38,9 @@ export default function TourPage() {
             </h1>
           </div>
           <p className="max-w-2xl text-lg leading-relaxed text-slate">
-            Explore the Data Engineer BootCamp through an interactive walkthrough of the key features
-            and course structure. This tour covers the curriculum layout, navigation, and learning
-            resources.
+            Explore the Data Engineer BootCamp through an interactive walkthrough of the key
+            features and course structure. This tour covers the curriculum layout, navigation, and
+            learning resources.
           </p>
         </div>
       </section>
@@ -123,10 +123,7 @@ export default function TourPage() {
                 topics: "Kafka and real-time pipelines",
               },
             ].map((item) => (
-              <div
-                key={item.week}
-                className="flex gap-4 border-l-2 border-teal/30 pl-4 py-2"
-              >
+              <div key={item.week} className="flex gap-4 border-l-2 border-teal/30 pl-4 py-2">
                 <div className="flex-shrink-0">
                   <span className="inline-block rounded bg-teal/10 px-3 py-1 text-sm font-mono font-semibold text-teal">
                     {item.week}
@@ -180,9 +177,7 @@ export default function TourPage() {
       {/* Footer */}
       <footer className="border-t border-card-border px-6 py-12 sm:px-8 text-center text-sm text-slate">
         <div className="mx-auto max-w-4xl space-y-3">
-          <p>
-            Built with Next.js and Tailwind CSS. Course materials in the GitHub repository.
-          </p>
+          <p>Built with Next.js and Tailwind CSS. Course materials in the GitHub repository.</p>
           <p>
             <a
               href="https://rin.contact"
