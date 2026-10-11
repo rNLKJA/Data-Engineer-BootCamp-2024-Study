@@ -134,6 +134,14 @@ export default function Home() {
             </a>
             .
           </p>
+          <p className="pt-4">
+            <a
+              href="/tour"
+              className="inline-block border border-red-500 bg-white px-6 py-3 font-bold text-red-500 hover:bg-red-50"
+            >
+              Take the Guided Tour
+            </a>
+          </p>
         </div>
       </section>
 
