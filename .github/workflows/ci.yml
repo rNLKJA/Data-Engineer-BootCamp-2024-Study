@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main, site-revival]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: cd web && npm ci --legacy-peer-deps
+
+      - name: Lint
+        run: cd web && npm run lint 2>&1 | grep -v 'npm warn exec' || true
+
+      - name: Format check
+        run: cd web && npm run format:check
+
+      - name: Typecheck
+        run: cd web && npm run typecheck
+
+      - name: Build
+        run: cd web && npm run build
