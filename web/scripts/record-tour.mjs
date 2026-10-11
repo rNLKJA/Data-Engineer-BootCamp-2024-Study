@@ -13,6 +13,14 @@ if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
+// Clean up old videos
+console.log('Cleaning up old recordings...');
+for (const f of fs.readdirSync(OUTPUT_DIR)) {
+  if (f.endsWith('.webm') || f.endsWith('.mp4')) {
+    fs.unlinkSync(path.join(OUTPUT_DIR, f));
+  }
+}
+
 const browser = await chromium.launch({ channel: 'chrome' });
 const videoPaths = [];
 
@@ -24,27 +32,27 @@ let page = await browser.newPage({
 });
 
 await page.goto(BASE, { waitUntil: 'load' });
-await page.waitForTimeout(1000);
+await page.waitForTimeout(1500);
 
 // Scroll through landing page with pacing
 await page.evaluate(() => {
   const h1 = document.querySelector('h1');
   if (h1) h1.style.outline = '3px solid #FF3C3C';
 });
-await page.waitForTimeout(2000);
+await page.waitForTimeout(2500);
 
 // Scroll down to curriculum
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 6; i++) {
   await page.mouse.wheel(0, 200);
-  await page.waitForTimeout(600);
+  await page.waitForTimeout(700);
 }
 
-await page.waitForTimeout(2000);
+await page.waitForTimeout(2500);
 const videoPath1 = await page.video().path();
 videoPaths.push(videoPath1);
 await page.close();
 
-// Video 2: Curriculum focus (scroll through cards)
+// Video 2: Curriculum focus (scroll through cards) - LONGER
 console.log('Recording video 2: Curriculum deep dive...');
 page = await browser.newPage({
   viewport: { width: 1280, height: 800 },
@@ -52,12 +60,12 @@ page = await browser.newPage({
 });
 
 await page.goto(BASE, { waitUntil: 'load' });
-await page.waitForTimeout(1000);
+await page.waitForTimeout(1500);
 
 // Scroll to curriculum section
 for (let i = 0; i < 3; i++) {
   await page.mouse.wheel(0, 200);
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(500);
 }
 
 // Highlight curriculum area
@@ -66,15 +74,15 @@ await page.evaluate(() => {
   if (section) section.style.outline = '3px solid #FF3C3C';
 });
 
-await page.waitForTimeout(1500);
+await page.waitForTimeout(2000);
 
-// Scroll through curriculum cards
-for (let i = 0; i < 4; i++) {
+// Scroll through curriculum cards - EXTENDED
+for (let i = 0; i < 6; i++) {
   await page.mouse.wheel(0, 150);
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(700);
 }
 
-await page.waitForTimeout(2000);
+await page.waitForTimeout(2500);
 const videoPath2 = await page.video().path();
 videoPaths.push(videoPath2);
 await page.close();
@@ -87,12 +95,12 @@ page = await browser.newPage({
 });
 
 await page.goto(BASE, { waitUntil: 'load' });
-await page.waitForTimeout(1000);
+await page.waitForTimeout(1500);
 
 // Scroll to about section
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 7; i++) {
   await page.mouse.wheel(0, 200);
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(500);
 }
 
 await page.waitForTimeout(1500);
@@ -101,12 +109,12 @@ await page.waitForTimeout(1500);
 const tourButton = await page.$('a[href="/tour"]');
 if (tourButton) {
   await tourButton.evaluate((el) => (el.style.outline = '3px solid #FF3C3C'));
-  await page.waitForTimeout(800);
+  await page.waitForTimeout(1000);
   await tourButton.click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(2500);
 }
 
-await page.waitForTimeout(1000);
+await page.waitForTimeout(1500);
 const videoPath3 = await page.video().path();
 videoPaths.push(videoPath3);
 await page.close();
