@@ -60,3 +60,16 @@ html {
     color-scheme: light dark;
   }
 }
+
+/* Ensure content has left margin */
+header {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

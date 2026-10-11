@@ -20,8 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <header className="sticky top-0 z-50 border-b border-card-border bg-card-bg/95 backdrop-blur supports-[backdrop-filter]:bg-card-bg/75">
-          <nav className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 sm:px-8">
+        <header className="sticky top-0 z-50 border-b border-card-border bg-card-bg/95 backdrop-blur supports-[backdrop-filter]:bg-card-bg/75 px-6 sm:px-8">
+          <nav className="mx-auto max-w-7xl flex items-center justify-between py-4">
             <a href="/" className="text-lg font-semibold tracking-tight text-foreground">
               Data Engineer BootCamp
             </a>
