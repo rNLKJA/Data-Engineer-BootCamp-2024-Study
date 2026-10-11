@@ -6,26 +6,64 @@ export const metadata: Metadata = {
 };
 
 export default function TourPage() {
+  const videos = [
+    {
+      title: 'Landing Page Tour',
+      description: 'Explore the Data Engineer BootCamp landing page and hero section.',
+      src: '/tour-videos/video-1.mp4',
+      transcript: 'Landing page introduction, curriculum preview, and call-to-action navigation.'
+    },
+    {
+      title: 'Curriculum Deep Dive',
+      description: 'Discover all six weeks of data engineering topics.',
+      src: '/tour-videos/video-2.mp4',
+      transcript: 'Week-by-week curriculum overview covering infrastructure, orchestration, warehousing, analytics, batch and stream processing.'
+    },
+    {
+      title: 'About and Resources',
+      description: 'Learn about the course structure and access learning materials.',
+      src: '/tour-videos/video-3.mp4',
+      transcript: 'Course philosophy, learning resources, and how to get started with the bootcamp materials.'
+    }
+  ];
+
   return (
     <div className="space-y-12 py-20">
       <section className="mx-auto max-w-4xl px-4">
         <h1 className="mb-8 text-4xl font-black">Guided Tour</h1>
         <p className="mb-8 text-gray-600">
-          Explore the Data Engineer BootCamp curriculum through an interactive walkthrough.
+          Explore the Data Engineer BootCamp curriculum through interactive walkthroughs of the key features and content areas.
         </p>
 
         <div className="space-y-12">
-          <div className="border border-gray-300 bg-gray-50 p-8">
-            <h2 className="mb-4 text-2xl font-bold">Tour Coming Soon</h2>
-            <p className="text-gray-700">
-              Interactive video walkthrough showing the curriculum, week-by-week breakdown,
-              and course structure. Check back soon for the recorded tour.
-            </p>
-          </div>
+          {videos.map((video, idx) => (
+            <div key={idx} className="border border-gray-300 bg-white p-6">
+              <div className="mb-4 grid gap-6 lg:grid-cols-3">
+                <div className="lg:col-span-2">
+                  <video
+                    controls
+                    className="w-full border border-gray-300"
+                    poster={`/tour-videos/poster-${idx + 1}.jpg`}
+                  >
+                    <source src={video.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-lg font-bold">{video.title}</h3>
+                  <p className="text-sm text-gray-600">{video.description}</p>
+                </div>
+              </div>
+              <div className="border-t border-gray-300 pt-4">
+                <h4 className="mb-2 text-sm font-bold">Transcript</h4>
+                <p className="text-sm text-gray-600">{video.transcript}</p>
+              </div>
+            </div>
+          ))}
 
-          <div className="space-y-6">
-            <h2 className="text-2xl font-black">Course Overview</h2>
-            <p className="text-gray-700">
+          <div className="border-t border-gray-300 pt-8">
+            <h2 className="mb-4 text-2xl font-black">Course Overview</h2>
+            <p className="mb-6 text-gray-700">
               The Data Engineer BootCamp spans six weeks of intensive training:
             </p>
             <ul className="space-y-3 text-gray-700">
