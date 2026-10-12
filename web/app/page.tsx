@@ -122,10 +122,7 @@ export default function Home() {
               const isScaffolded = item.status === "upcoming";
 
               return (
-                <div
-                  key={item.week}
-                  className="group relative"
-                >
+                <div key={item.week} className="group relative">
                   {/* Stage indicator and card */}
                   <div
                     className={`flex gap-4 rounded-xl border transition-all duration-200 ${
@@ -138,9 +135,7 @@ export default function Home() {
                     <div className="flex flex-col items-center pt-5 pl-4">
                       <div
                         className={`h-3 w-3 rounded-full ring-4 transition-all ${
-                          isComplete
-                            ? "bg-teal ring-background"
-                            : "bg-graphite/50 ring-background"
+                          isComplete ? "bg-teal ring-background" : "bg-graphite/50 ring-background"
                         }`}
                       />
                     </div>
@@ -182,9 +177,7 @@ export default function Home() {
                             <span
                               key={topic}
                               className={`text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap ${
-                                isComplete
-                                  ? "bg-teal/15 text-teal"
-                                  : "bg-graphite/10 text-graphite"
+                                isComplete ? "bg-teal/15 text-teal" : "bg-graphite/10 text-graphite"
                               }`}
                             >
                               {topic}
@@ -252,7 +245,9 @@ export default function Home() {
         <div className="space-y-3">
           <p>
             Built with Next.js and Tailwind CSS. Course materials in{" "}
-            <code className="font-mono bg-graphite/10 px-2 py-0.5 rounded text-graphite">original/</code>
+            <code className="font-mono bg-graphite/10 px-2 py-0.5 rounded text-graphite">
+              original/
+            </code>
           </p>
           <p>
             <a
