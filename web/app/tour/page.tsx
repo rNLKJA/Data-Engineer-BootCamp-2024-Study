@@ -9,19 +9,22 @@ export default function TourPage() {
   const screenshots = [
     {
       title: "Hero Section",
-      description: "The landing page hero introducing the Data Engineer BootCamp with the value proposition and course overview.",
+      description:
+        "The landing page hero introducing the Data Engineer BootCamp with the value proposition and course overview.",
       src: "/tour/hero.png",
       alt: "Hero section with Data Engineer BootCamp title and course description",
     },
     {
       title: "Curriculum Pipeline",
-      description: "Six weeks of data engineering topics presented as a pipeline timeline. Week 1 is marked as complete with the teal accent colour, while subsequent weeks are scaffolded by stage.",
+      description:
+        "Six weeks of data engineering topics presented as a pipeline timeline. Week 1 is marked as complete with the teal accent colour, while subsequent weeks are scaffolded by stage.",
       src: "/tour/curriculum.png",
       alt: "Curriculum cards showing Week 1 through Week 6 with topics and status indicators",
     },
     {
       title: "About and Call-to-Action",
-      description: "Course philosophy and learning resources section with links to the original materials and the guided tour.",
+      description:
+        "Course philosophy and learning resources section with links to the original materials and the guided tour.",
       src: "/tour/about.png",
       alt: "About section with course description and call-to-action button",
     },
@@ -38,9 +41,9 @@ export default function TourPage() {
             </h1>
           </div>
           <p className="max-w-2xl text-lg leading-relaxed text-slate">
-            Explore the Data Engineer BootCamp through visual screenshots of the key
-            features and course structure. This tour covers the curriculum layout, design, and
-            learning resources.
+            Explore the Data Engineer BootCamp through visual screenshots of the key features and
+            course structure. This tour covers the curriculum layout, design, and learning
+            resources.
           </p>
         </div>
       </section>
@@ -54,12 +57,11 @@ export default function TourPage() {
 
           <div className="space-y-16">
             {screenshots.map((screenshot, idx) => (
-              <div key={idx} className="overflow-hidden rounded-lg border border-card-border bg-card-bg">
-                <img
-                  src={screenshot.src}
-                  alt={screenshot.alt}
-                  className="w-full"
-                />
+              <div
+                key={idx}
+                className="overflow-hidden rounded-lg border border-card-border bg-card-bg"
+              >
+                <img src={screenshot.src} alt={screenshot.alt} className="w-full" />
                 <div className="space-y-2 p-6">
                   <h3 className="text-xl font-semibold text-foreground">{screenshot.title}</h3>
                   <p className="text-slate">{screenshot.description}</p>
