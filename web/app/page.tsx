@@ -167,40 +167,55 @@ export default function HomePage() {
         >
           Six weeks, scaffolded by stage.
         </h2>
-        <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {WEEKS.map((week, i) => {
-            const Icon = WEEK_ICONS[i];
-            const isComplete = week.status === "complete";
-            return (
-              <li
-                key={week.week}
-                className="relative rounded-3xl border border-white/10 bg-card p-6"
-              >
-                <span className="absolute top-5 right-6 font-mono text-sm text-muted-foreground">
-                  0{i + 1}
-                </span>
-                <Icon
-                  className={`size-7 ${isComplete ? "text-mint" : "text-teal"}`}
-                  aria-hidden="true"
-                />
-                <h3 className="mt-5 font-display text-2xl font-semibold">{week.title}</h3>
-                <p className="mt-1 font-mono text-xs text-muted-foreground">{week.week}</p>
-                <ul className="mt-3 space-y-1.5">
-                  {week.topics.map((topic) => (
-                    <li key={topic} className="text-sm leading-relaxed text-muted-foreground">
-                      {topic}
-                    </li>
-                  ))}
-                </ul>
-                {isComplete && (
-                  <div className="mt-4 inline-block rounded-full bg-mint/15 px-3 py-1 text-xs font-medium text-mint">
-                    Complete
-                  </div>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+        <div className="relative mt-10">
+          {/* Pipeline progress line - connects weeks and fills honestly */}
+          <div
+            className="absolute top-0 left-0 hidden h-full w-1 md:block"
+            aria-hidden="true"
+          >
+            {/* Background track */}
+            <div className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-white/5" />
+            {/* Filled portion - only to Week 1 (1/6 = ~16.67%) */}
+            <div
+              className="absolute left-0 top-12 w-1 rounded-full bg-gradient-to-b from-mint to-teal transition-all duration-1000 ease-out"
+              style={{ height: `calc((100% - 6rem) * ${1 / 6})` }}
+            />
+          </div>
+          <ol className="grid gap-4 md:grid-cols-2 md:pl-8 lg:grid-cols-3">
+            {WEEKS.map((week, i) => {
+              const Icon = WEEK_ICONS[i];
+              const isComplete = week.status === "complete";
+              return (
+                <li
+                  key={week.week}
+                  className="relative rounded-3xl border border-white/10 bg-card p-6"
+                >
+                  <span className="absolute top-5 right-6 font-mono text-sm text-muted-foreground">
+                    0{i + 1}
+                  </span>
+                  <Icon
+                    className={`size-7 ${isComplete ? "text-mint" : "text-teal"}`}
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-5 font-display text-2xl font-semibold">{week.title}</h3>
+                  <p className="mt-1 font-mono text-xs text-muted-foreground">{week.week}</p>
+                  <ul className="mt-3 space-y-1.5">
+                    {week.topics.map((topic) => (
+                      <li key={topic} className="text-sm leading-relaxed text-muted-foreground">
+                        {topic}
+                      </li>
+                    ))}
+                  </ul>
+                  {isComplete && (
+                    <div className="mt-4 inline-block rounded-full bg-mint/15 px-3 py-1 text-xs font-medium text-mint">
+                      Complete
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </section>
 
       {/* About */}
