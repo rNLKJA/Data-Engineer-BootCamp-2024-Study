@@ -104,6 +104,11 @@ export default function HomePage() {
                 practical training built on real-world tools. From Docker and Terraform through
                 Prefect, BigQuery, dbt, Spark and Kafka.
               </p>
+              <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground/90">
+                I'm working through the DataTalksClub Data Engineering Zoomcamp, one week at a
+                time, and building this site as a public study record. It's honest about what's
+                done and what's still scaffolded.
+              </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
                   href="#curriculum"
@@ -271,17 +276,15 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
           <div className="flex flex-col items-center gap-4 text-center text-sm text-muted-foreground">
             <p>
-              Built with Next.js and Tailwind CSS. Course materials in{" "}
-              <code className="rounded bg-card px-1.5 py-0.5 font-mono text-xs">original/</code>
+              <a
+                href="https://rin.contact"
+                className="text-mint underline-offset-4 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Made by Rin in Adelaide
+              </a>
             </p>
-            <a
-              href="https://rin.contact"
-              className="text-mint underline-offset-4 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              rin.contact
-            </a>
           </div>
         </div>
       </footer>

@@ -42,6 +42,32 @@ export const metadata: Metadata = {
   },
   description:
     "Learn data engineering fundamentals through hands-on curriculum spanning orchestration, warehousing, analytics, batch and stream processing.",
+  openGraph: {
+    title: "Data Engineer BootCamp",
+    description:
+      "Six weeks of hands-on data engineering training. Working through the DataTalksClub Zoomcamp, one week at a time.",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Data Engineer BootCamp - Six weeks of hands-on training",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Data Engineer BootCamp",
+    description: "Six weeks of hands-on data engineering training",
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

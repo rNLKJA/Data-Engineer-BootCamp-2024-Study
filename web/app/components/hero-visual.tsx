@@ -1,5 +1,17 @@
-/** Hero visual with abstract data pipeline artwork and floating Week 1 card. */
+"use client";
+
+import { useEffect, useState } from "react";
+
+/** Hero visual with abstract data pipeline artwork, floating Week 1 card, and progress indicator. */
 export function HeroVisual() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Animate to 16.67% (1 out of 6 weeks)
+    const timer = setTimeout(() => setProgress(16.67), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none">
       <div className="arch relative aspect-[4/5] w-full overflow-hidden border border-white/10 bg-gradient-to-br from-[#0f131c] to-[#0a0d12] shadow-2xl shadow-mint/20">
@@ -163,6 +175,21 @@ export function HeroVisual() {
         </svg>
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d12]/90 via-transparent to-transparent" />
+      </div>
+
+      {/* Progress indicator - fills to Week 1 (16.67%) */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-1 overflow-hidden rounded-b-2xl bg-white/5"
+        role="progressbar"
+        aria-valuenow={1}
+        aria-valuemin={0}
+        aria-valuemax={6}
+        aria-label="Course progress: 1 of 6 weeks complete"
+      >
+        <div
+          className="h-full bg-gradient-to-r from-mint to-teal transition-all duration-1000 ease-out"
+          style={{ width: `${progress}%` }}
+        />
       </div>
 
       {/* Floating Week 1 card */}
