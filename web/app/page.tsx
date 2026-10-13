@@ -105,7 +105,8 @@ export default function HomePage() {
                 Prefect, BigQuery, dbt, Spark and Kafka.
               </p>
               <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground/90">
-                I'm following the DataTalksClub Zoomcamp and keeping my working notes and code here as I go. It's a learn-in-public record, built up one week at a time.
+                I'm following the DataTalksClub Zoomcamp and keeping my working notes and code here
+                as I go. It's a learn-in-public record, built up one week at a time.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
@@ -180,7 +181,9 @@ export default function HomePage() {
                   aria-hidden="true"
                 />
                 <div className="mt-5">
-                  <p className="font-mono text-xs tracking-wide text-muted-foreground">{week.week}</p>
+                  <p className="font-mono text-xs tracking-wide text-muted-foreground">
+                    {week.week}
+                  </p>
                   <h3 className="mt-2 font-display text-xl font-semibold leading-tight">
                     {week.title}
                   </h3>
