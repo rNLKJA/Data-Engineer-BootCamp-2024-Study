@@ -89,29 +89,25 @@ export default function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="absolute -top-40 left-1/2 -z-10 size-[42rem] -translate-x-1/2 rounded-full bg-mint/10 blur-3xl"
+          className="absolute -top-40 left-1/2 -z-10 size-[42rem] -translate-x-1/2 rounded-full bg-mint/15 blur-3xl"
         />
         <main id="main">
           {/* Hero */}
-          <section className="mx-auto grid max-w-6xl items-center gap-16 px-4 pt-14 pb-24 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:pt-20 lg:pb-32">
+          <section className="mx-auto grid max-w-6xl items-center gap-14 px-4 pt-20 pb-32 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:pt-32 lg:pb-40">
             <div>
               <p className="kicker text-mint">Data Engineering BootCamp</p>
-              <h1 className="mt-4 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[1.02] font-semibold tracking-[-0.025em] sm:tracking-[-0.03em]">
+              <h1 className="mt-6 font-display text-5xl leading-[1.02] font-semibold tracking-tight sm:text-6xl lg:text-7xl">
                 Six weeks of hands-on <em className="text-mint not-italic">data engineering</em>.
               </h1>
-              <p className="mt-7 max-w-xl text-[1.125rem] leading-[1.7] text-muted-foreground">
+              <p className="mt-12 max-w-xl text-lg leading-relaxed text-muted-foreground">
                 Learn orchestration, warehousing, analytics, batch and stream processing through
                 practical training built on real-world tools. From Docker and Terraform through
                 Prefect, BigQuery, dbt, Spark and Kafka.
               </p>
-              <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground/90">
-                I'm following the DataTalksClub Zoomcamp and keeping my working notes and code here
-                as I go. It's a learn-in-public record, built up one week at a time.
-              </p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="mt-12 flex flex-wrap gap-3">
                 <Link
                   href="#curriculum"
-                  className="inline-flex h-12 items-center gap-2 rounded-full bg-mint px-6 text-[0.95rem] font-medium text-graphite-deep transition-colors hover:bg-mint/90"
+                  className="inline-flex h-12 items-center rounded-full bg-mint px-6 text-[0.95rem] font-medium text-graphite-deep transition-colors hover:bg-mint/90"
                 >
                   See the curriculum
                 </Link>
@@ -119,11 +115,15 @@ export default function HomePage() {
                   href="https://dezoomcamp.streamlit.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center gap-2 rounded-full border border-white/10 bg-card px-6 text-[0.95rem] font-medium transition-colors hover:bg-card/80"
+                  className="inline-flex h-12 items-center rounded-full border border-white/10 bg-card px-6 text-[0.95rem] font-medium transition-colors hover:border-mint/50"
                 >
                   Original course
                 </a>
               </div>
+              <p className="mt-8 text-sm text-muted-foreground">
+                I&apos;m following the DataTalksClub Zoomcamp and keeping my working notes and code
+                here as I go. It&apos;s a learn-in-public record, built up one week at a time.
+              </p>
             </div>
             <HeroVisual />
           </section>
@@ -131,7 +131,10 @@ export default function HomePage() {
       </div>
 
       {/* Status */}
-      <section aria-labelledby="status" className="border-y border-white/10 bg-graphite-deep/30">
+      <section
+        aria-labelledby="status"
+        className="border-y border-white/10 bg-gradient-to-br from-graphite-deep/70 to-graphite-deep/50 py-16"
+      >
         <h2 id="status" className="sr-only">
           Course progress
         </h2>
@@ -139,7 +142,7 @@ export default function HomePage() {
           {[
             { label: "Weeks", value: "6", tone: "text-mint" },
             { label: "Complete", value: "1", tone: "text-mint" },
-            { label: "Upcoming", value: "5", tone: "text-muted-foreground" },
+            { label: "Upcoming", value: "5", tone: "text-teal" },
           ].map((s) => (
             <div key={s.label} className="px-2 py-8 text-center md:py-10">
               <dt className="kicker text-muted-foreground">{s.label}</dt>
@@ -155,7 +158,7 @@ export default function HomePage() {
       <section
         id="curriculum"
         aria-labelledby="curriculum-title"
-        className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6 sm:py-28"
+        className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-32 sm:px-6 sm:py-40"
       >
         <p className="kicker text-teal">Curriculum</p>
         <h2
@@ -164,33 +167,27 @@ export default function HomePage() {
         >
           Six weeks, scaffolded by stage.
         </h2>
-        <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {WEEKS.map((week, i) => {
             const Icon = WEEK_ICONS[i];
             const isComplete = week.status === "complete";
             return (
               <li
                 key={week.week}
-                className="relative rounded-3xl border border-white/10 bg-card p-7"
+                className="relative rounded-3xl border border-white/10 bg-card p-6"
               >
                 <span className="absolute top-5 right-6 font-mono text-sm text-muted-foreground">
                   0{i + 1}
                 </span>
                 <Icon
-                  className={`size-7 ${isComplete ? "text-mint" : "text-muted-foreground"}`}
+                  className={`size-7 ${isComplete ? "text-mint" : "text-teal"}`}
                   aria-hidden="true"
                 />
-                <div className="mt-5">
-                  <p className="font-mono text-xs tracking-wide text-muted-foreground">
-                    {week.week}
-                  </p>
-                  <h3 className="mt-2 font-display text-xl font-semibold leading-tight">
-                    {week.title}
-                  </h3>
-                </div>
-                <ul className="mt-4 space-y-2">
+                <h3 className="mt-5 font-display text-2xl font-semibold">{week.title}</h3>
+                <p className="mt-1 font-mono text-xs text-muted-foreground">{week.week}</p>
+                <ul className="mt-3 space-y-1.5">
                   {week.topics.map((topic) => (
-                    <li key={topic} className="text-sm text-muted-foreground">
+                    <li key={topic} className="text-sm leading-relaxed text-muted-foreground">
                       {topic}
                     </li>
                   ))}
@@ -210,9 +207,9 @@ export default function HomePage() {
       <section
         id="about"
         aria-labelledby="about-title"
-        className="scroll-mt-20 border-t border-white/10 bg-graphite-deep/30"
+        className="scroll-mt-20 border-t border-white/10 bg-gradient-to-br from-graphite-deep/60 to-graphite-deep/40"
       >
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1fr]">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-32 sm:px-6 sm:py-40 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="kicker text-mint">About this curriculum</p>
             <h2
@@ -281,7 +278,7 @@ export default function HomePage() {
         aria-labelledby="learned-title"
         className="scroll-mt-20 border-t border-white/10"
       >
-        <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-28">
+        <div className="mx-auto max-w-6xl px-4 py-28 sm:px-6 sm:py-36">
           <p className="kicker text-teal">Week 1</p>
           <h2
             id="learned-title"
@@ -291,9 +288,10 @@ export default function HomePage() {
           </h2>
           <div className="mt-6 max-w-3xl space-y-4 text-[1.05rem] leading-relaxed text-muted-foreground">
             <p>
-              Containers solve the "it works on my machine" problem by packaging an application and
-              its environment together. They're lighter than virtual machines because they share the
-              host kernel, making them fast to start and efficient with resources.
+              Containers solve the &ldquo;it works on my machine&rdquo; problem by packaging an
+              application and its environment together. They&apos;re lighter than virtual machines
+              because they share the host kernel, making them fast to start and efficient with
+              resources.
             </p>
             <p>
               Docker Compose lets you define multi-container setups in a single YAML file. I spun up
@@ -302,8 +300,8 @@ export default function HomePage() {
             </p>
             <p>
               The most practical lesson: isolation helps you focus. Each service runs in its own
-              container with explicit dependencies, so there's no conflict between project
-              requirements and you can tear everything down cleanly when you're done.
+              container with explicit dependencies, so there&apos;s no conflict between project
+              requirements and you can tear everything down cleanly when you&apos;re done.
             </p>
           </div>
         </div>
