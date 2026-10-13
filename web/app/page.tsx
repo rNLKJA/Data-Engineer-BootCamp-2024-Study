@@ -169,10 +169,7 @@ export default function HomePage() {
         </h2>
         <div className="relative mt-10">
           {/* Pipeline progress line - connects weeks and fills honestly */}
-          <div
-            className="absolute top-0 left-0 hidden h-full w-1 md:block"
-            aria-hidden="true"
-          >
+          <div className="absolute top-0 left-0 hidden h-full w-1 md:block" aria-hidden="true">
             {/* Background track */}
             <div className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-white/5" />
             {/* Filled portion - only to Week 1 (1/6 = ~16.67%) */}
