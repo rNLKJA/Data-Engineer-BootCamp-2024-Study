@@ -121,8 +121,8 @@ export default function HomePage() {
                 </a>
               </div>
               <p className="mt-8 text-sm text-muted-foreground">
-                I&apos;m following the DataTalksClub Zoomcamp and keeping my working notes and code here
-                as I go. It&apos;s a learn-in-public record, built up one week at a time.
+                I&apos;m following the DataTalksClub Zoomcamp and keeping my working notes and code
+                here as I go. It&apos;s a learn-in-public record, built up one week at a time.
               </p>
             </div>
             <HeroVisual />
@@ -131,7 +131,10 @@ export default function HomePage() {
       </div>
 
       {/* Status */}
-      <section aria-labelledby="status" className="border-y border-white/10 bg-gradient-to-br from-graphite-deep/70 to-graphite-deep/50 py-16">
+      <section
+        aria-labelledby="status"
+        className="border-y border-white/10 bg-gradient-to-br from-graphite-deep/70 to-graphite-deep/50 py-16"
+      >
         <h2 id="status" className="sr-only">
           Course progress
         </h2>
@@ -270,7 +273,11 @@ export default function HomePage() {
       </section>
 
       {/* What I learned */}
-      <section id="learned" aria-labelledby="learned-title" className="scroll-mt-20 border-t border-white/10">
+      <section
+        id="learned"
+        aria-labelledby="learned-title"
+        className="scroll-mt-20 border-t border-white/10"
+      >
         <div className="mx-auto max-w-6xl px-4 py-28 sm:px-6 sm:py-36">
           <p className="kicker text-teal">Week 1</p>
           <h2
@@ -281,9 +288,10 @@ export default function HomePage() {
           </h2>
           <div className="mt-6 max-w-3xl space-y-4 text-[1.05rem] leading-relaxed text-muted-foreground">
             <p>
-              Containers solve the &ldquo;it works on my machine&rdquo; problem by packaging an application and
-              its environment together. They&apos;re lighter than virtual machines because they share the
-              host kernel, making them fast to start and efficient with resources.
+              Containers solve the &ldquo;it works on my machine&rdquo; problem by packaging an
+              application and its environment together. They&apos;re lighter than virtual machines
+              because they share the host kernel, making them fast to start and efficient with
+              resources.
             </p>
             <p>
               Docker Compose lets you define multi-container setups in a single YAML file. I spun up

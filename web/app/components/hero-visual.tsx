@@ -103,7 +103,13 @@ export function HeroVisual() {
               </feMerge>
             </filter>
             <filter id="noise">
-              <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" seed="42" result="noise" />
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.65"
+                numOctaves="5"
+                seed="42"
+                result="noise"
+              />
               <feColorMatrix in="noise" type="saturate" values="0" result="desaturatedNoise" />
               <feComponentTransfer in="desaturatedNoise" result="theNoise">
                 <feFuncA type="linear" slope="0.15" />
