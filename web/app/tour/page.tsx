@@ -162,8 +162,7 @@ export default function TourPage() {
 
       {/* Footer */}
       <footer className="border-t border-card-border px-6 py-12 sm:px-8 text-center text-sm text-slate">
-        <div className="mx-auto max-w-4xl space-y-3">
-          <p>Built with Next.js and Tailwind CSS. Course materials in the GitHub repository.</p>
+        <div className="mx-auto max-w-4xl">
           <p>
             <a
               href="https://rin.contact"
@@ -171,7 +170,7 @@ export default function TourPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              rin.contact
+              Made by Rin in Adelaide
             </a>
           </p>
         </div>

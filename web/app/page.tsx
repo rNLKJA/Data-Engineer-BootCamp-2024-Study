@@ -1,239 +1,273 @@
-"use client";
+import Link from "next/link";
+import { BookOpen, Database, GitBranch, Server, Sparkles, Workflow } from "lucide-react";
+import { HeroVisual } from "./components/hero-visual";
 
-export default function Home() {
-  const weeks = [
-    {
-      week: "Week 1",
-      title: "Introduction & Prerequisites",
-      status: "complete" as const,
-      topics: [
-        "Course overview",
-        "Introduction to GCP",
-        "Docker and docker-compose",
-        "Postgres with Docker",
-        "Infrastructure with Terraform",
-      ],
-    },
-    {
-      week: "Week 2",
-      title: "Workflow Orchestration",
-      status: "upcoming" as const,
-      topics: [
-        "Data Lake concepts",
-        "Workflow orchestration patterns",
-        "Introduction to Prefect",
-        "ETL with GCP & Prefect",
-        "Parametrizing workflows",
-      ],
-    },
-    {
-      week: "Week 3",
-      title: "Data Warehouse",
-      status: "upcoming" as const,
-      topics: [
-        "Data Warehouse fundamentals",
-        "BigQuery overview",
-        "Partitioning and clustering",
-        "BigQuery best practices",
-        "BigQuery internals",
-      ],
-    },
-    {
-      week: "Week 4",
-      title: "Analytics Engineering",
-      status: "upcoming" as const,
-      topics: [
-        "Analytics engineering basics",
-        "dbt (data build tool)",
-        "Models and testing",
-        "Cloud and local deployment",
-        "Data visualization",
-      ],
-    },
-    {
-      week: "Week 5",
-      title: "Batch Processing",
-      status: "upcoming" as const,
-      topics: [
-        "Batch processing concepts",
-        "Apache Spark introduction",
-        "Spark DataFrames",
-        "Spark SQL",
-        "GroupBy and joins internals",
-      ],
-    },
-    {
-      week: "Week 6",
-      title: "Stream Processing",
-      status: "upcoming" as const,
-      topics: [
-        "Introduction to Kafka",
-        "Schemas with Avro",
-        "Kafka Streams",
-        "Kafka Connect and KSQL",
-        "Real-time data pipelines",
-      ],
-    },
-  ];
+const WEEKS = [
+  {
+    week: "Week 1",
+    title: "Introduction & Prerequisites",
+    status: "complete" as const,
+    topics: [
+      "Course overview",
+      "Introduction to GCP",
+      "Docker and docker-compose",
+      "Postgres with Docker",
+      "Infrastructure with Terraform",
+    ],
+  },
+  {
+    week: "Week 2",
+    title: "Workflow Orchestration",
+    status: "upcoming" as const,
+    topics: [
+      "Data Lake concepts",
+      "Workflow orchestration patterns",
+      "Introduction to Prefect",
+      "ETL with GCP & Prefect",
+      "Parametrizing workflows",
+    ],
+  },
+  {
+    week: "Week 3",
+    title: "Data Warehouse",
+    status: "upcoming" as const,
+    topics: [
+      "Data Warehouse fundamentals",
+      "BigQuery overview",
+      "Partitioning and clustering",
+      "BigQuery best practices",
+      "BigQuery internals",
+    ],
+  },
+  {
+    week: "Week 4",
+    title: "Analytics Engineering",
+    status: "upcoming" as const,
+    topics: [
+      "Analytics engineering basics",
+      "dbt (data build tool)",
+      "Models and testing",
+      "Cloud and local deployment",
+      "Data visualization",
+    ],
+  },
+  {
+    week: "Week 5",
+    title: "Batch Processing",
+    status: "upcoming" as const,
+    topics: [
+      "Batch processing concepts",
+      "Apache Spark introduction",
+      "Spark DataFrames",
+      "Spark SQL",
+      "GroupBy and joins internals",
+    ],
+  },
+  {
+    week: "Week 6",
+    title: "Stream Processing",
+    status: "upcoming" as const,
+    topics: [
+      "Introduction to Kafka",
+      "Schemas with Avro",
+      "Kafka Streams",
+      "Kafka Connect and KSQL",
+      "Real-time data pipelines",
+    ],
+  },
+] as const;
 
+const WEEK_ICONS = [BookOpen, Workflow, Database, GitBranch, Server, Sparkles] as const;
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-card-border/50">
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 right-0 h-80 w-80 rounded-full bg-teal/5 blur-3xl" />
-        </div>
-
-        <div className="relative mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 md:py-40">
-          <div className="space-y-8 max-w-3xl">
-            <div className="space-y-4">
-              <p className="text-xs font-mono tracking-widest uppercase text-teal">
-                Six Week Curriculum
-              </p>
-              <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl">
-                Data Engineer BootCamp
+    <div className="dark flex min-h-dvh flex-col">
+      <div className="relative isolate overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="grain absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -top-40 left-1/2 -z-10 size-[42rem] -translate-x-1/2 rounded-full bg-mint/10 blur-3xl"
+        />
+        <main id="main">
+          {/* Hero */}
+          <section className="mx-auto grid max-w-6xl items-center gap-16 px-4 pt-14 pb-24 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:pt-20 lg:pb-32">
+            <div>
+              <p className="kicker text-mint">Data Engineering BootCamp</p>
+              <h1 className="mt-4 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[1.02] font-semibold tracking-[-0.025em] sm:tracking-[-0.03em]">
+                Six weeks of hands-on <em className="text-mint not-italic">data engineering</em>.
               </h1>
+              <p className="mt-7 max-w-xl text-[1.125rem] leading-[1.7] text-muted-foreground">
+                Learn orchestration, warehousing, analytics, batch and stream processing through
+                practical training built on real-world tools. From Docker and Terraform through
+                Prefect, BigQuery, dbt, Spark and Kafka.
+              </p>
+              <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground/90">
+                I&apos;m working through the DataTalksClub Data Engineering Zoomcamp, one week at a
+                time, and building this site as a public study record. It&apos;s honest about
+                what&apos;s done and what&apos;s still scaffolded.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Link
+                  href="#curriculum"
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-mint px-6 text-[0.95rem] font-medium text-graphite-deep transition-colors hover:bg-mint/90"
+                >
+                  See the curriculum
+                </Link>
+                <a
+                  href="https://dezoomcamp.streamlit.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 items-center gap-2 rounded-full border border-white/10 bg-card px-6 text-[0.95rem] font-medium transition-colors hover:bg-card/80"
+                >
+                  Original course
+                </a>
+              </div>
             </div>
-            <p className="text-lg leading-relaxed text-slate max-w-2xl">
-              Learn data engineering fundamentals through hands-on lessons spanning orchestration,
-              warehousing, analytics, batch and stream processing. Six weeks of practical training
-              built on real-world tools and patterns.
-            </p>
-          </div>
-        </div>
+            <HeroVisual />
+          </section>
+        </main>
+      </div>
+
+      {/* Status */}
+      <section aria-labelledby="status" className="border-y border-white/10 bg-graphite-deep/30">
+        <h2 id="status" className="sr-only">
+          Course progress
+        </h2>
+        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-px px-4 sm:px-6 md:grid-cols-3">
+          {[
+            { label: "Weeks", value: "6", tone: "text-mint" },
+            { label: "Complete", value: "1", tone: "text-mint" },
+            { label: "Upcoming", value: "5", tone: "text-muted-foreground" },
+          ].map((s) => (
+            <div key={s.label} className="px-2 py-8 text-center md:py-10">
+              <dt className="kicker text-muted-foreground">{s.label}</dt>
+              <dd className={`mt-2 font-display text-4xl font-semibold sm:text-5xl ${s.tone}`}>
+                {s.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      {/* Pipeline Timeline */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8 md:py-28">
-        <div className="mb-16 space-y-3">
-          <h2 className="text-3xl font-bold leading-tight">Curriculum</h2>
-          <p className="text-sm text-slate">Six weeks, scaffolded by stage</p>
-        </div>
-
-        {/* Pipeline visual with stages */}
-        <div className="relative">
-          {/* Connecting line behind all stages */}
-          <div className="absolute left-[1.125rem] top-8 bottom-0 w-0.5 bg-gradient-to-b from-teal/60 via-teal/30 to-graphite/10" />
-
-          <div className="space-y-4 relative z-10">
-            {weeks.map((item, index) => {
-              const isComplete = item.status === "complete";
-              const isScaffolded = item.status === "upcoming";
-
-              return (
-                <div key={item.week} className="group relative">
-                  {/* Stage indicator and card */}
-                  <div
-                    className={`flex gap-4 rounded-xl border transition-all duration-200 ${
-                      isComplete
-                        ? "border-teal/40 bg-teal/8 hover:border-teal/60 hover:bg-teal/12"
-                        : "border-graphite/20 bg-graphite/5 hover:border-graphite/30 hover:bg-graphite/8"
-                    }`}
-                  >
-                    {/* Status dot on connecting line */}
-                    <div className="flex flex-col items-center pt-5 pl-4">
-                      <div
-                        className={`h-3 w-3 rounded-full ring-4 transition-all ${
-                          isComplete ? "bg-teal ring-background" : "bg-graphite/50 ring-background"
-                        }`}
-                      />
-                    </div>
-
-                    {/* Card content */}
-                    <div className="flex-1 px-4 py-5 min-w-0">
-                      <div className="flex flex-col gap-4">
-                        {/* Header with stage label and status */}
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="flex items-center gap-3">
-                            <span className="text-xs font-mono font-semibold tracking-wider text-teal">
-                              {item.week}
-                            </span>
-                            {isComplete && (
-                              <span className="text-xs font-mono font-medium text-teal/70 px-2 py-1 bg-teal/15 rounded">
-                                Complete
-                              </span>
-                            )}
-                            {isScaffolded && index > 0 && (
-                              <span className="text-xs font-mono font-medium text-graphite/60 px-2 py-1 bg-graphite/10 rounded">
-                                Scaffolded
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Week title */}
-                        <h3
-                          className={`text-xl font-semibold leading-tight ${
-                            isComplete ? "text-foreground" : "text-graphite"
-                          }`}
-                        >
-                          {item.title}
-                        </h3>
-
-                        {/* Topic chips */}
-                        <div className="flex flex-wrap gap-2">
-                          {item.topics.map((topic) => (
-                            <span
-                              key={topic}
-                              className={`text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap ${
-                                isComplete ? "bg-teal/15 text-teal" : "bg-graphite/10 text-graphite"
-                              }`}
-                            >
-                              {topic}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+      {/* Curriculum */}
+      <section
+        id="curriculum"
+        aria-labelledby="curriculum-title"
+        className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6 sm:py-28"
+      >
+        <p className="kicker text-teal">Curriculum</p>
+        <h2
+          id="curriculum-title"
+          className="mt-3 max-w-2xl font-display text-4xl font-semibold tracking-tight"
+        >
+          Six weeks, scaffolded by stage.
+        </h2>
+        <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {WEEKS.map((week, i) => {
+            const Icon = WEEK_ICONS[i];
+            const isComplete = week.status === "complete";
+            return (
+              <li
+                key={week.week}
+                className="relative rounded-3xl border border-white/10 bg-card p-7"
+              >
+                <span className="absolute top-5 right-6 font-mono text-sm text-muted-foreground">
+                  0{i + 1}
+                </span>
+                <Icon
+                  className={`size-7 ${isComplete ? "text-mint" : "text-muted-foreground"}`}
+                  aria-hidden="true"
+                />
+                <div className="mt-5">
+                  <p className="kicker text-xs text-muted-foreground">{week.week}</p>
+                  <h3 className="mt-2 font-display text-xl font-semibold leading-tight">
+                    {week.title}
+                  </h3>
                 </div>
-              );
-            })}
-          </div>
-        </div>
+                <ul className="mt-4 space-y-2">
+                  {week.topics.map((topic) => (
+                    <li key={topic} className="text-sm text-muted-foreground">
+                      {topic}
+                    </li>
+                  ))}
+                </ul>
+                {isComplete && (
+                  <div className="mt-4 inline-block rounded-full bg-mint/15 px-3 py-1 text-xs font-medium text-mint">
+                    Complete
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </section>
 
       {/* About */}
-      <section className="border-t border-card-border/50 mx-auto w-full max-w-6xl px-6 py-20 sm:px-8 md:py-28">
-        <div className="space-y-12">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold leading-tight">About</h2>
-            <p className="text-sm text-slate">What you will learn</p>
-          </div>
-
-          <div className="space-y-6 text-base leading-relaxed text-slate max-w-2xl">
-            <p>
+      <section
+        id="about"
+        aria-labelledby="about-title"
+        className="scroll-mt-20 border-t border-white/10 bg-graphite-deep/30"
+      >
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1fr]">
+          <div>
+            <p className="kicker text-mint">About this curriculum</p>
+            <h2
+              id="about-title"
+              className="mt-3 font-display text-4xl font-semibold tracking-tight"
+            >
+              What you will learn.
+            </h2>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
               This Data Engineer BootCamp curriculum spans six weeks of hands-on data engineering
               training. Starting from foundational concepts like Docker and cloud infrastructure, it
               progresses through modern data stack tools including Prefect, BigQuery, dbt, Apache
               Spark, and Kafka.
             </p>
-            <p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
               Each week builds on core principles: data flows through pipelines, schemas matter,
               testing and documentation are essential, and every system has trade-offs. The course
               materials include week-by-week lessons, practical examples, and a capstone project to
               solidify understanding.
             </p>
-            <p>
-              See the original course at{" "}
+          </div>
+          <div className="grid content-start gap-4">
+            <div className="rounded-2xl border border-white/10 bg-card p-5">
+              <h3 className="font-semibold">Course structure</h3>
+              <dl className="mt-3 grid gap-2 text-sm">
+                <div className="flex justify-between">
+                  <dt className="text-muted-foreground">Duration</dt>
+                  <dd>6 weeks</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-muted-foreground">Format</dt>
+                  <dd>Hands-on lessons</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-muted-foreground">Prerequisites</dt>
+                  <dd>Basic programming</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-muted-foreground">Level</dt>
+                  <dd>Beginner to intermediate</dd>
+                </div>
+              </dl>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-card p-5">
+              <h3 className="font-semibold">Original course</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                See the original course materials and lectures at the official DataTalks.Club
+                platform.
+              </p>
               <a
                 href="https://dezoomcamp.streamlit.app/"
-                className="font-semibold text-teal hover:text-teal/80 underline underline-offset-2 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="mt-3 inline-block font-mono text-sm text-mint underline-offset-4 hover:underline"
               >
                 dezoomcamp.streamlit.app
-              </a>
-              .
-            </p>
-
-            <div className="pt-4 flex gap-3">
-              <a
-                href="/tour"
-                className="inline-flex items-center justify-center rounded-lg border border-teal/50 bg-teal/10 px-5 py-2.5 font-medium text-teal hover:bg-teal/20 hover:border-teal/70 transition-colors text-sm"
-              >
-                Take the Guided Tour
               </a>
             </div>
           </div>
@@ -241,24 +275,20 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-card-border/50 mx-auto w-full max-w-6xl px-6 py-12 sm:px-8 text-center text-xs text-graphite/70">
-        <div className="space-y-3">
-          <p>
-            Built with Next.js and Tailwind CSS. Course materials in{" "}
-            <code className="font-mono bg-graphite/10 px-2 py-0.5 rounded text-graphite">
-              original/
-            </code>
-          </p>
-          <p>
-            <a
-              href="https://rin.contact"
-              className="text-teal hover:text-teal/80 underline underline-offset-2 transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              rin.contact
-            </a>
-          </p>
+      <footer className="border-t border-white/10">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+          <div className="flex flex-col items-center gap-4 text-center text-sm text-muted-foreground">
+            <p>
+              <a
+                href="https://rin.contact"
+                className="text-mint underline-offset-4 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Made by Rin in Adelaide
+              </a>
+            </p>
+          </div>
         </div>
       </footer>
     </div>
