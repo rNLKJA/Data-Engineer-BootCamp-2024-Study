@@ -105,9 +105,7 @@ export default function HomePage() {
                 Prefect, BigQuery, dbt, Spark and Kafka.
               </p>
               <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground/90">
-                I&apos;m working through the DataTalksClub Data Engineering Zoomcamp, one week at a
-                time, and building this site as a public study record. It&apos;s honest about
-                what&apos;s done and what&apos;s still scaffolded.
+                I'm following the DataTalksClub Zoomcamp and keeping my working notes and code here as I go. It's a learn-in-public record, built up one week at a time.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
@@ -182,7 +180,7 @@ export default function HomePage() {
                   aria-hidden="true"
                 />
                 <div className="mt-5">
-                  <p className="kicker text-xs text-muted-foreground">{week.week}</p>
+                  <p className="font-mono text-xs tracking-wide text-muted-foreground">{week.week}</p>
                   <h3 className="mt-2 font-display text-xl font-semibold leading-tight">
                     {week.title}
                   </h3>
@@ -270,6 +268,40 @@ export default function HomePage() {
                 dezoomcamp.streamlit.app
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What I learned */}
+      <section
+        id="learned"
+        aria-labelledby="learned-title"
+        className="scroll-mt-20 border-t border-white/10"
+      >
+        <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-28">
+          <p className="kicker text-teal">Week 1</p>
+          <h2
+            id="learned-title"
+            className="mt-3 font-display text-4xl font-semibold tracking-tight"
+          >
+            What I learned.
+          </h2>
+          <div className="mt-6 max-w-3xl space-y-4 text-[1.05rem] leading-relaxed text-muted-foreground">
+            <p>
+              Containers solve the "it works on my machine" problem by packaging an application and
+              its environment together. They're lighter than virtual machines because they share the
+              host kernel, making them fast to start and efficient with resources.
+            </p>
+            <p>
+              Docker Compose lets you define multi-container setups in a single YAML file. I spun up
+              Postgres and pgAdmin together, then wrote a Python script that downloads NYC taxi data
+              as parquet files and loads them month-by-month into the database with SQLAlchemy.
+            </p>
+            <p>
+              The most practical lesson: isolation helps you focus. Each service runs in its own
+              container with explicit dependencies, so there's no conflict between project
+              requirements and you can tear everything down cleanly when you're done.
+            </p>
           </div>
         </div>
       </section>
