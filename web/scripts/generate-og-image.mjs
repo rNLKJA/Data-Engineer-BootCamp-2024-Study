@@ -36,8 +36,6 @@ const svg = `<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http:/
   <text x="600" y="350" font-family="ui-monospace, monospace" font-size="28" fill="#a9adc6" text-anchor="middle" letter-spacing="0.08em" text-transform="uppercase">Six weeks · Hands-on training</text>
 </svg>`;
 
-await sharp(Buffer.from(svg))
-  .png()
-  .toFile("public/og-image.png");
+await sharp(Buffer.from(svg)).png().toFile("public/og-image.png");
 
 console.log("✓ Generated OG image");

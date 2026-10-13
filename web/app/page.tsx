@@ -105,9 +105,9 @@ export default function HomePage() {
                 Prefect, BigQuery, dbt, Spark and Kafka.
               </p>
               <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground/90">
-                I'm working through the DataTalksClub Data Engineering Zoomcamp, one week at a
-                time, and building this site as a public study record. It's honest about what's
-                done and what's still scaffolded.
+                I&apos;m working through the DataTalksClub Data Engineering Zoomcamp, one week at a
+                time, and building this site as a public study record. It&apos;s honest about
+                what&apos;s done and what&apos;s still scaffolded.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
@@ -170,7 +170,10 @@ export default function HomePage() {
             const Icon = WEEK_ICONS[i];
             const isComplete = week.status === "complete";
             return (
-              <li key={week.week} className="relative rounded-3xl border border-white/10 bg-card p-7">
+              <li
+                key={week.week}
+                className="relative rounded-3xl border border-white/10 bg-card p-7"
+              >
                 <span className="absolute top-5 right-6 font-mono text-sm text-muted-foreground">
                   0{i + 1}
                 </span>

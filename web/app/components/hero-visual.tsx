@@ -52,18 +52,8 @@ export function HeroVisual() {
               </feMerge>
             </filter>
             <filter id="noise">
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.9"
-                numOctaves="4"
-                result="noise"
-              />
-              <feColorMatrix
-                in="noise"
-                type="saturate"
-                values="0"
-                result="desaturatedNoise"
-              />
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
+              <feColorMatrix in="noise" type="saturate" values="0" result="desaturatedNoise" />
               <feComponentTransfer in="desaturatedNoise" result="theNoise">
                 <feFuncA type="discrete" tableValues="0 0 0 0 0 1" />
               </feComponentTransfer>
@@ -150,15 +140,7 @@ export function HeroVisual() {
               fill="url(#stream-3)"
               opacity="0.9"
             />
-            <rect
-              x="180"
-              y="385"
-              width="35"
-              height="90"
-              rx="6"
-              fill="#5ce1b5"
-              opacity="0.3"
-            />
+            <rect x="180" y="385" width="35" height="90" rx="6" fill="#5ce1b5" opacity="0.3" />
           </g>
 
           {/* Grain overlay */}
@@ -195,7 +177,9 @@ export function HeroVisual() {
       {/* Floating Week 1 card */}
       <div className="absolute -bottom-6 -left-2 w-[17rem] -rotate-3 sm:-left-8 sm:w-[19rem] rounded-2xl border border-white/10 bg-card/95 p-4 shadow-xl backdrop-blur">
         <div className="kicker text-mint">Week 1 · complete</div>
-        <div className="mt-2 font-display text-xl font-semibold">Introduction &amp; Prerequisites</div>
+        <div className="mt-2 font-display text-xl font-semibold">
+          Introduction &amp; Prerequisites
+        </div>
         <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground">
           <li className="flex items-start gap-2">
             <span className="mt-1 size-1 shrink-0 rounded-full bg-mint" />

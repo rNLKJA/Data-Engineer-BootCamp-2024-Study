@@ -24,10 +24,7 @@ const svg = `<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://w
 const sizes = [16, 32, 48];
 
 for (const size of sizes) {
-  await sharp(Buffer.from(svg))
-    .resize(size, size)
-    .png()
-    .toFile(`app/favicon-${size}.png`);
+  await sharp(Buffer.from(svg)).resize(size, size).png().toFile(`app/favicon-${size}.png`);
 }
 
 // Generate ICO (multi-resolution)

@@ -10,7 +10,7 @@ export default function NotFound() {
           Pipeline not found
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          That route doesn't exist yet. The curriculum is still being built, week by week.
+          That route doesn&apos;t exist yet. The curriculum is still being built, week by week.
         </p>
         <Link
           href="/"
