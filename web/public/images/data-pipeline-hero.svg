@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Noise texture for grain overlay -->
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="2" />
+      <feColorMatrix type="saturate" values="0" />
+      <feBlend mode="multiply" in2="SourceGraphic" />
+    </filter>
+
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Enhanced glow for accents -->
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradients for flowing streams -->
+    <linearGradient id="stream1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a4f55;stop-opacity:0.3" />
+      <stop offset="50%" style="stop-color:#0a4f55;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#5ce1b5;stop-opacity:0.4" />
+    </linearGradient>
+
+    <linearGradient id="stream2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b4247;stop-opacity:0.4" />
+      <stop offset="50%" style="stop-color:#0a4f55;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#5ce1b5;stop-opacity:0.5" />
+    </linearGradient>
+
+    <linearGradient id="stream3" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:#5ce1b5;stop-opacity:0.2" />
+      <stop offset="40%" style="stop-color:#0a4f55;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#3b4247;stop-opacity:0.6" />
+    </linearGradient>
+
+    <!-- Radial gradients for depth -->
+    <radialGradient id="depth1" cx="30%" cy="40%">
+      <stop offset="0%" style="stop-color:#5ce1b5;stop-opacity:0.6" />
+      <stop offset="50%" style="stop-color:#0a4f55;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#3b4247;stop-opacity:0.2" />
+    </radialGradient>
+
+    <radialGradient id="depth2" cx="70%" cy="30%">
+      <stop offset="0%" style="stop-color:#5ce1b5;stop-opacity:0.5" />
+      <stop offset="60%" style="stop-color:#0a4f55;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#3b4247;stop-opacity:0.1" />
+    </radialGradient>
+
+    <!-- Column gradient -->
+    <linearGradient id="column" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5ce1b5;stop-opacity:0.8" />
+      <stop offset="30%" style="stop-color:#0a4f55;stop-opacity:0.9" />
+      <stop offset="70%" style="stop-color:#0a4f55;stop-opacity:0.85" />
+      <stop offset="100%" style="stop-color:#3b4247;stop-opacity:0.7" />
+    </linearGradient>
+
+    <!-- Accent highlights -->
+    <radialGradient id="accent1">
+      <stop offset="0%" style="stop-color:#5ce1b5;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#5ce1b5;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1200" height="800" fill="#3b4247"/>
+
+  <!-- Deep background layer with depth -->
+  <ellipse cx="350" cy="300" rx="400" ry="350" fill="url(#depth1)" opacity="0.6"/>
+  <ellipse cx="850" cy="250" rx="380" ry="320" fill="url(#depth2)" opacity="0.5"/>
+
+  <!-- Flowing stream layer 1 - left side -->
+  <path d="M -50 100 Q 150 180, 250 300 Q 320 400, 400 500 Q 450 580, 520 650 Q 560 700, 580 800"
+        fill="none" stroke="url(#stream1)" stroke-width="80" opacity="0.4" filter="url(#glow)"/>
+  <path d="M 0 150 Q 180 220, 280 340 Q 350 440, 430 540 Q 480 620, 550 690 Q 590 740, 610 800"
+        fill="none" stroke="url(#stream1)" stroke-width="60" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- Flowing stream layer 2 - right side -->
+  <path d="M 1250 120 Q 1050 200, 950 320 Q 880 420, 800 520 Q 750 600, 680 670 Q 640 720, 620 800"
+        fill="none" stroke="url(#stream2)" stroke-width="75" opacity="0.45" filter="url(#glow)"/>
+  <path d="M 1200 180 Q 1020 250, 920 360 Q 850 450, 770 550 Q 720 630, 650 700 Q 610 750, 590 800"
+        fill="none" stroke="url(#stream2)" stroke-width="55" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- Center stream layer -->
+  <path d="M 600 -50 Q 580 100, 590 250 Q 595 400, 600 550 Q 600 650, 600 800"
+        fill="none" stroke="url(#stream3)" stroke-width="70" opacity="0.3" filter="url(#glow)"/>
+
+  <!-- Organic flowing shapes - background -->
+  <path d="M 200 200 Q 300 250, 350 350 Q 380 420, 420 500 C 450 580, 480 650, 520 720 L 480 750 C 440 680, 410 610, 380 540 Q 340 450, 310 380 Q 260 280, 160 230 Z"
+        fill="url(#stream1)" opacity="0.3"/>
+
+  <path d="M 1000 180 Q 900 240, 850 340 Q 820 410, 780 490 C 750 570, 720 640, 680 710 L 720 740 C 760 670, 790 600, 820 530 Q 860 440, 890 370 Q 940 270, 1040 210 Z"
+        fill="url(#stream2)" opacity="0.35"/>
+
+  <!-- Middle layer organic shapes -->
+  <ellipse cx="280" cy="380" rx="120" ry="160" fill="#0a4f55" opacity="0.4" filter="url(#glow)"/>
+  <ellipse cx="920" cy="360" rx="110" ry="150" fill="#0a4f55" opacity="0.45" filter="url(#glow)"/>
+  <ellipse cx="600" cy="280" rx="90" ry="120" fill="#5ce1b5" opacity="0.25" filter="url(#glow)"/>
+
+  <!-- Converging streams into column -->
+  <path d="M 450 550 Q 500 600, 540 680 Q 560 720, 570 800"
+        fill="none" stroke="#0a4f55" stroke-width="45" opacity="0.6" filter="url(#glow)"/>
+  <path d="M 750 560 Q 700 610, 660 690 Q 640 730, 630 800"
+        fill="none" stroke="#0a4f55" stroke-width="40" opacity="0.65" filter="url(#glow)"/>
+
+  <!-- Central column structure -->
+  <path d="M 560 500 L 580 520 L 620 520 L 640 500 L 640 800 L 560 800 Z"
+        fill="url(#column)" opacity="0.7" filter="url(#glow)"/>
+
+  <!-- Column inner detail -->
+  <rect x="575" y="530" width="50" height="270" fill="#0a4f55" opacity="0.5"/>
+  <rect x="585" y="550" width="30" height="250" fill="#5ce1b5" opacity="0.3" filter="url(#strongGlow)"/>
+
+  <!-- Accent particles/dots -->
+  <circle cx="320" cy="420" r="8" fill="#5ce1b5" opacity="0.8" filter="url(#strongGlow)"/>
+  <circle cx="880" cy="400" r="6" fill="#5ce1b5" opacity="0.7" filter="url(#strongGlow)"/>
+  <circle cx="600" cy="320" r="10" fill="#5ce1b5" opacity="0.9" filter="url(#strongGlow)"/>
+  <circle cx="520" cy="580" r="7" fill="#5ce1b5" opacity="0.75" filter="url(#strongGlow)"/>
+  <circle cx="680" cy="590" r="5" fill="#5ce1b5" opacity="0.7" filter="url(#strongGlow)"/>
+
+  <!-- Small accent glows -->
+  <circle cx="380" cy="480" r="25" fill="url(#accent1)" opacity="0.4"/>
+  <circle cx="820" cy="460" r="30" fill="url(#accent1)" opacity="0.35"/>
+  <circle cx="600" cy="380" r="35" fill="url(#accent1)" opacity="0.3"/>
+
+  <!-- Top layer flowing ribbons -->
+  <path d="M 100 250 Q 200 300, 300 400 Q 380 480, 480 580 C 520 630, 560 680, 590 750"
+        fill="none" stroke="#5ce1b5" stroke-width="3" opacity="0.6" filter="url(#glow)"/>
+  <path d="M 1100 230 Q 1000 290, 900 390 Q 820 470, 720 570 C 680 620, 640 670, 610 740"
+        fill="none" stroke="#5ce1b5" stroke-width="3" opacity="0.65" filter="url(#glow)"/>
+
+  <!-- Grain overlay -->
+  <rect width="1200" height="800" fill="#3b4247" opacity="0.15" filter="url(#grain)"/>
+
+  <!-- Subtle vignette -->
+  <rect width="1200" height="800" fill="url(#depth1)" opacity="0.1"/>
+</svg>

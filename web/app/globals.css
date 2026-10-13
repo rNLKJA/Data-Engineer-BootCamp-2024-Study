@@ -1,126 +1,181 @@
 @import "tailwindcss";
 
-:root {
-  --background: #f9fafb;
-  --foreground: #111827;
-  --slate: #64748b;
-  --graphite: #4b5563;
-  --teal: #14b8a6;
-  --accent: #14b8a6;
-  --muted: #9ca3af;
-  --card-bg: #ffffff;
-  --card-border: #e5e7eb;
-  --spacing-hero: 5rem;
-  --spacing-section: 3.5rem;
-  --content-max: 72rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0e27;
-    --foreground: #f8fafc;
-    --slate: #cbd5e1;
-    --graphite: #b4bcc8;
-    --teal: #2dd4bf;
-    --accent: #2dd4bf;
-    --muted: #94a3b8;
-    --card-bg: #1e293b;
-    --card-border: #334155;
-  }
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-accent: var(--accent);
-  --color-slate: var(--slate);
-  --color-graphite: var(--graphite);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code-face), ui-monospace, SFMono-Regular, monospace;
+  --font-heading: var(--font-display-face), ui-serif, Georgia, serif;
+  --font-display: var(--font-display-face), ui-serif, Georgia, serif;
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-mint: var(--mint);
   --color-teal: var(--teal);
+  --color-graphite: var(--graphite);
+  --color-graphite-deep: var(--graphite-deep);
+  --color-teal-deep: var(--teal-deep);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
-  --color-card-bg: var(--card-bg);
-  --color-card-border: var(--card-border);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-body {
-  background: var(--background);
+/*
+ * Design tokens. Dark mode uses graphite, deep teal and mint accents for
+ * data engineering. Ported from Project Cradle's design system.
+ */
+:root {
+  --radius: 0.75rem;
+  --background: #fafafa;
+  --foreground: #1f2029;
+  --card: #ffffff;
+  --card-foreground: #1f2029;
+  --popover: #ffffff;
+  --popover-foreground: #1f2029;
+  --primary: #0d7377;
+  --primary-foreground: #ffffff;
+  --secondary: #e8f4f4;
+  --secondary-foreground: #2a2b37;
+  --muted: #f0f3f3;
+  --muted-foreground: #5b5f74;
+  --accent: #e6faf8;
+  --accent-foreground: #0a4f55;
+  --destructive: #b42332;
+  --success: #146c36;
+  --warning: #a65c00;
+  --info: #0a6f8a;
+  --border: #e0e5e5;
+  --input: #d4dada;
+  --ring: #5ce1b5;
+  --teal: #0d7377;
+  --teal-deep: #0a4f55;
+  --mint: #5ce1b5;
+  --graphite: #3a4247;
+  --graphite-deep: #2a2f33;
+}
+
+.dark {
+  --background: #0a0d12;
+  --foreground: #f8f9f9;
+  --card: #161d2b;
+  --card-foreground: #f8f9f9;
+  --popover: #1a2028;
+  --popover-foreground: #f8f9f9;
+  --primary: #5ce1b5;
+  --primary-foreground: #0a0d12;
+  --secondary: #2a2f33;
+  --secondary-foreground: #f8f9f9;
+  --muted: #1e2636;
+  --muted-foreground: #a9adc6;
+  --accent: #1e3a3d;
+  --accent-foreground: #f8f9f9;
+  --destructive: #ff6e6e;
+  --success: #5ce1b5;
+  --warning: #ffb86c;
+  --info: #8de8ca;
+  --border: #2a3340;
+  --input: #2a2f33;
+  --ring: #5ce1b5;
+  --teal: #0d7377;
+  --teal-deep: #0a4f55;
+  --mint: #5ce1b5;
+  --graphite: #3a4247;
+  --graphite-deep: #2a2f33;
+}
+
+.dark {
+  color-scheme: dark;
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-@supports (color-scheme: dark light) {
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
   html {
-    color-scheme: light dark;
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 30%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
-/* Wider page margins for breathing room */
-header {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-section {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-footer {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-@media (min-width: 48rem) {
-  header {
-    padding-left: 2rem;
-    padding-right: 2rem;
+@layer components {
+  /* Display headings with serif and tight tracking. */
+  .font-display {
+    font-family: var(--font-display-face), ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
   }
 
-  section {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  /* Small mono label used for kickers. */
+  .kicker {
+    font-family: var(--font-code-face), ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
-  footer {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  /* The arch: Cradle's frame shape. */
+  .arch {
+    border-radius: 999px 999px 1.25rem 1.25rem;
+  }
+
+  .grain {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--foreground) 7%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 18px 18px;
   }
 }
 
-@media (min-width: 64rem) {
-  header {
-    padding-left: 3rem;
-    padding-right: 3rem;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-
-  section {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
-  footer {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-}
-
-/* Typography refinements */
-h1,
-h2,
-h3 {
-  text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
 }
