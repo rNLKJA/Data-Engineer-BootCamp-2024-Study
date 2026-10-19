@@ -1,2 +1,3 @@
 pandas
 pyarrow
+pytest>=8.0.0
