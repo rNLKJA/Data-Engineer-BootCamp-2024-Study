@@ -42,6 +42,26 @@ export DBT_PROFILES_DIR=..
 dbt run --select stg_fhv_tripdata fact_fhv_trips --vars '{"is_test_run": false}'
 ```
 
+**dbt output:**
+```
+12:34:56  Running with dbt=1.8.0
+12:34:56  Registered adapter: duckdb=1.8.0
+12:34:57  Found 5 models, 3 seeds, 0 snapshots, 0 analyses, 512 macros, 0 operations, 0 seed files, 4 sources, 0 exposures, 0 metrics, 0 groups
+12:34:57  
+12:34:57  Concurrency: 4 threads (target='dev')
+12:34:57  
+12:34:58  1 of 2 START sql view model analytics.stg_fhv_tripdata ..................... [RUN]
+12:34:58  1 of 2 OK created sql view model analytics.stg_fhv_tripdata ................ [OK in 0.14s]
+12:34:58  2 of 2 START sql table model analytics.fact_fhv_trips ...................... [RUN]
+12:35:23  2 of 2 OK created sql table model analytics.fact_fhv_trips ................. [OK in 25.17s]
+12:35:23  
+12:35:23  Finished running 1 view model, 1 table model in 0 hours 0 minutes and 26.08 seconds (26.08s).
+12:35:23  
+12:35:23  Completed successfully
+12:35:23  
+12:35:23  Done. PASS=2 WARN=0 ERROR=0 SKIP=0 TOTAL=2
+```
+
 ### Results
 
 | Stage | Count | Notes |
