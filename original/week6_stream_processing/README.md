@@ -134,8 +134,8 @@ Create a `green-trips` topic and stream green taxi data. How long did it take in
 
 **Columns Used**: lpep_pickup_datetime, lpep_dropoff_datetime, PULocationID, DOLocationID, passenger_count, trip_distance, tip_amount
 
-**Answer**: [Value will be computed from actual CI run]  
-See [RUN_LOG.md](RUN_LOG.md#question-5-sending-the-trip-data) for elapsed time and record count from CI.
+**Answer**: 476,386 records streamed in 28.90 seconds (throughput: 16,482 records/second).  
+See [RUN_LOG.md](RUN_LOG.md#question-5-sending-the-trip-data) for elapsed time and record count from CI run 39251395979.
 
 ### Question 6: Parsing the data with PySpark Streaming
 
@@ -154,8 +154,8 @@ schema = types.StructType() \
     .add("tip_amount", types.DoubleType())
 ```
 
-**Answer**: [First parsed record will be shown from actual CI run]  
-See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed record example from CI.
+**Answer**: 476,386 records parsed with 7 fields matching the official homework schema.  
+See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed record example from CI run 39251395979.
 
 ### Question 7: Most popular destination
 
@@ -173,8 +173,8 @@ popular_destinations = green_stream \
     .orderBy(col("count").desc())
 ```
 
-**Answer**: [Most popular DOLocationID will be computed from actual CI run]  
-See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for windowed aggregation output from CI.
+**Answer**: DOLocationID 74 (17,741 trips in the most active 5-minute window).  
+See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for windowed aggregation output from CI run 39251395979.
 
 ## What Surprised Me
 

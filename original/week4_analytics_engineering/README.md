@@ -125,9 +125,9 @@ WHERE pickup_location_id IS NOT NULL
   AND dropoff_location_id NOT IN (264, 265)
 ```
 
-**Answer**: [To be computed after applying the filter - see RUN_LOG.md for before/after counts]
+**Answer**: 23,014,060 records
 
-The official homework answer is 22,998,722. The previous count of 41,231,038 did not exclude Unknown zones.
+See [RUN_LOG.md](RUN_LOG.md) for before/after counts and filtering logic. The count is 15,338 records (0.067%) higher than the official homework answer of 22,998,722, likely due to minor data download variations.
 
 ### Question 4
 
