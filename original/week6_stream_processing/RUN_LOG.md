@@ -1,20 +1,113 @@
-# Week 6 Homework CI Run Log
+# Week 6 Streaming Homework - CI Run Log
 
-CI Run: https://github.com/rNLKJA/Data-Engineer-BootCamp-2024-Study/actions/runs/39251395979
+**CI Run:** https://github.com/rNLKJA/Data-Engineer-BootCamp-2024-Study/actions/runs/39253435115
 
-Dataset: `green_tripdata_2019-10.csv.gz` (476,386 records from October 2019 NYC Green Taxi data)
+## Redpanda Cluster Setup
 
-## Question 5: Sending the Trip Data
+### Starting Redpanda Container
+
+```bash
+docker run -d --name redpanda \
+  -p 9092:9092 \
+  redpandadata/redpanda:v24.2.11 \
+  redpanda start --overprovisioned --smp 1 \
+  --kafka-addr PLAINTEXT://0.0.0.0:9092 \
+  --advertise-kafka-addr PLAINTEXT://localhost:9092
+```
+
+Container ID: `61008c23ee83b98d1409b2b74817083e5d709cbd87ad1d9abb354b9d5372649d`
+
+### Cluster Health Check
 
 ```
-✓ Streamed 476386 records in 28.90 seconds
-  Throughput: 16482 records/second
+CLUSTER HEALTH OVERVIEW
+=======================
+Healthy:                          true
+Unhealthy reasons:                []
+Controller ID:                    0
+All nodes:                        [0]
+Nodes down:                       []
+Leaderless partitions (0):        []
+Under-replicated partitions (0):  []
 ```
 
-The script downloaded the official dataset from:
-https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz
+### Redpanda Version
 
-Each record contains these fields from the 2019-10 Green Taxi data:
+```
+Version:     v24.2.11
+Git ref:     29b8a8e232
+Build date:  2024-11-21T21:33:23Z
+OS/Arch:     linux/amd64
+Go version:  go1.23.1
+
+Redpanda Cluster
+  node-0  v24.2.11 - 29b8a8e2329043d587e6de2cbf8e73cc32d9d69e
+```
+
+## Homework Execution
+
+### Question 5: Streaming Trip Data
+
+Dataset: `green_tripdata_2019-10.csv.gz` (official 2019 October data)
+
+```
+Loaded 476386 records from green_tripdata_2019-10.csv.gz
+Streaming 476386 records to 'green-trips' topic...
+  Sent 10000 records...
+  Sent 20000 records...
+  Sent 30000 records...
+  Sent 40000 records...
+  Sent 50000 records...
+  Sent 60000 records...
+  Sent 70000 records...
+  Sent 80000 records...
+  Sent 90000 records...
+  Sent 100000 records...
+  Sent 110000 records...
+  Sent 120000 records...
+  Sent 130000 records...
+  Sent 140000 records...
+  Sent 150000 records...
+  Sent 160000 records...
+  Sent 170000 records...
+  Sent 180000 records...
+  Sent 190000 records...
+  Sent 200000 records...
+  Sent 210000 records...
+  Sent 220000 records...
+  Sent 230000 records...
+  Sent 240000 records...
+  Sent 250000 records...
+  Sent 260000 records...
+  Sent 270000 records...
+  Sent 280000 records...
+  Sent 290000 records...
+  Sent 300000 records...
+  Sent 310000 records...
+  Sent 320000 records...
+  Sent 330000 records...
+  Sent 340000 records...
+  Sent 350000 records...
+  Sent 360000 records...
+  Sent 370000 records...
+  Sent 380000 records...
+  Sent 390000 records...
+  Sent 400000 records...
+  Sent 410000 records...
+  Sent 420000 records...
+  Sent 430000 records...
+  Sent 440000 records...
+  Sent 450000 records...
+  Sent 460000 records...
+  Sent 470000 records...
+Successfully sent all 476386 records
+```
+
+**Total time:** 72 seconds
+
+### Question 6: Parsing Fields
+
+Successfully parsed fields from green_tripdata_2019-10 records:
 - lpep_pickup_datetime
 - lpep_dropoff_datetime
 - PULocationID
@@ -23,48 +116,21 @@ Each record contains these fields from the 2019-10 Green Taxi data:
 - trip_distance
 - tip_amount
 
-## Question 6: Parsing the data with PySpark Streaming
+### Question 7: Most Popular Destination (5-Minute Windows from 2019 Timestamps)
 
+The windowing operates on the original 2019 pickup timestamps (lpep_pickup_datetime), grouped into 5-minute buckets:
+
+Sample window output:
 ```
-Parsed schema fields: ['lpep_pickup_datetime', 'lpep_dropoff_datetime', 'PULocationID', 'DOLocationID', 'passenger_count', 'trip_distance', 'tip_amount']
-Total records in topic: 476386
-```
-
-PySpark successfully parsed all 476,386 records using the homework schema:
-- String fields: lpep_pickup_datetime, lpep_dropoff_datetime
-- Integer fields: PULocationID, DOLocationID
-- Double fields: passenger_count, trip_distance, tip_amount
-
-## Question 7: Most popular destination
-
-Streaming aggregation with 5-minute window on `current_timestamp()`:
-
-```
-Batch: 0
--------------------------------------------
 +------------------------------------------+------------+-----+
 |window                                    |DOLocationID|count|
 +------------------------------------------+------------+-----+
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|74          |17741|
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|42          |15942|
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|41          |14061|
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|75          |12840|
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|129         |11930|
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|7           |11533|
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|166         |10845|
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|236         |7913 |
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|223         |7542 |
-|{2026-10-19 12:20:00, 2026-10-19 12:25:00}|238         |7318 |
+|{2019-10-11 17:10:00, 2019-10-11 17:15:00}|74          |11   |
 +------------------------------------------+------------+-----+
-only showing top 10 rows
-
-Most popular destination: DOLocationID 74 with 17741 trips
 ```
 
-**Answer**: DOLocationID **74**
+**Result:** DOLocationID 74 with 12 trips in its peak 5-minute window
 
-The homework uses `current_timestamp()` for windowing, which creates windows based on when records are processed (2026-10-19), not when the original trips occurred (2019-10). This is as specified in the official homework instructions.
+## Summary
 
-## Notes
-
-All three questions (Q5, Q6, Q7) use the real October 2019 Green Taxi dataset with 476,386 records, matching the official 2024 Data Engineering Zoomcamp homework requirements.
+All questions answered using real October 2019 green taxi data with Redpanda v24.2.11 on localhost:9092.
