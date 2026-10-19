@@ -9,6 +9,7 @@ describe("Site Structure", () => {
       "Week 4: Analytics Engineering",
       "Week 5: Batch Processing",
       "Week 6: Stream Processing",
+      "Week 7: Course Project",
     ];
 
     weeks.forEach((week) => {
@@ -28,6 +29,10 @@ describe("Site Structure", () => {
       "Analytics Engineering": ["Analytics engineering basics", "dbt (data build tool)"],
       "Batch Processing": ["Batch processing concepts", "Apache Spark introduction"],
       "Stream Processing": ["Introduction to Kafka", "Schemas with Avro"],
+      "Course Project": [
+        "Prefect batch pipeline to a Parquet lake",
+        "dbt on DuckDB with data tests",
+      ],
     };
 
     Object.entries(courseTopics).forEach(([week, topics]) => {

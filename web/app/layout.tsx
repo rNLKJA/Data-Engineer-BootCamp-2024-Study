@@ -45,21 +45,21 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Data Engineer BootCamp",
     description:
-      "Six weeks of hands-on data engineering training. Working through the DataTalksClub Zoomcamp, one week at a time.",
+      "Seven weeks of hands-on data engineering training, from Docker to a course project. Working through the DataTalksClub Zoomcamp, one week at a time.",
     type: "website",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Data Engineer BootCamp - Six weeks of hands-on training",
+        alt: "Data Engineer BootCamp - Seven weeks of hands-on training",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Data Engineer BootCamp",
-    description: "Six weeks of hands-on data engineering training",
+    description: "Seven weeks of hands-on data engineering training",
     images: ["/og-image.png"],
   },
   icons: {

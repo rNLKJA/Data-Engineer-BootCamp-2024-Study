@@ -29,6 +29,9 @@ jobs:
       - name: Typecheck
         run: cd web && npm run typecheck
 
+      - name: Unit tests
+        run: cd web && npm test
+
       - name: Build
         run: cd web && npm run build
 
@@ -170,3 +173,110 @@ jobs:
             original/week6_stream_processing/homework_results.json
             original/week6_stream_processing/homework_output.log
 
+  # Week 7 course project: SA road crash pipeline (original/project).
+  project-pipeline:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: original/project
+    env:
+      DBT_USE_COLORS: 'false'
+      PREFECT_LOGGING_COLORS: 'false'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: original/project/requirements.txt
+
+      - name: Restore cached DIT releases
+        uses: actions/cache@v4
+        with:
+          path: original/project/data/landing
+          key: sa-crash-landing-${{ hashFiles('original/project/pipeline/sources.yml') }}
+
+      - name: Install pinned requirements
+        run: python -m pip install -r requirements.txt
+
+      - name: Offline tests (fixtures and a local HTTP server, no network)
+        run: python -m pytest -m "not integration" -v
+
+      - name: Run the pipeline (download, lake, dbt build, benchmark, export)
+        run: python -m pipeline.flow 2>&1 | tee pipeline-run.log
+
+      - name: Integration tests against the real warehouse
+        run: python -m pytest -m integration -v
+
+      - name: Committed dashboard numbers equal the pipeline output
+        run: git diff --exit-code -- ../../web/app/project/dashboard-data.json
+
+      - name: Upload run results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-pipeline-results
+          path: |
+            original/project/dbt/target/run_results.json
+            original/project/dbt/target/manifest.json
+            original/project/pipeline-run.log
+            original/project/data/warehouse/benchmark.json
+            web/app/project/dashboard-data.json
+
+  project-terraform:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: original/project/infra/terraform
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.16.6
+          terraform_wrapper: false
+
+      - name: Format check
+        run: terraform fmt -check -recursive
+
+      - name: Local stack (folders and rendered config)
+        working-directory: original/project/infra/terraform/local
+        run: |
+          terraform init -input=false
+          terraform validate
+          terraform apply -input=false -auto-approve
+          terraform output
+          test -f "$(terraform output -raw pipeline_env_file)"
+          grep -q 'SA_CRASH_WAREHOUSE=' "$(terraform output -raw pipeline_env_file)"
+
+      - name: Restore cached DIT releases
+        uses: actions/cache@v4
+        with:
+          path: original/project/data/landing
+          key: sa-crash-landing-${{ hashFiles('original/project/pipeline/sources.yml') }}
+
+      - name: Docker stack (build the image, run the pipeline container once)
+        working-directory: original/project/infra/terraform/docker
+        run: |
+          terraform init -input=false
+          terraform validate
+          terraform apply -input=false -auto-approve
+          terraform output -raw container_logs | tail -n 30
+          code="$(terraform output -raw exit_code)"
+          echo "pipeline container exit code: ${code}"
+          test "${code}" = "0"
+          terraform output -raw container_logs | grep -q "Flow run .* Finished in state Completed()"
+
+      - name: Container export equals the committed dashboard JSON
+        working-directory: .
+        run: cmp original/project/data/export/dashboard-data.json web/app/project/dashboard-data.json
+
+      - name: Destroy docker stack
+        if: always()
+        working-directory: original/project/infra/terraform/docker
+        run: terraform destroy -input=false -auto-approve

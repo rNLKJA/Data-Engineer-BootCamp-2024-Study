@@ -1,0 +1,12 @@
+# dbt profile for the SA road crash warehouse (DuckDB, a local stand-in for BigQuery).
+# Paths come from environment variables so nothing machine-specific is committed:
+#   SA_CRASH_WAREHOUSE  path of the DuckDB file (data/warehouse/sa_crash.duckdb)
+#   SA_CRASH_LAKE       root of the Parquet lake (data/lake), read by the sources
+# `make dbt`, `python -m pipeline.flow` and the Terraform-rendered pipeline.env set both.
+sa_crash:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('SA_CRASH_WAREHOUSE') }}"
+      threads: 4

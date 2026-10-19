@@ -1,0 +1,5 @@
+severity_code,csef_severity,severity_name,is_fsi,is_casualty_crash
+1,1: PDO,Property damage only,false,false
+2,2: MI,Minor injury,false,true
+3,3: SI,Serious injury,true,true
+4,4: Fatal,Fatal,true,true

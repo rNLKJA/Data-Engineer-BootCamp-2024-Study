@@ -137,8 +137,9 @@ export default function TourPage() {
             </p>
             <p>
               The bootcamp emphasises hands-on learning through projects and real tools used in
-              production data engineering. By completing all six weeks, you will have built a
-              complete understanding of modern data stack fundamentals.
+              production data engineering. By completing all seven weeks, including the course
+              project, you will have built a complete understanding of modern data stack
+              fundamentals.
             </p>
             <div className="pt-4 flex gap-4">
               <a

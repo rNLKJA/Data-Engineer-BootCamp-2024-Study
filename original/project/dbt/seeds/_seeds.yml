@@ -1,0 +1,30 @@
+version: 2
+
+seeds:
+  - name: severity_levels
+    description: CSEF severity codes from the DIT metadata, with the FSI (fatal or serious injury) flag.
+    columns:
+      - name: severity_code
+        data_tests:
+          - unique
+          - not_null
+  - name: pdo_reporting_regimes
+    description: >
+      Property-damage-only (PDO) reporting rules in force over time, summarised
+      from the DIT Road Crash Data metadata PDF (metadata-for-road-crash-data-20251215.pdf,
+      CC BY 4.0). Counts of all crashes are not comparable across regimes.
+    columns:
+      - name: regime_id
+        data_tests:
+          - unique
+          - not_null
+  - name: lga_name_aliases
+    description: >
+      Council names spelled differently in the 2012-2020 extracts, mapped to the
+      spelling used by the 2021-2025 extract. Built in this project by comparing
+      the distinct LGA Name values across releases.
+    columns:
+      - name: raw_lga_name
+        data_tests:
+          - unique
+          - not_null

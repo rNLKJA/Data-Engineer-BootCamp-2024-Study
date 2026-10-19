@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: lake
+    description: >
+      Raw layer of the Parquet lake written by pipeline/ingest.py. One Hive partition
+      per crash year (year=YYYY). Source column names are kept exactly as DIT
+      publishes them; staging renames them.
+    config:
+      meta:
+        external_location: "read_parquet('{{ env_var('SA_CRASH_LAKE') }}/raw/{name}/*/*.parquet', hive_partitioning=true)"
+    tables:
+      - name: crash
+        description: One row per reported crash (DIT *_DATA_SA_Crash.csv).
+      - name: casualty
+        description: One row per casualty (DIT *_DATA_SA_Casualty.csv).
+      - name: units
+        description: One row per unit (vehicle, pedestrian, animal or object) involved (DIT *_DATA_SA_Units.csv).
+      - name: releases
+        description: The pinned release manifest (pipeline/sources.yml) stored as data.
+        config:
+          meta:
+            external_location: "read_parquet('{{ env_var('SA_CRASH_LAKE') }}/raw/releases/releases.parquet')"

@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: fct_crashes
+    description: >
+      Curated crash fact, written in (crash_month, lga_name, severity_code) order
+      so row-group statistics can skip data, and exported to
+      lake/curated/fct_crashes as Parquet partitioned by crash_year.
+    columns:
+      - name: crash_id
+        data_tests:
+          - unique
+          - not_null
+      - name: severity_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4]
+                quote: false
+      - name: severity_name
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Property damage only", "Minor injury", "Serious injury", "Fatal"]
+      - name: pdo_regime_id
+        description: PDO reporting regime in force for the crash month (seed pdo_reporting_regimes).
+        data_tests:
+          - not_null
+      - name: casualty_rows
+        data_tests:
+          - non_negative
+      - name: total_fats
+        data_tests:
+          - non_negative
+
+  - name: fct_casualties
+    description: One row per casualty, with crash month, council area and crash type.
+    columns:
+      - name: crash_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_crashes')
+                field: crash_id
+
+  - name: dim_lga
+    description: One row per council area with its main statistical area.
+    columns:
+      - name: lga_name
+        data_tests:
+          - unique
+          - not_null
+      - name: main_stats_area
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["City", "Metropolitan", "Country"]

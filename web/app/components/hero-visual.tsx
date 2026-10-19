@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-/** Hero visual with rich abstract data pipeline artwork, floating Week 1 card, and progress indicator. */
+/** Hero visual with rich abstract data pipeline artwork, floating Week 7 card, and progress indicator. */
 export function HeroVisual() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Animate to 16.67% (1 out of 6 weeks)
-    const timer = setTimeout(() => setProgress(16.67), 100);
+    // Animate to 100% (7 out of 7 weeks)
+    const timer = setTimeout(() => setProgress(100), 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -305,10 +305,10 @@ export function HeroVisual() {
       <div
         className="absolute bottom-0 left-0 right-0 h-1 overflow-hidden rounded-b-2xl bg-white/5"
         role="progressbar"
-        aria-valuenow={1}
+        aria-valuenow={7}
         aria-valuemin={0}
-        aria-valuemax={6}
-        aria-label="Course progress: 1 of 6 weeks complete"
+        aria-valuemax={7}
+        aria-label="Course progress: 7 of 7 weeks complete"
       >
         <div
           className="h-full bg-gradient-to-r from-mint to-teal transition-all duration-1000 ease-out"
@@ -316,24 +316,22 @@ export function HeroVisual() {
         />
       </div>
 
-      {/* Floating Week 1 card with shadow */}
+      {/* Floating Week 7 card with shadow */}
       <div className="absolute -bottom-8 -left-2 w-[17rem] -rotate-3 sm:-left-10 sm:w-[19rem] rounded-2xl border border-white/10 bg-card/95 p-4 shadow-lg backdrop-blur">
-        <div className="kicker text-mint">Week 1 · complete</div>
-        <div className="mt-2 font-display text-xl font-semibold">
-          Introduction &amp; Prerequisites
-        </div>
+        <div className="kicker text-mint">Week 7 · complete</div>
+        <div className="mt-2 font-display text-xl font-semibold">Course project</div>
         <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground">
           <li className="flex items-start gap-2">
             <span className="mt-1 size-1 shrink-0 rounded-full bg-mint" />
-            <span>Docker and docker-compose</span>
+            <span>Prefect batch pipeline to a Parquet lake</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-1 size-1 shrink-0 rounded-full bg-mint" />
-            <span>Postgres with Docker</span>
+            <span>dbt on DuckDB with data tests</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-1 size-1 shrink-0 rounded-full bg-mint" />
-            <span>Infrastructure with Terraform</span>
+            <span>SA road crash dashboard, 2012 to 2025</span>
           </li>
         </ul>
       </div>

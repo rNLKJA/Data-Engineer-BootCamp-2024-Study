@@ -1,0 +1,105 @@
+# Pinned source releases for the SA road crash pipeline.
+#
+# Dataset: "Road Crash Data", Department for Infrastructure and Transport (DIT),
+# Government of South Australia, published on data.sa.gov.au under CC BY 4.0.
+# Every release below was downloaded and checksummed on 2026-10-20. The pipeline
+# refuses a file whose size or SHA-256 differs, so a silent re-publication by DIT
+# fails loudly instead of changing the dashboard numbers.
+#
+# Releases must cover disjoint calendar years. The newest year in the newest
+# release is treated as provisional because DIT revises it in later extracts.
+
+dataset:
+  title: Road Crash Data
+  publisher: Department for Infrastructure and Transport (Government of South Australia)
+  page: https://data.sa.gov.au/data/dataset/road-crash-data
+  package_id: 21386a53-56a1-4edf-bd0b-61ed15f10acf
+  licence: CC BY 4.0
+  licence_url: http://creativecommons.org/licenses/by/4.0
+  attribution: Road Crash Data, Department for Infrastructure and Transport (Government of South Australia), data.sa.gov.au, CC BY 4.0
+  url_template: https://data.sa.gov.au/data/dataset/{package_id}/resource/{resource_id}/download/{file}
+  metadata_pdf:
+    resource_id: 02fb14f9-8dcb-4a59-863c-5f7cc3ae1832
+    file: metadata-for-road-crash-data-20251215.pdf
+
+releases:
+  - release_id: sa_crash_2012_as_at_20210527
+    first_year: 2012
+    last_year: 2012
+    as_at: 2021-05-27
+    resource_id: 922cd06b-76e4-40bf-a534-ce2f2daae904
+    file: 2012_data_sa_as_at_20210527.zip
+    bytes: 1628505
+    sha256: 02380fee078ed225f5d6b555ad5876d4a9b09667bc712cecb2728361041019bf
+  - release_id: sa_crash_2013_as_at_20210527
+    first_year: 2013
+    last_year: 2013
+    as_at: 2021-05-27
+    resource_id: 4b2b5c27-98c9-42bd-9352-3e35c4e3fc22
+    file: 2013_data_sa_as_at_20210527.zip
+    bytes: 1257991
+    sha256: 697e5ae5b0ddcc89f117dee7f8a4b43bc60ad56a765df891737bad7e30fce8e1
+  - release_id: sa_crash_2014_as_at_20210527
+    first_year: 2014
+    last_year: 2014
+    as_at: 2021-05-27
+    resource_id: ea84f40e-8554-4f8d-bbb4-4f6b5c0ef728
+    file: 2014_data_sa_as_at_20210527.zip
+    bytes: 1221928
+    sha256: d6ff9170c6ef092d7eaeab4a22693570bf7be7ad39bc2dd9f03bda07766c014f
+  - release_id: sa_crash_2015_as_at_20210527
+    first_year: 2015
+    last_year: 2015
+    as_at: 2021-05-27
+    resource_id: 01e6515b-5428-4850-9814-b2a11a177040
+    file: 2015_data_sa_as_at_20210527.zip
+    bytes: 1168394
+    sha256: 8aa9d4b9bca05bd8f14a5da8e9adb928af06ed6abb4ff4089081aa3a91abe8db
+  - release_id: sa_crash_2016_as_at_20210527
+    first_year: 2016
+    last_year: 2016
+    as_at: 2021-05-27
+    resource_id: ade3f316-3720-4c8f-b0a2-181556ec3cf6
+    file: 2016_data_sa_as_at_20210527.zip
+    bytes: 1259179
+    sha256: 3d1ce02ebe9dfe582452f715bb14b9729de9d79ca66aee04302302c02c49839a
+  - release_id: sa_crash_2017_as_at_20210527
+    first_year: 2017
+    last_year: 2017
+    as_at: 2021-05-27
+    resource_id: 8c4689ce-d3cb-413c-a467-674e00fb9115
+    file: 2017_data_sa_as_at_20210527.zip
+    bytes: 1001803
+    sha256: a97b3c4e877c56b5b5459ae346d996f1d52292ab0d715db07188edd138f96e73
+  - release_id: sa_crash_2018_as_at_20210527
+    first_year: 2018
+    last_year: 2018
+    as_at: 2021-05-27
+    resource_id: 45ceb7e8-59bd-4492-b107-8379752ea597
+    file: 2018_data_sa_as_at_20210527.zip
+    bytes: 1024690
+    sha256: c7fad62e2f7b8786c40c9324ff98315c683e8721547b16a640bb9d7cf5b1b647
+  - release_id: sa_crash_2019_as_at_20210527
+    first_year: 2019
+    last_year: 2019
+    as_at: 2021-05-27
+    resource_id: 0f522af2-ad29-47b4-82dc-12c9cbe79796
+    file: 2019_data_sa_as_at_20210527.zip
+    bytes: 980081
+    sha256: aef9a66aef2756d5fc4ffc548c7377b993086b471412c259441c9c754ed679a8
+  - release_id: sa_crash_2020_as_at_20210527
+    first_year: 2020
+    last_year: 2020
+    as_at: 2021-05-27
+    resource_id: 1c97e5d4-3a2f-4db7-b856-4eff7e6acef9
+    file: 2020_data_sa_as_at_20210527.zip
+    bytes: 865285
+    sha256: 8a5f4269d900b9b518db0d7274d935a53b3befeb148ee49cfc0e71d74947f989
+  - release_id: sa_crash_2021_2025_as_at_20261009
+    first_year: 2021
+    last_year: 2025
+    as_at: 2026-10-09
+    resource_id: 7631278e-cf4b-49e3-bea3-4f02f55920db
+    file: 2021-2025_data_sa_crash_as_at_20261009.zip
+    bytes: 5155745
+    sha256: 2c6df4a4bcaeef88cd29cfab77ebcf9bbacc97e7f5237d7abc3e3a6e89a29288

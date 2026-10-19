@@ -171,3 +171,14 @@ original/week4_analytics_engineering/data/**/*.parquet
 original/week5_batch_processing/data/*.csv
 original/week5_batch_processing/data/*.parquet
 original/week5_batch_processing/output/*.parquet
+
+# Week 7 course project (original/project): runtime data, dbt and Terraform state
+original/project/data/
+original/project/dbt/logs/
+original/project/dbt/dbt_packages/
+original/project/dbt/.user.yml
+**/.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+dbt_packages/

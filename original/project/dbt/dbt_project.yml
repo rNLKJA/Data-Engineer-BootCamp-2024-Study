@@ -1,0 +1,42 @@
+name: sa_crash
+version: "1.0.0"
+profile: sa_crash
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: target
+clean-targets: ["target", "logs"]
+
+models:
+  sa_crash:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    core:
+      +materialized: table
+    reporting:
+      +materialized: table
+
+seeds:
+  sa_crash:
+    severity_levels:
+      +column_types:
+        severity_code: integer
+        csef_severity: varchar
+        severity_name: varchar
+        is_fsi: boolean
+        is_casualty_crash: boolean
+    lga_name_aliases:
+      +column_types:
+        raw_lga_name: varchar
+        lga_name: varchar
+    pdo_reporting_regimes:
+      +column_types:
+        regime_id: integer
+        valid_from: date
+        valid_to: date
+        pdo_rule_summary: varchar
+        source: varchar
