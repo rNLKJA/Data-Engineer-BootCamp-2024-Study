@@ -166,16 +166,24 @@ def question_5_stream_green_trips():
     print("Question 5: Sending the Trip Data")
     print("="*60)
 
-    # Find green taxi data (from week 2)
-    week2_dir = Path(__file__).parent.parent / "week2_workflow_orchestration/downloads"
-    green_files = list(week2_dir.glob("green_tripdata_*.parquet"))
+    # Find green taxi data (test data or week 2 data)
+    test_data_dir = Path(__file__).parent / "test_data"
+    test_files = list(test_data_dir.glob("green_tripdata_*.parquet"))
 
-    if not green_files:
-        print("ERROR: No green taxi parquet files found")
-        return None
+    if test_files:
+        data_file = test_files[0]
+        print(f"Using test data: {data_file.name}")
+    else:
+        week2_dir = Path(__file__).parent.parent / "week2_workflow_orchestration/downloads"
+        green_files = list(week2_dir.glob("green_tripdata_*.parquet"))
+        if not green_files:
+            print("ERROR: No green taxi parquet files found")
+            return None
+        data_file = green_files[0]
+        print(f"Using week 2 data: {data_file.name}")
 
-    print(f"Loading data from {green_files[0].name}...")
-    df = pd.read_parquet(green_files[0])
+    print(f"Loading data from {data_file.name}...")
+    df = pd.read_parquet(data_file)
     print(f"Loaded {len(df)} records")
 
     # Create producer
