@@ -7,9 +7,14 @@
 -- Fact table for FHV trips
 -- Joins with dim_zones to get zone names
 -- Keeps only records with known pickup and dropoff locations
+-- Filters out NULL location IDs and Unknown zones (264, 265)
 
 WITH fhv_trips AS (
     SELECT * FROM {{ ref('stg_fhv_tripdata') }}
+    WHERE pickup_location_id IS NOT NULL
+      AND dropoff_location_id IS NOT NULL
+      AND pickup_location_id NOT IN (264, 265)
+      AND dropoff_location_id NOT IN (264, 265)
 ),
 
 zones AS (
@@ -19,6 +24,7 @@ zones AS (
         Zone,
         service_zone
     FROM read_csv_auto('../data/taxi_zone_lookup.csv')
+    WHERE Zone != 'Unknown'
 )
 
 SELECT

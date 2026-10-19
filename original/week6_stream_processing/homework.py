@@ -166,25 +166,33 @@ def question_5_stream_green_trips():
     print("Question 5: Sending the Trip Data")
     print("="*60)
 
-    # Find green taxi data (test data or week 2 data)
-    test_data_dir = Path(__file__).parent / "test_data"
-    test_files = list(test_data_dir.glob("green_tripdata_*.parquet"))
+    # Use the official green_tripdata_2019-10.csv.gz file from the homework
+    # Download from the official source if not present
+    data_file = Path(__file__).parent.parent / "week2_workflow_orchestration/downloads/green_tripdata_2019-10.csv.gz"
 
-    if test_files:
-        data_file = test_files[0]
-        print(f"Using test data: {data_file.name}")
-    else:
-        week2_dir = Path(__file__).parent.parent / "week2_workflow_orchestration/downloads"
-        green_files = list(week2_dir.glob("green_tripdata_*.parquet"))
-        if not green_files:
-            print("ERROR: No green taxi parquet files found")
-            return None
-        data_file = green_files[0]
-        print(f"Using week 2 data: {data_file.name}")
+    if not data_file.exists():
+        print(f"Downloading green_tripdata_2019-10.csv.gz from official source...")
+        import urllib.request
+        data_file.parent.mkdir(parents=True, exist_ok=True)
+        url = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz"
+        urllib.request.urlretrieve(url, data_file)
+        print(f"Downloaded to {data_file}")
 
     print(f"Loading data from {data_file.name}...")
-    df = pd.read_parquet(data_file)
-    print(f"Loaded {len(df)} records")
+    # Load only the required columns from the homework
+    df = pd.read_csv(
+        data_file,
+        usecols=[
+            'lpep_pickup_datetime',
+            'lpep_dropoff_datetime',
+            'PULocationID',
+            'DOLocationID',
+            'passenger_count',
+            'trip_distance',
+            'tip_amount'
+        ]
+    )
+    print(f"Loaded {len(df)} records from green_tripdata_2019-10.csv.gz")
 
     # Create producer
     producer = KafkaProducer(
@@ -201,24 +209,16 @@ def question_5_stream_green_trips():
         time.sleep(1)
     admin.close()
 
-    # Stream data
+    # Stream data (no sleep, as per homework instructions)
     print(f"Streaming {len(df)} records to 'green-trips' topic...")
     start_time = time.time()
 
-    for idx, row in df.iterrows():
-        event = {
-            'trip_id': f"green_{idx}",
-            'vendor_id': int(row['VendorID']) if 'VendorID' in row and pd.notna(row['VendorID']) else 0,
-            'lpep_pickup_datetime': row['lpep_pickup_datetime'].isoformat() if pd.notna(row['lpep_pickup_datetime']) else None,
-            'lpep_dropoff_datetime': row['lpep_dropoff_datetime'].isoformat() if pd.notna(row['lpep_dropoff_datetime']) else None,
-            'PULocationID': int(row['PULocationID']) if pd.notna(row['PULocationID']) else 0,
-            'DOLocationID': int(row['DOLocationID']) if pd.notna(row['DOLocationID']) else 0,
-            'trip_distance': float(row['trip_distance']) if pd.notna(row['trip_distance']) else 0.0,
-            'fare_amount': float(row['fare_amount']) if pd.notna(row['fare_amount']) else 0.0,
-        }
-        producer.send('green-trips', value=event)
+    for idx, row in enumerate(df.itertuples(index=False)):
+        # Use the homework's recommended iteration method (itertuples)
+        row_dict = {col: getattr(row, col) for col in row._fields}
+        producer.send('green-trips', value=row_dict)
 
-        if (idx + 1) % 5000 == 0:
+        if (idx + 1) % 10000 == 0:
             print(f"  Sent {idx + 1} records...")
 
     producer.flush()
@@ -230,7 +230,7 @@ def question_5_stream_green_trips():
 
     return {
         'records': len(df),
-        'time_seconds': elapsed,
+        'time_seconds': round(elapsed),  # Round to whole number as per homework
         'throughput': len(df) / elapsed
     }
 
@@ -242,7 +242,7 @@ def question_6_pyspark_parse():
     print("="*60)
 
     from pyspark.sql import SparkSession
-    from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
+    from pyspark.sql.types import StructType, StringType, IntegerType, DoubleType
 
     # Create Spark session - packages will be provided by spark-submit --packages
     spark = SparkSession.builder \
@@ -251,17 +251,15 @@ def question_6_pyspark_parse():
 
     spark.sparkContext.setLogLevel("WARN")
 
-    # Define schema
-    schema = StructType([
-        StructField("trip_id", StringType(), True),
-        StructField("vendor_id", IntegerType(), True),
-        StructField("lpep_pickup_datetime", StringType(), True),
-        StructField("lpep_dropoff_datetime", StringType(), True),
-        StructField("PULocationID", IntegerType(), True),
-        StructField("DOLocationID", IntegerType(), True),
-        StructField("trip_distance", DoubleType(), True),
-        StructField("fare_amount", DoubleType(), True),
-    ])
+    # Define schema exactly as in the homework
+    schema = StructType() \
+        .add("lpep_pickup_datetime", StringType()) \
+        .add("lpep_dropoff_datetime", StringType()) \
+        .add("PULocationID", IntegerType()) \
+        .add("DOLocationID", IntegerType()) \
+        .add("passenger_count", DoubleType()) \
+        .add("trip_distance", DoubleType()) \
+        .add("tip_amount", DoubleType())
 
     # Read from Kafka
     df = spark.readStream \
@@ -273,18 +271,17 @@ def question_6_pyspark_parse():
 
     # Parse JSON
     from pyspark.sql.functions import from_json, col
-    parsed_df = df.select(from_json(col("value").cast("string"), schema).alias("data")).select("data.*")
+    green_stream = df.select(from_json(col("value").cast("string"), schema).alias("data")).select("data.*")
 
-    # Write to console to get count (run for limited time)
-    query = parsed_df.writeStream \
-        .outputMode("append") \
-        .format("console") \
-        .option("truncate", False) \
-        .option("numRows", 10) \
-        .start()
+    # Peek at first record to show parsed output
+    def peek(mini_batch, batch_id):
+        first_row = mini_batch.take(1)
+        if first_row:
+            print("\nFirst parsed record:")
+            print(first_row[0])
 
-    # Run for a few seconds to process
-    time.sleep(10)
+    query = green_stream.writeStream.foreachBatch(peek).start()
+    time.sleep(5)
     query.stop()
 
     # Get record count from Kafka consumer
@@ -302,13 +299,13 @@ def question_6_pyspark_parse():
         count += 1
     consumer.close()
 
-    print(f"\nParsed schema: {[f.name for f in schema.fields]}")
+    print(f"\nParsed schema fields: {schema.fieldNames()}")
     print(f"Total records in topic: {count}")
 
     spark.stop()
 
     return {
-        'schema': [f.name for f in schema.fields],
+        'schema': schema.fieldNames(),
         'record_count': count
     }
 
@@ -320,54 +317,84 @@ def question_7_most_popular_destination():
     print("="*60)
 
     from pyspark.sql import SparkSession
-    from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
+    from pyspark.sql.types import StructType, StringType, IntegerType, DoubleType
     from pyspark.sql.functions import from_json, col, window, current_timestamp
 
-    # Create Spark session - packages will be provided by spark-submit --packages
+    # Create Spark session with tuned settings for faster streaming
     spark = SparkSession.builder \
         .appName("Week6HomeworkQ7") \
+        .config("spark.sql.shuffle.partitions", "4") \
+        .config("spark.streaming.kafka.maxRatePerPartition", "100000") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
 
-    schema = StructType([
-        StructField("trip_id", StringType(), True),
-        StructField("vendor_id", IntegerType(), True),
-        StructField("lpep_pickup_datetime", StringType(), True),
-        StructField("lpep_dropoff_datetime", StringType(), True),
-        StructField("PULocationID", IntegerType(), True),
-        StructField("DOLocationID", IntegerType(), True),
-        StructField("trip_distance", DoubleType(), True),
-        StructField("fare_amount", DoubleType(), True),
-    ])
+    # Schema matching Q6
+    schema = StructType() \
+        .add("lpep_pickup_datetime", StringType()) \
+        .add("lpep_dropoff_datetime", StringType()) \
+        .add("PULocationID", IntegerType()) \
+        .add("DOLocationID", IntegerType()) \
+        .add("passenger_count", DoubleType()) \
+        .add("trip_distance", DoubleType()) \
+        .add("tip_amount", DoubleType())
 
     # Read from Kafka
-    df = spark.readStream \
+    green_stream = spark.readStream \
         .format("kafka") \
         .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS) \
         .option("subscribe", "green-trips") \
         .option("startingOffsets", "earliest") \
         .load()
 
-    # Parse and add timestamp
-    parsed_df = df.select(from_json(col("value").cast("string"), schema).alias("data")).select("data.*")
-    df_with_ts = parsed_df.withColumn("timestamp", current_timestamp())
+    # Parse and add timestamp (using current_timestamp as per homework)
+    green_stream = green_stream.select(from_json(col("value").cast("string"), schema).alias("data")).select("data.*")
+    green_stream = green_stream.withColumn("timestamp", current_timestamp())
 
     # Group by 5-minute window and DOLocationID
-    popular_destinations = df_with_ts \
+    popular_destinations = green_stream \
         .groupBy(window(col("timestamp"), "5 minutes"), "DOLocationID") \
         .count() \
         .orderBy(col("count").desc())
 
-    # Write to memory table
+    # Write to console to see the output
     query = popular_destinations.writeStream \
+        .outputMode("complete") \
+        .format("console") \
+        .option("truncate", "false") \
+        .option("numRows", 10) \
+        .trigger(processingTime='10 seconds') \
+        .start()
+
+    # Wait for data to accumulate and process
+    print("\nWaiting for streaming aggregation to process data...")
+    for i in range(6):
+        time.sleep(10)
+        print(f"  Waiting... {(i+1)*10}s elapsed")
+
+    query.stop()
+
+    # Query via memory sink to get the result
+    query2 = popular_destinations.writeStream \
         .outputMode("complete") \
         .format("memory") \
         .queryName("popular_destinations") \
+        .trigger(processingTime='5 seconds') \
         .start()
 
-    # Wait for data to accumulate
-    time.sleep(15)
+    print("Waiting for memory sink to process...")
+    for i in range(4):
+        time.sleep(10)
+        print(f"  Waiting... {(i+1)*10}s elapsed")
+        # Check if data is available
+        try:
+            result = spark.sql("SELECT COUNT(*) as cnt FROM popular_destinations")
+            cnt = result.collect()[0]['cnt']
+            if cnt > 0:
+                print(f"  Found {cnt} rows in memory table")
+                break
+        except Exception:
+            pass
 
     # Query the in-memory table
     result = spark.sql("SELECT * FROM popular_destinations ORDER BY count DESC LIMIT 5")
@@ -377,12 +404,12 @@ def question_7_most_popular_destination():
     rows = result.collect()
     if rows:
         top_destination = rows[0]
-        print(f"\nMost popular destination: {top_destination['DOLocationID']} (count: {top_destination['count']})")
+        print(f"\nMost popular destination: DOLocationID {top_destination['DOLocationID']} with {top_destination['count']} trips")
         answer = top_destination['DOLocationID']
     else:
         answer = None
 
-    query.stop()
+    query2.stop()
     spark.stop()
 
     return answer
