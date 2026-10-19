@@ -185,9 +185,7 @@ export default function HomePage() {
             {/* Background track */}
             <div className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-white/5" />
             {/* Filled portion - all 6 weeks complete */}
-            <div
-              className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-gradient-to-b from-mint to-teal transition-all duration-1000 ease-out"
-            />
+            <div className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-gradient-to-b from-mint to-teal transition-all duration-1000 ease-out" />
           </div>
           <ol className="grid gap-4 md:grid-cols-2 md:pl-8 lg:grid-cols-3">
             {WEEKS.map((week, i) => {
@@ -338,7 +336,9 @@ export default function HomePage() {
           </h2>
           <div className="mt-6 max-w-3xl space-y-6 text-[1.05rem] leading-relaxed text-muted-foreground">
             <div>
-              <h3 className="font-semibold text-foreground">Week 1: Containers and infrastructure</h3>
+              <h3 className="font-semibold text-foreground">
+                Week 1: Containers and infrastructure
+              </h3>
               <p className="mt-2">
                 Containers solve the &ldquo;it works on my machine&rdquo; problem by packaging an
                 application and its environment together. Docker Compose lets you define
@@ -348,9 +348,7 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h3 className="font-semibold text-foreground">
-                Weeks 2 to 6: The modern data stack
-              </h3>
+              <h3 className="font-semibold text-foreground">Weeks 2 to 6: The modern data stack</h3>
               <p className="mt-2">
                 Weeks 2 to 6 were completed in October 2026 with Claude as a pair programmer.
                 Together we worked through orchestration with Prefect, data warehousing with DuckDB
