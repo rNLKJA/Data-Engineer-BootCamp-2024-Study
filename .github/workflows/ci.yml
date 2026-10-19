@@ -42,12 +42,43 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Test Week 4
+      - name: Test Week 2
         run: |
-          cd original/week4_analytics_engineering/taxi_analytics
+          cd original/week2_workflow_orchestration
           python3 -m venv venv
           source venv/bin/activate
           pip install -q -r requirements.txt
-          dbt deps
+          python3 -m pytest test_week2.py -v
+
+      - name: Test Week 3
+        run: |
+          cd original/week3_data_warehouse
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          python3 -m pytest test_week3.py -v
+
+      - name: Test Week 4
+        run: |
+          cd original/week4_analytics_engineering
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
           python3 -m pytest test_week4.py -v
+
+      - name: Test Week 5
+        run: |
+          cd original/week5_batch_processing
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          python3 -m pytest test_week5.py -v
+
+      - name: Test Week 6
+        run: |
+          cd original/week6_stream_processing
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          python3 -m pytest test_week6.py -v
 
