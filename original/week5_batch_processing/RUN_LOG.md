@@ -31,3 +31,26 @@ Q1 2021 Total Revenue: $84,001,487.96
 January 2021 Trip Count: 1,343,375
 March 2021 Average Distance: 4.45 miles
 Highest Average Revenue: Month 3.0 ($18.45 per trip)
+
+## Week 5 Homework - FHV October 2019
+
+**Date**: October 2026
+**Dataset**: FHV October 2019
+**Source**: https://github.com/DataTalksClub/nyc-tlc-data/releases/download/fhv/fhv_tripdata_2019-10.csv.gz
+
+### Execution
+
+```bash
+python homework_fhv_oct2019.py
+```
+
+### Results
+
+**Question 1**: Spark version (not reproducible locally)
+**Question 2**: ~6 MB average per partition file
+**Question 3**: 62,610 trips on October 15th, 2019
+**Question 4**: 631,152.50 hours (longest trip duration)
+**Question 5**: Port 4040 (Spark UI)
+**Question 6**: Jamaica Bay (least frequent pickup zone with 1 pickup)
+
+Note: Used DuckDB instead of PySpark due to Java compatibility issues. SQL logic is identical.

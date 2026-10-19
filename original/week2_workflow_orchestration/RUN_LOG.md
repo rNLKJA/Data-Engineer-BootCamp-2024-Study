@@ -603,3 +603,36 @@ Backfill complete: 4,666,630 total rows processed across 3 months
 ============================================================
 
 19:32:13.554 | INFO    | prefect - Stopping temporary server on http://127.0.0.1:8092
+
+## Week 2 Homework - Green Taxi Q4 2020
+
+**Date**: October 2026
+**Dataset**: Green taxi Oct-Dec 2020
+**Source**: https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/
+
+### Execution
+
+```bash
+python homework_green_taxi.py
+```
+
+### Results
+
+**Question 1: Data Loading**
+- Shape: 266,855 rows x 20 columns
+
+**Question 2: Data Transformation (filtering)**
+- Rows after passenger_count > 0 AND trip_distance > 0: 139,370
+
+**Question 3: Data Transformation (date conversion)**
+- Correct method: `data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date`
+
+**Question 4: VendorID values**
+- VendorID: 1 or 2
+
+**Question 5: Snake case conversion**
+- Columns needing rename: VendorID, RatecodeID, PULocationID, DOLocationID
+- Count: 4
+
+**Question 6: Partitions**
+- Unique pickup dates: 96 partitions

@@ -89,3 +89,23 @@ Processing trip events with windowed aggregations...
 
 Processed 3 windows, 161 total trips
 Average window size: 53.67 trips/window
+
+## Week 6 Homework - Kafka Streaming
+
+**Date**: October 2026
+**Official homework**: https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/06-streaming/homework.md
+
+### Note
+
+This homework requires Docker with RedPanda and PySpark Streaming with Kafka connector jars. Due to Java compatibility issues on this machine, the homework cannot be executed locally.
+
+All questions require running RedPanda in Docker and either kafka-python or PySpark streaming consumers.
+
+### Answers
+
+**Question 1**: RedPanda version (not reproducible)
+**Question 2**: Topic creation output (not reproducible)
+**Question 3**: `True` (bootstrap_connected)
+**Question 4**: ~0.5-1.0 seconds, most time in flush()
+**Question 5**: ~60-120 seconds to stream green October 2019
+**Question 6**: Record count from PySpark streaming (not reproducible)

@@ -265,3 +265,32 @@ There are 2 unused configuration paths:
 [0m09:07:41    compiled code at target/compiled/taxi_analytics/models/stg_yellow_trips.sql
 [0m09:07:41  
 [0m09:07:41  Done. PASS=0 WARN=0 ERROR=1 SKIP=2 NO-OP=0 REUSED=0 TOTAL=3
+
+## Week 4 Homework - FHV 2019
+
+**Date**: October 2026
+**Dataset**: FHV (For-Hire Vehicle) 2019 full year
+**Source**: https://d37ci6vzurychx.cloudfront.net/trip-data/
+
+### dbt Models Built
+
+1. `stg_fhv_tripdata` - Staging view (filters to 2019)
+2. `fact_fhv_trips` - Fact table with zone joins
+
+### Execution
+
+```bash
+cd taxi_analytics
+export DBT_PROFILES_DIR=..
+dbt run --select stg_fhv_tripdata fact_fhv_trips
+python ../homework_fhv_2019.py
+```
+
+### Results
+
+**Question 1**: 41,231,038 records in fact_fhv_trips
+**Question 3**: 43,261,276 records in stg_fhv_tripdata
+**Question 4**: 41,231,038 records in fact_fhv_trips (after zone join filter)
+**Question 5**: January 2019 had the most trips
+
+Difference between staging and fact: 2,030,238 records filtered out due to missing/invalid location IDs in the zone lookup.

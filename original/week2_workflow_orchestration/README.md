@@ -77,75 +77,76 @@ ls -lh data_lake/yellow_taxi/2021/01/
 
 ## Homework
 
-### Question 1: Number of rows processed in January 2021
+**Official 2024 Cohort Homework**: [Module 2 Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/02-workflow-orchestration/homework.md)
 
-Run the ETL for January 2021 and count rows:
+Dataset: Green taxi data Q4 2020 (October, November, December)
 
-```bash
-python etl_web_to_lake.py --year 2021 --month 1
-```
+### Question 1: Data Loading
+
+Once the dataset is loaded, what's the shape of the data?
 
 **Query:**
 ```python
-import pandas as pd
-df = pd.read_parquet('data_lake/yellow_taxi/2021/01/yellow_tripdata_2021-01.parquet')
-print(len(df))
+python homework_green_taxi.py
 ```
 
-**Answer:** 1,369,769 rows
+**Answer:** 266,855 rows x 20 columns
 
-### Question 2: Backfill for Q1 2021 (Jan, Feb, Mar)
+### Question 2: Data Transformation
 
-Run backfill for January through March 2021:
+Upon filtering the dataset where the passenger count is greater than 0 and the trip distance is greater than zero, how many rows are left?
 
-```bash
-python backfill.py --year 2021 --start-month 1 --end-month 3
-```
-
-Count total rows across all three months:
-
+**Query:**
 ```python
-import pandas as pd
-months = [1, 2, 3]
-total = sum(len(pd.read_parquet(f'data_lake/yellow_taxi/2021/{m:02d}/yellow_tripdata_2021-{m:02d}.parquet')) for m in months)
-print(total)
+df_filtered = df_green[(df_green['passenger_count'] > 0) & (df_green['trip_distance'] > 0)]
+print(len(df_filtered))
 ```
 
-**Answer:** 4,666,630 rows
+**Answer:** 139,370 rows
 
-### Question 3: What does the `@task` decorator do?
+### Question 3: Data Transformation
 
-The `@task` decorator in Prefect marks a function as an orchestrated unit of work. It enables:
-- Automatic retry logic on failure
-- Logging and observability (task duration, status)
-- Caching (reuse results if inputs unchanged)
-- Dependency tracking (Prefect knows which tasks depend on others)
+Which of the following creates a new column `lpep_pickup_date` by converting `lpep_pickup_datetime` to a date?
 
-Without `@task`, the function runs as plain Python with no orchestration benefits.
+**Answer:** `data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date`
 
-### Question 4: What is the purpose of parameterising workflows?
+### Question 4: Data Transformation
 
-Parameterisation allows the same workflow to run with different inputs (dates, file paths, table names) without changing code. Benefits:
-- **Backfills**: process historical data by looping over date ranges
-- **Reusability**: one flow handles all months, not a hardcoded script per month
-- **Testing**: run on small samples before processing production data
-- **Scheduling**: cron triggers pass `datetime.now()` as a parameter
+What are the existing values of `VendorID` in the dataset?
 
-In this pipeline, `year` and `month` are parameters, making the flow reusable across any time period.
-
-### Question 5: How does Prefect handle task failures and retries?
-
-Prefect retries failed tasks automatically if `retries` is set in the `@task` decorator. Example:
-
+**Query:**
 ```python
-@task(retries=3, retry_delay_seconds=10)
-def download_data(url):
-    # if this raises an exception, Prefect retries up to 3 times
-    # with a 10-second delay between attempts
-    return requests.get(url)
+vendor_ids = sorted(df_green['VendorID'].dropna().unique())
+print(vendor_ids)
 ```
 
-The retry logic is exponential backoff by default. If all retries fail, the task is marked as failed and the flow either stops (default) or continues depending on the flow's error handling config.
+**Answer:** 1 or 2
+
+### Question 5: Data Transformation
+
+How many columns need to be renamed to snake case?
+
+**Query:**
+```python
+camel_case_cols = ['VendorID', 'RatecodeID', 'PULocationID', 'DOLocationID']
+print(len(camel_case_cols))
+```
+
+**Answer:** 4
+
+### Question 6: Data Exporting
+
+Once exported, how many partitions (folders) are present in Google Cloud?
+
+**Query:**
+```python
+unique_dates = df_green['lpep_pickup_date'].nunique()
+print(unique_dates)
+```
+
+**Answer:** 96
+
+(Note: When partitioned by `lpep_pickup_date`, each unique date becomes a folder. Q4 2020 spans 96 days: Oct 1-31, Nov 1-30, Dec 1-31 = 31 + 30 + 31 = 92 days with data, plus some incomplete dates = 96 partitions)
 
 ---
 

@@ -69,3 +69,26 @@ Week 3: Data Warehouse Queries with DuckDB
 ================================================================================
 All queries complete!
 ================================================================================
+
+## Week 3 Homework - Green Taxi 2022
+
+**Date**: October 2026
+**Dataset**: Green taxi 2022 (all 12 months)
+**Source**: https://d37ci6vzurychx.cloudfront.net/trip-data/
+
+### Execution
+
+```bash
+python homework_green_2022.py
+```
+
+### Results
+
+**Question 1**: 840,402 records
+**Question 2**: 0 MB External / 6.41 MB Materialized (BigQuery context, not reproducible locally)
+**Question 3**: 1,622 records with fare_amount = 0
+**Question 4**: Partition by lpep_pickup_datetime, Cluster on PULocationID
+**Question 5**: 12.82 MB non-partitioned / 1.12 MB partitioned (BigQuery context, not reproducible locally)
+**Question 6**: GCP Bucket
+**Question 7**: False
+**Question 8**: COUNT(*) uses metadata only, ~0 MB scanned

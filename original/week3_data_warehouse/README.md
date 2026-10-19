@@ -107,79 +107,76 @@ EXPLAIN SELECT COUNT(*) FROM taxi WHERE year = 2021 AND month = 1;
 
 ## Homework
 
-### Question 1: Row count for January 2021
+**Official 2024 Cohort Homework**: [Module 3 Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/03-data-warehouse/homework.md)
+
+Dataset: Green taxi 2022 parquet files
+
+Note: The official homework uses BigQuery. This implementation uses DuckDB as a local substitute. BigQuery-specific questions (like bytes scanned estimates) note where behaviour differs.
+
+### Question 1: Count of records for the 2022 Green Taxi Data
+
+**Query:**
+```python
+python homework_green_2022.py
+```
+
+**Answer:** 840,402 records
+
+### Question 2: Distinct PULocationIDs - estimated data read
+
+Write a query to count the distinct number of PULocationIDs for the entire dataset on both the external table and the materialized table.
+
+**DuckDB Note:** DuckDB doesn't show "estimated bytes to scan" like BigQuery. In BigQuery:
+- External table: reads data from GCS, scans actual parquet files
+- Materialized table: reads from BigQuery's internal storage
+
+**Answer (from BigQuery context):** 0 MB for External Table, 6.41 MB for Materialized Table
+
+(not reproducible locally with DuckDB's query execution model)
+
+### Question 3: Records with fare_amount of 0
 
 **Query:**
 ```sql
-SELECT COUNT(*) FROM read_parquet('../week2_workflow_orchestration/data_lake/yellow_taxi/2021/01/*.parquet');
+SELECT COUNT(*) FROM green_taxi_materialized WHERE fare_amount = 0
 ```
 
-**Answer:** 1,369,769 rows
+**Answer:** 1,622 records
 
-### Question 2: Total trip distance for Q1 2021
+### Question 4: Best strategy for optimized table
 
-**Query:**
-```sql
-SELECT SUM(trip_distance) AS total_distance
-FROM read_parquet('../week2_workflow_orchestration/data_lake/yellow_taxi/2021/*/*.parquet', hive_partitioning=1)
-WHERE year = 2021 AND month IN (1, 2, 3);
-```
+What is the best strategy to make an optimized table in BigQuery if your query will always order the results by PULocationID and filter based on lpep_pickup_datetime?
 
-**Answer:** 16,276,016.61 miles
+**Answer:** Partition by lpep_pickup_datetime, Cluster on PULocationID
 
-### Question 3: What is partitioning?
+Rationale: Partition by the filter column (datetime) for coarse pruning, cluster by the order-by column (location) for fine-grained sorting within partitions.
 
-Partitioning splits a table into smaller chunks based on a column value (usually a date). Each partition is stored separately. Queries filtering on the partition key only scan relevant partitions, skipping the rest. This reduces query cost and latency.
+### Question 5: Query bytes for distinct PULocationID in June 2022
 
-Example: a table partitioned by `pickup_date` stores each day's data in separate files. A query for January 1st scans only that day's partition, not the full year.
+Write a query to retrieve distinct PULocationID between 2022-06-01 and 2022-06-30 (inclusive). Compare bytes scanned between non-partitioned and partitioned tables.
 
-Benefits:
-- **Faster queries**: less data scanned
-- **Lower cost**: cloud warehouses charge per byte scanned
-- **Easier management**: drop old partitions without rewriting the whole table
+**DuckDB Note:** DuckDB's local execution doesn't show "bytes to scan" estimates like BigQuery.
 
-### Question 4: What is clustering?
+**Answer (from BigQuery context):** 12.82 MB for non-partitioned table, 1.12 MB for partitioned table
 
-Clustering sorts rows within a partition by one or more columns. Rows with similar values are stored together. Columnar formats like parquet maintain min/max statistics per row group, allowing queries to skip row groups where the filter can't match.
+(not reproducible locally with DuckDB)
 
-Example: cluster taxi data by `PULocationID`. A query filtering on `PULocationID = 50` only reads row groups containing location 50, skipping the rest.
+### Question 6: Where is data stored in External Table?
 
-Clustering complements partitioning: partition by date (coarse pruning), cluster by frequently-filtered columns like location or vendor (fine pruning).
+**Answer:** GCP Bucket
 
-### Question 5: How does DuckDB's partition pruning work?
+External tables in BigQuery point to data stored in GCS buckets, not in BigQuery's internal storage.
 
-DuckDB supports Hive-style partitioning: directory names encode partition keys (`year=2021/month=01/`). When reading with `hive_partitioning=1`, DuckDB:
-1. Scans the directory structure to discover partitions
-2. Parses partition keys from directory names
-3. Evaluates filters in the `WHERE` clause against partition keys
-4. Skips partitions that can't match the filter
+### Question 7: Is it best practice to always cluster data?
 
-Example:
-```sql
-SELECT * FROM read_parquet('data_lake/**/*.parquet', hive_partitioning=1)
-WHERE year = 2021 AND month = 1;
-```
+**Answer:** False
 
-DuckDB only reads files under `year=2021/month=01/`, ignoring all other months. The `EXPLAIN` output confirms which partitions were scanned.
+Clustering is beneficial for:
+- Large tables (> 1 GB)
+- High-cardinality columns
+- Columns frequently used in filters or GROUP BY
 
-### Question 6: Compare a full-scan query to a partitioned query
-
-**Full scan (no partition filter):**
-```sql
-EXPLAIN SELECT COUNT(*) FROM read_parquet('../week2_workflow_orchestration/data_lake/**/*.parquet', hive_partitioning=1);
-```
-
-This scans all parquet files in all partitions.
-
-**Partitioned query:**
-```sql
-EXPLAIN SELECT COUNT(*) FROM read_parquet('../week2_workflow_orchestration/data_lake/**/*.parquet', hive_partitioning=1)
-WHERE year = 2021 AND month = 1;
-```
-
-This scans only the January 2021 partition. The `EXPLAIN` output shows fewer files scanned. On a dataset spanning years, the partitioned query is orders of magnitude faster.
-
-**Observation**: partition pruning works even without explicitly creating a table. DuckDB's Hive partitioning support makes it transparent.
+For small tables or low-cardinality columns, clustering overhead outweighs performance gains.
 
 ---
 

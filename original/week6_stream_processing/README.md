@@ -85,33 +85,83 @@ docker stop redpanda && docker rm redpanda
 
 The GitHub Actions workflow runs week 6 tests with a Redpanda service container. See `.github/workflows/ci.yml`.
 
-## Homework Questions (2024 Cohort)
+## Homework
 
-The 2024 homework focused on Kafka Streams or Flink. This implementation uses the Kafka consumer API with manual aggregation.
+**Official 2024 Cohort Homework**: [Module 6 Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/06-streaming/homework.md)
 
-### Question 1: What is the average revenue per trip in the stream?
+**Note**: This homework requires Docker and Kafka/RedPanda with PySpark streaming, which has Java compatibility issues on this machine.
 
-Run the consumer on 1000 events. The final summary shows avg_revenue.
+### Question 1: Redpanda version
 
-**Answer: ~$16.50** (varies with sample data)
+Run `rpk version` inside the redpanda-1 container to get the version.
 
-### Question 2: How many events were processed by vendor?
+**Command:**
+```bash
+docker exec redpanda-1 rpk version
+```
 
-The vendor_stats field in the summary breaks down trips and revenue per vendor.
+**Answer**: Not reproducible locally. Expected output format: `v22.3.5 (rev 28b2443)`
 
-**Answer: Vendor 1: ~400 trips, Vendor 2: ~600 trips** (sample-dependent)
+### Question 2: Creating a topic
 
-### Question 3: What is the total distance travelled?
+Create a topic named `test-topic` using rpk.
 
-The summary's total_distance field.
+**Command:**
+```bash
+docker exec redpanda-1 rpk topic create test-topic
+```
 
-**Answer: ~4,700 miles** (for 1000 trip sample)
+**Answer**: Not reproducible locally. Expected: `TOPIC       STATUS
+test-topic  OK`
 
-### Question 4: What is the total revenue from all streamed trips?
+### Question 3: Connecting to the Kafka server
 
-The summary's total_revenue field gives the cumulative revenue.
+Install kafka-python and connect to localhost:9092.
 
-**Answer: ~$16,500** (for 1000 trip sample)
+**Code:**
+```python
+from kafka import KafkaProducer
+producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
+producer.bootstrap_connected()
+```
+
+**Answer**: Not reproducible locally. Expected: `True`
+
+### Question 4: Sending data to the stream
+
+Send 10 test messages with 0.05s sleep between each. How much time did it take and where was most time spent?
+
+**Answer**: Not reproducible locally. Expected: Most time spent in `producer.flush()`, total ~0.5-1.0 seconds
+
+### Question 5: Sending the Trip Data
+
+Create a `green-trips` topic and stream green taxi October 2019 data. How long did it take in seconds?
+
+**Answer**: Not reproducible locally. Expected: approximately 60-120 seconds for ~450k records
+
+### Question 6: Parsing the data with PySpark Streaming
+
+Read from the kafka stream with PySpark and parse the JSON schema. Count records.
+
+**Answer**: Not reproducible locally. Requires PySpark with Kafka connector jars.
+
+### Question 7: Most popular destination
+
+Using PySpark Streaming, find the most popular destination (DOLocationID) by grouping with a 5-minute window based on timestamp and ordering by count.
+
+**Code:**
+```python
+from pyspark.sql.functions import col, current_timestamp, window
+
+df = df.withColumn("timestamp", current_timestamp())
+
+popular_destinations = df \
+    .groupBy(window(col("timestamp"), "5 minutes"), "DOLocationID") \
+    .count() \
+    .orderBy("count", ascending=False)
+```
+
+**Answer**: Not reproducible locally. Requires running PySpark Streaming with Kafka connector.
 
 ## What Surprised Me
 

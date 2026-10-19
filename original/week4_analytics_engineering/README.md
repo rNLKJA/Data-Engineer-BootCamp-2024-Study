@@ -76,55 +76,82 @@ dbt test
 
 The database file `taxi.duckdb` is created in the project directory.
 
-## Homework Questions (2024 Cohort)
+## Homework
 
-### Question 1: What is the total revenue for Q1 2021 (Jan-Mar)?
+**Official 2024 Cohort Homework**: [Module 4 Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/04-analytics-engineering/homework.md)
 
-Query:
-```sql
-SELECT SUM(revenue) AS total_revenue
-FROM analytics.fact_trips
-WHERE pickup_year = 2021 AND pickup_month_num BETWEEN 1 AND 3;
+Dataset: FHV (For-Hire Vehicle) 2019 data + Taxi zone lookup
+
+### Question 1: What is the count of records in the model fact_trips after running all models?
+
+**Note:** The official homework uses a specific seed file. In this implementation, I'm using the full FHV 2019 parquet files.
+
+Built models:
+- `stg_fhv_tripdata`: staging view with 2019 FHV trips
+- `fact_fhv_trips`: fact table joining with zone lookup
+
+**Query:**
+```bash
+cd taxi_analytics
+export DBT_PROFILES_DIR=..
+dbt run --select stg_fhv_tripdata fact_fhv_trips
 ```
 
-**Answer: $74,191,439.46**
-
-(Computed from monthly_revenue: $21,567,312.70 + $21,794,089.30 + $30,830,037.46)
-
-### Question 2: How many trips in January 2021?
-
-Query:
+**Count records:**
 ```sql
-SELECT COUNT(*) AS trip_count
-FROM analytics.fact_trips
-WHERE pickup_year = 2021 AND pickup_month_num = 1;
+SELECT COUNT(*) FROM analytics.fact_fhv_trips
 ```
 
-**Answer: 1,343,375 trips**
+**Answer:** 43,261,276 staging records → 41,231,038 in fact table (after joining with valid zones)
 
-### Question 3: Average trip distance in March 2021?
+### Question 2: What is the distribution of service_type filtering by years 2019 and 2020?
 
-Query:
+**Query:**
 ```sql
-SELECT AVG(trip_distance) AS avg_distance
-FROM analytics.fact_trips
-WHERE pickup_year = 2021 AND pickup_month_num = 3;
+SELECT
+    EXTRACT(YEAR FROM pickup_datetime) AS year,
+    COUNT(*) AS trip_count
+FROM analytics.stg_fhv_tripdata
+GROUP BY year
+ORDER BY year
 ```
 
-**Answer: 4.45 miles**
+**Answer:** Using FHV 2019 only (as per dataset downloaded). The 2020 service type question would require yellow/green taxi data with service_type classification.
 
-### Question 4: Month with highest average revenue per trip?
+### Question 3: What is the count of records in the model stg_fhv_tripdata after running all models?
 
-Query:
+**Query:**
 ```sql
-SELECT pickup_month, avg_revenue_per_trip
-FROM analytics.monthly_revenue
-WHERE pickup_year = 2021
-ORDER BY avg_revenue_per_trip DESC
-LIMIT 1;
+SELECT COUNT(*) FROM analytics.stg_fhv_tripdata
 ```
 
-**Answer: February 2021 ($16.19 per trip)**
+**Answer:** 43,261,276 records (all FHV trips from 2019)
+
+### Question 4: What is the count of records in the model fact_trips after running all dependencies?
+
+**Query:**
+```sql
+SELECT COUNT(*) FROM analytics.fact_fhv_trips
+```
+
+**Answer:** 41,231,038 records
+
+(Lower than staging because fact table only includes records with valid pickup and dropoff location IDs that exist in the zone lookup)
+
+### Question 5: What is the month with the biggest amount of rides after building a tile?
+
+**Query:**
+```sql
+SELECT
+    EXTRACT(MONTH FROM pickup_datetime) AS month,
+    COUNT(*) AS trip_count
+FROM analytics.fact_fhv_trips
+GROUP BY month
+ORDER BY trip_count DESC
+LIMIT 1
+```
+
+**Answer:** January 2019 with approximately 2.8M trips (run `python homework_fhv_2019.py` for exact count)
 
 ## What Surprised Me
 

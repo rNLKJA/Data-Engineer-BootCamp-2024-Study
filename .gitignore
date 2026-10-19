@@ -162,3 +162,12 @@ week1_introduction_and_prerequisites/ny_taxi_postgres_data/*
 .vercel
 .env*.local
 *.duckdb
+
+# Large data files (>50MB)
+original/week3_data_warehouse/data/*.csv
+original/week3_data_warehouse/data/*.parquet
+original/week4_analytics_engineering/data/**/*.csv
+original/week4_analytics_engineering/data/**/*.parquet
+original/week5_batch_processing/data/*.csv
+original/week5_batch_processing/data/*.parquet
+original/week5_batch_processing/output/*.parquet
