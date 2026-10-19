@@ -139,9 +139,20 @@ jobs:
           cd original/week6_stream_processing
           source venv/bin/activate
           set -euo pipefail
-          # Use spark-submit with Scala 2.12 packages for PySpark 3.4.3
+          # Download JARs explicitly to avoid classloader issues
+          # PySpark's --packages has known Scala library classpath bugs
+          mkdir -p spark-jars
+          cd spark-jars
+          wget -q https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.3/spark-sql-kafka-0-10_2.12-3.4.3.jar
+          wget -q https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.1/kafka-clients-3.4.1.jar
+          wget -q https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.4.3/spark-token-provider-kafka-0-10_2.12-3.4.3.jar
+          wget -q https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar
+          # Explicitly include Scala library
+          wget -q https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.18/scala-library-2.12.18.jar
+          cd ..
+          # Use --jars with explicit paths to bypass Ivy dependency resolution
           spark-submit \
-            --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.3 \
+            --jars spark-jars/spark-sql-kafka-0-10_2.12-3.4.3.jar,spark-jars/kafka-clients-3.4.1.jar,spark-jars/spark-token-provider-kafka-0-10_2.12-3.4.3.jar,spark-jars/commons-pool2-2.11.1.jar,spark-jars/scala-library-2.12.18.jar \
             homework.py 2>&1 | tee homework_output.log
 
       - name: Stop Redpanda
