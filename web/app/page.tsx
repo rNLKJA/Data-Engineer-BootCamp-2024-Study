@@ -1,5 +1,14 @@
 import Link from "next/link";
-import { BookOpen, Database, GitBranch, Server, Sparkles, Workflow, ArrowRight, Calendar } from "lucide-react";
+import {
+  BookOpen,
+  Database,
+  GitBranch,
+  Server,
+  Sparkles,
+  Workflow,
+  ArrowRight,
+  Calendar,
+} from "lucide-react";
 import { HeroVisual } from "./components/hero-visual";
 
 const WEEKS = [
