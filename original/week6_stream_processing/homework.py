@@ -244,13 +244,10 @@ def question_6_pyspark_parse():
     from pyspark.sql import SparkSession
     from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 
-    # Create Spark session with correct Scala 2.13 package for PySpark 3.5.0
+    # Create Spark session with correct Scala 2.13 package for PySpark 3.5.3
     spark = SparkSession.builder \
         .appName("Week6Homework") \
-        .config("spark.jars.packages",
-                "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0,"
-                "org.scala-lang:scala-library:2.13.8") \
-        .config("spark.jars.ivy", "/tmp/.ivy2") \
+        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.3") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
@@ -329,7 +326,7 @@ def question_7_most_popular_destination():
 
     spark = SparkSession.builder \
         .appName("Week6HomeworkQ7") \
-        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0") \
+        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.3") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")

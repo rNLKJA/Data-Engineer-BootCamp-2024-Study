@@ -131,7 +131,9 @@ jobs:
           cd original/week6_stream_processing
           python3 -m venv venv
           source venv/bin/activate
-          pip install -q kafka-python-ng pandas pyarrow pyspark==3.5.0
+          # PySpark 3.5.3 includes Scala 2.13 by default
+          # Use matching spark-sql-kafka connector
+          pip install -q kafka-python-ng pandas pyarrow pyspark==3.5.3
 
       - name: Run Week 6 Homework
         run: |
