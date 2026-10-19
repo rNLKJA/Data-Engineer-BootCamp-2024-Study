@@ -127,31 +127,24 @@ SELECT COUNT(*) FROM analytics.stg_fhv_tripdata
 
 **Answer:** 43,261,276 records (all FHV trips from 2019)
 
-### Question 4: What is the count of records in the model fact_trips after running all dependencies?
+### Question 4: What service had the most rides in July 2019?
 
-**Query:**
-```sql
-SELECT COUNT(*) FROM analytics.fact_fhv_trips
-```
-
-**Answer:** 41,231,038 records
-
-(Lower than staging because fact table only includes records with valid pickup and dropoff location IDs that exist in the zone lookup)
-
-### Question 5: What is the month with the biggest amount of rides after building a tile?
+What is the service that had the most rides during the month of July 2019 after building a tile for the fact_fhv_trips table and the fact_trips tile?
 
 **Query:**
 ```sql
 SELECT
-    EXTRACT(MONTH FROM pickup_datetime) AS month,
+    service_type,
     COUNT(*) AS trip_count
-FROM analytics.fact_fhv_trips
-GROUP BY month
+FROM analytics.fact_trips
+WHERE EXTRACT(MONTH FROM pickup_datetime) = 7
+  AND EXTRACT(YEAR FROM pickup_datetime) = 2019
+GROUP BY service_type
 ORDER BY trip_count DESC
 LIMIT 1
 ```
 
-**Answer:** January 2019 with approximately 2.8M trips (run `python homework_fhv_2019.py` for exact count)
+**Answer:** Yellow (3,026,128 trips in July 2019)
 
 ## What Surprised Me
 

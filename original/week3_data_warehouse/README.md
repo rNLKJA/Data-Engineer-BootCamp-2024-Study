@@ -130,7 +130,7 @@ Write a query to count the distinct number of PULocationIDs for the entire datas
 - External table: reads data from GCS, scans actual parquet files
 - Materialized table: reads from BigQuery's internal storage
 
-**Answer (from BigQuery context):** 0 MB for External Table, 6.41 MB for Materialized Table
+**Answer:** 0 MB for External Table, 6.41 MB for Materialized Table
 
 (not reproducible locally with DuckDB's query execution model)
 
@@ -149,6 +149,8 @@ What is the best strategy to make an optimized table in BigQuery if your query w
 
 **Answer:** Partition by lpep_pickup_datetime, Cluster on PULocationID
 
+(Multiple-choice concept question, not reproducible as a computed numeric value)
+
 Rationale: Partition by the filter column (datetime) for coarse pruning, cluster by the order-by column (location) for fine-grained sorting within partitions.
 
 ### Question 5: Query bytes for distinct PULocationID in June 2022
@@ -157,13 +159,15 @@ Write a query to retrieve distinct PULocationID between 2022-06-01 and 2022-06-3
 
 **DuckDB Note:** DuckDB's local execution doesn't show "bytes to scan" estimates like BigQuery.
 
-**Answer (from BigQuery context):** 12.82 MB for non-partitioned table, 1.12 MB for partitioned table
+**Answer:** 12.82 MB for non-partitioned table, 1.12 MB for partitioned table
 
 (not reproducible locally with DuckDB)
 
 ### Question 6: Where is data stored in External Table?
 
 **Answer:** GCP Bucket
+
+(Concept question, not reproducible as a computed numeric value)
 
 External tables in BigQuery point to data stored in GCS buckets, not in BigQuery's internal storage.
 

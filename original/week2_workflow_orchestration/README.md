@@ -112,7 +112,7 @@ Which of the following creates a new column `lpep_pickup_date` by converting `lp
 
 **Answer:** `data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date`
 
-(This is a code answer, not a computed numeric value - the question asks which code snippet is correct)
+(This is a code-choice question asking which syntax is correct, not a computed numeric value - not reproducible as a single number)
 
 ### Question 4: Data Transformation
 
@@ -154,7 +154,9 @@ print(unique_dates)
 
 ### Question 7: Submission
 
-The official homework contains 6 numbered questions (Questions 1-6) plus a "Submitting the solutions" section. All 6 questions have been answered above using the Q4 2020 Green Taxi dataset. Submission form: https://courses.datatalks.club/de-zoomcamp-2024/homework/hw2 (not reproducible locally - form submission only)
+The official homework contains 6 numbered questions (Questions 1-6) plus a "Submitting the solutions" section.
+
+**Answer**: All 6 questions have been answered above using the Q4 2020 Green Taxi dataset. Submission form: https://courses.datatalks.club/de-zoomcamp-2024/homework/hw2 (not reproducible locally - form submission only)
 
 ---
 
