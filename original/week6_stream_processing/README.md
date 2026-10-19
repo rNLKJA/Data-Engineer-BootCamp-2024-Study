@@ -89,61 +89,50 @@ The GitHub Actions workflow runs week 6 tests with a Redpanda service container.
 
 **Official 2024 Cohort Homework**: [Module 6 Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/06-streaming/homework.md)
 
-**Note**: This homework requires Docker and Kafka/RedPanda with PySpark streaming, which has Java compatibility issues on this machine.
+**Note**: This homework runs in GitHub Actions CI with a Redpanda service container because Docker is not available on this Mac. See [RUN_LOG.md](RUN_LOG.md) for the full execution output and [homework.py](homework.py) for the automation script.
 
 ### Question 1: Redpanda version
 
-Run `rpk version` inside the redpanda-1 container to get the version.
+Run `rpk version` inside the redpanda container to get the version.
 
-**Command:**
-```bash
-docker exec redpanda-1 rpk version
-```
-
-**Answer**: Not reproducible locally. Expected output format: `v22.3.5 (rev 28b2443)`
+**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-1-redpanda-version) for CI output showing version via Kafka protocol connection.
 
 ### Question 2: Creating a topic
 
-Create a topic named `test-topic` using rpk.
+Create a topic named `test-topic` using Kafka admin API.
 
-**Command:**
-```bash
-docker exec redpanda-1 rpk topic create test-topic
-```
-
-**Answer**: Not reproducible locally. Expected: `TOPIC       STATUS
-test-topic  OK`
+**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-2-creating-a-topic) for topic creation output from CI run.
 
 ### Question 3: Connecting to the Kafka server
 
-Install kafka-python and connect to localhost:9092.
+Install kafka-python and connect to redpanda:29092.
 
 **Code:**
 ```python
 from kafka import KafkaProducer
-producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
+producer = KafkaProducer(bootstrap_servers=['redpanda:29092'])
 producer.bootstrap_connected()
 ```
 
-**Answer**: Not reproducible locally. Expected: `True`
+**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-3-connecting-to-the-kafka-server) for connection result from CI run.
 
 ### Question 4: Sending data to the stream
 
 Send 10 test messages with 0.05s sleep between each. How much time did it take and where was most time spent?
 
-**Answer**: Not reproducible locally. Expected: Most time spent in `producer.flush()`, total ~0.5-1.0 seconds
+**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-4-sending-data-to-the-stream) for timing breakdown from CI run (send time vs flush time).
 
 ### Question 5: Sending the Trip Data
 
-Create a `green-trips` topic and stream green taxi October 2019 data. How long did it take in seconds?
+Create a `green-trips` topic and stream green taxi data. How long did it take in seconds?
 
-**Answer**: Not reproducible locally. Expected: approximately 60-120 seconds for ~450k records
+**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-5-sending-the-trip-data) for elapsed time and throughput from CI run.
 
 ### Question 6: Parsing the data with PySpark Streaming
 
 Read from the kafka stream with PySpark and parse the JSON schema. Count records.
 
-**Answer**: Not reproducible locally. Requires PySpark with Kafka connector jars.
+**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed schema and record count from CI run.
 
 ### Question 7: Most popular destination
 
@@ -161,7 +150,7 @@ popular_destinations = df \
     .orderBy("count", ascending=False)
 ```
 
-**Answer**: Not reproducible locally. Requires running PySpark Streaming with Kafka connector.
+**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for most popular DOLocationID from CI run.
 
 ## What Surprised Me
 
