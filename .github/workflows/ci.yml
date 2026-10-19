@@ -131,18 +131,17 @@ jobs:
           cd original/week6_stream_processing
           python3 -m venv venv
           source venv/bin/activate
-          # PySpark 3.5.3 includes Scala 2.13 by default
-          # Use matching spark-sql-kafka connector
-          pip install -q kafka-python-ng pandas pyarrow pyspark==3.5.3
+          # PySpark 3.4.3 uses Scala 2.12
+          pip install -q kafka-python-ng pandas pyarrow pyspark==3.4.3
 
       - name: Run Week 6 Homework
         run: |
           cd original/week6_stream_processing
           source venv/bin/activate
           set -euo pipefail
-          # Use spark-submit to properly handle JAR dependencies
+          # Use spark-submit with Scala 2.12 packages for PySpark 3.4.3
           spark-submit \
-            --packages org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.3 \
+            --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.3 \
             homework.py 2>&1 | tee homework_output.log
 
       - name: Stop Redpanda

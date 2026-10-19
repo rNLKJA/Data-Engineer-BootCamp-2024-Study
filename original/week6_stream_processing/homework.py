@@ -323,19 +323,9 @@ def question_7_most_popular_destination():
     from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
     from pyspark.sql.functions import from_json, col, window, current_timestamp
 
-    # Create Spark session - use pre-downloaded JARs
-    import os
-    jar_dir = os.path.expanduser("~/.ivy2/jars")
-    jars = [
-        f"{jar_dir}/spark-sql-kafka-0-10_2.13-3.5.3.jar",
-        f"{jar_dir}/kafka-clients-3.6.1.jar",
-        f"{jar_dir}/spark-token-provider-kafka-0-10_2.13-3.5.3.jar",
-        f"{jar_dir}/commons-pool2-2.12.0.jar"
-    ]
-
+    # Create Spark session - packages will be provided by spark-submit --packages
     spark = SparkSession.builder \
         .appName("Week6HomeworkQ7") \
-        .config("spark.jars", ",".join(jars)) \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
