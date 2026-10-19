@@ -24,7 +24,7 @@ TOP_LGAS = 10
 def _rows(con: duckdb.DuckDBPyConnection, sql: str) -> list[dict[str, Any]]:
     cursor = con.execute(sql)
     names = [d[0] for d in cursor.description]
-    return [dict(zip(names, row)) for row in cursor.fetchall()]
+    return [dict(zip(names, row, strict=True)) for row in cursor.fetchall()]
 
 
 def _clean(value: Any) -> Any:

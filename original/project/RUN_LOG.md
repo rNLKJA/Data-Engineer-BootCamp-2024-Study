@@ -5,7 +5,7 @@ and date shown below. Nothing here is edited except that this header was added.
 
 ```text
 $ date -u
-Mon Oct 19 23:48:50 UTC 2026
+Mon Oct 19 23:59:02 UTC 2026
 $ uname -sm
 Darwin arm64
 $ .venv/bin/python --version
@@ -15,245 +15,245 @@ $ ls -l data/landing
 (empty: first run downloads every release)
 $ make all
 .venv/bin/python -m pipeline.flow
-10:18:53.776 | INFO    | prefect - Starting temporary server on http://127.0.0.1:8452
+10:29:06.312 | INFO    | prefect - Starting temporary server on http://127.0.0.1:8743
 See https://docs.prefect.io/v3/concepts/server#how-to-guides for more information on running a dedicated Prefect server.
-10:18:56.588 | INFO    | Flow run 'loyal-crayfish' - Beginning flow run 'loyal-crayfish' for flow 'sa_crash_pipeline'
-10:18:56.593 | INFO    | Flow run 'loyal-crayfish' - manifest: 10 releases covering 2012-2025 (14 years)
-10:18:58.971 | INFO    | Task run 'fetch_release-eb0' - sa_crash_2012_as_at_20210527: downloaded 2012_data_sa_as_at_20210527.zip (1628505 bytes, sha256 02380fee078e...)
-10:18:58.973 | INFO    | Task run 'fetch_release-eb0' - Finished in state Completed()
-10:18:59.128 | INFO    | Task run 'validate_schema-5e4' - sa_crash_2012_as_at_20210527: header contract ok; rows crash=22829 casualty=7479 units=48320
-10:18:59.129 | INFO    | Task run 'validate_schema-5e4' - Finished in state Completed()
-10:18:59.402 | INFO    | Task run 'load_to_lake-213' - sa_crash_2012_as_at_20210527: wrote years 2012-2012 to lake; crash=22829 casualty=7479 units=48320
-10:18:59.403 | INFO    | Task run 'load_to_lake-213' - Finished in state Completed()
-10:18:59.836 | INFO    | Task run 'fetch_release-7f8' - sa_crash_2013_as_at_20210527: downloaded 2013_data_sa_as_at_20210527.zip (1257991 bytes, sha256 697e5ae5b0dd...)
-10:18:59.839 | INFO    | Task run 'fetch_release-7f8' - Finished in state Completed()
-10:18:59.985 | INFO    | Task run 'validate_schema-16e' - sa_crash_2013_as_at_20210527: header contract ok; rows crash=16675 casualty=7177 units=35865
-10:18:59.987 | INFO    | Task run 'validate_schema-16e' - Finished in state Completed()
-10:19:00.206 | INFO    | Task run 'load_to_lake-ea1' - sa_crash_2013_as_at_20210527: wrote years 2013-2013 to lake; crash=16675 casualty=7177 units=35865
-10:19:00.207 | INFO    | Task run 'load_to_lake-ea1' - Finished in state Completed()
-10:19:00.623 | INFO    | Task run 'fetch_release-b63' - sa_crash_2014_as_at_20210527: downloaded 2014_data_sa_as_at_20210527.zip (1221928 bytes, sha256 d6ff9170c6ef...)
-10:19:00.625 | INFO    | Task run 'fetch_release-b63' - Finished in state Completed()
-10:19:00.765 | INFO    | Task run 'validate_schema-830' - sa_crash_2014_as_at_20210527: header contract ok; rows crash=16162 casualty=6982 units=34552
-10:19:00.766 | INFO    | Task run 'validate_schema-830' - Finished in state Completed()
-10:19:00.978 | INFO    | Task run 'load_to_lake-fc4' - sa_crash_2014_as_at_20210527: wrote years 2014-2014 to lake; crash=16162 casualty=6982 units=34552
-10:19:00.979 | INFO    | Task run 'load_to_lake-fc4' - Finished in state Completed()
-10:19:01.436 | INFO    | Task run 'fetch_release-d24' - sa_crash_2015_as_at_20210527: downloaded 2015_data_sa_as_at_20210527.zip (1168394 bytes, sha256 8aa9d4b9bca0...)
-10:19:01.437 | INFO    | Task run 'fetch_release-d24' - Finished in state Completed()
-10:19:01.564 | INFO    | Task run 'validate_schema-650' - sa_crash_2015_as_at_20210527: header contract ok; rows crash=15431 casualty=6660 units=33084
-10:19:01.565 | INFO    | Task run 'validate_schema-650' - Finished in state Completed()
-10:19:01.781 | INFO    | Task run 'load_to_lake-294' - sa_crash_2015_as_at_20210527: wrote years 2015-2015 to lake; crash=15431 casualty=6660 units=33084
-10:19:01.782 | INFO    | Task run 'load_to_lake-294' - Finished in state Completed()
-10:19:03.865 | INFO    | Task run 'fetch_release-a63' - sa_crash_2016_as_at_20210527: downloaded 2016_data_sa_as_at_20210527.zip (1259179 bytes, sha256 3d1ce02ebe9d...)
-10:19:03.868 | INFO    | Task run 'fetch_release-a63' - Finished in state Completed()
-10:19:04.022 | INFO    | Task run 'validate_schema-ff4' - sa_crash_2016_as_at_20210527: header contract ok; rows crash=16775 casualty=6565 units=35861
-10:19:04.023 | INFO    | Task run 'validate_schema-ff4' - Finished in state Completed()
-10:19:04.240 | INFO    | Task run 'load_to_lake-8ed' - sa_crash_2016_as_at_20210527: wrote years 2016-2016 to lake; crash=16775 casualty=6565 units=35861
-10:19:04.241 | INFO    | Task run 'load_to_lake-8ed' - Finished in state Completed()
-10:19:05.080 | INFO    | Task run 'fetch_release-53c' - sa_crash_2017_as_at_20210527: downloaded 2017_data_sa_as_at_20210527.zip (1001803 bytes, sha256 a97b3c4e877c...)
-10:19:05.081 | INFO    | Task run 'fetch_release-53c' - Finished in state Completed()
-10:19:05.197 | INFO    | Task run 'validate_schema-97c' - sa_crash_2017_as_at_20210527: header contract ok; rows crash=13236 casualty=6237 units=28161
-10:19:05.199 | INFO    | Task run 'validate_schema-97c' - Finished in state Completed()
-10:19:05.385 | INFO    | Task run 'load_to_lake-7bc' - sa_crash_2017_as_at_20210527: wrote years 2017-2017 to lake; crash=13236 casualty=6237 units=28161
-10:19:05.386 | INFO    | Task run 'load_to_lake-7bc' - Finished in state Completed()
-10:19:06.153 | INFO    | Task run 'fetch_release-210' - sa_crash_2018_as_at_20210527: downloaded 2018_data_sa_as_at_20210527.zip (1024690 bytes, sha256 c7fad62e2f7b...)
-10:19:06.154 | INFO    | Task run 'fetch_release-210' - Finished in state Completed()
-10:19:06.343 | INFO    | Task run 'validate_schema-594' - sa_crash_2018_as_at_20210527: header contract ok; rows crash=13599 casualty=6124 units=29033
-10:19:06.345 | INFO    | Task run 'validate_schema-594' - Finished in state Completed()
-10:19:06.595 | INFO    | Task run 'load_to_lake-29d' - sa_crash_2018_as_at_20210527: wrote years 2018-2018 to lake; crash=13599 casualty=6124 units=29033
-10:19:06.596 | INFO    | Task run 'load_to_lake-29d' - Finished in state Completed()
-10:19:07.336 | INFO    | Task run 'fetch_release-19d' - sa_crash_2019_as_at_20210527: downloaded 2019_data_sa_as_at_20210527.zip (980081 bytes, sha256 aef9a66aef27...)
-10:19:07.340 | INFO    | Task run 'fetch_release-19d' - Finished in state Completed()
-10:19:07.469 | INFO    | Task run 'validate_schema-f76' - sa_crash_2019_as_at_20210527: header contract ok; rows crash=12964 casualty=6031 units=27714
-10:19:07.470 | INFO    | Task run 'validate_schema-f76' - Finished in state Completed()
-10:19:07.659 | INFO    | Task run 'load_to_lake-cf5' - sa_crash_2019_as_at_20210527: wrote years 2019-2019 to lake; crash=12964 casualty=6031 units=27714
-10:19:07.660 | INFO    | Task run 'load_to_lake-cf5' - Finished in state Completed()
-10:19:08.379 | INFO    | Task run 'fetch_release-06f' - sa_crash_2020_as_at_20210527: downloaded 2020_data_sa_as_at_20210527.zip (865285 bytes, sha256 8a5f4269d900...)
-10:19:08.381 | INFO    | Task run 'fetch_release-06f' - Finished in state Completed()
-10:19:08.500 | INFO    | Task run 'validate_schema-e9c' - sa_crash_2020_as_at_20210527: header contract ok; rows crash=11534 casualty=4877 units=24539
-10:19:08.501 | INFO    | Task run 'validate_schema-e9c' - Finished in state Completed()
-10:19:08.668 | INFO    | Task run 'load_to_lake-b43' - sa_crash_2020_as_at_20210527: wrote years 2020-2020 to lake; crash=11534 casualty=4877 units=24539
-10:19:08.669 | INFO    | Task run 'load_to_lake-b43' - Finished in state Completed()
-10:19:10.229 | INFO    | Task run 'fetch_release-383' - sa_crash_2021_2025_as_at_20261009: downloaded 2021-2025_data_sa_crash_as_at_20261009.zip (5155745 bytes, sha256 2c6df4a4bcae...)
-10:19:10.230 | INFO    | Task run 'fetch_release-383' - Finished in state Completed()
-10:19:10.446 | INFO    | Task run 'validate_schema-468' - sa_crash_2021_2025_as_at_20261009: header contract ok; rows crash=65655 casualty=23751 units=140150
-10:19:10.447 | INFO    | Task run 'validate_schema-468' - Finished in state Completed()
-10:19:10.938 | INFO    | Task run 'load_to_lake-35f' - sa_crash_2021_2025_as_at_20261009: wrote years 2021-2025 to lake; crash=65655 casualty=23751 units=140150
-10:19:10.940 | INFO    | Task run 'load_to_lake-35f' - Finished in state Completed()
-10:19:10.970 | INFO    | Flow run 'loyal-crayfish' - lake has 14 crash year partitions (2012-2025); removed 0 stale
-23:49:11  Running with dbt=1.12.6
-23:49:11  Registered adapter: duckdb=1.11.0
-23:49:11  Unable to do partial parsing because saved manifest not found. Starting full parse.
-23:49:12  Found 13 models, 63 data tests, 3 seeds, 4 sources, 501 macros
-23:49:12  
-23:49:12  Concurrency: 4 threads (target='dev')
-23:49:12  
-23:49:12  1 of 79 START sql view model main.stg_casualties ............................... [RUN]
-23:49:12  2 of 79 START sql view model main.stg_units .................................... [RUN]
-23:49:12  3 of 79 START seed file main.lga_name_aliases .................................. [RUN]
-23:49:12  4 of 79 START seed file main.pdo_reporting_regimes ............................. [RUN]
-23:49:12  3 of 79 OK loaded seed file main.lga_name_aliases .............................. [INSERT 33 in 0.05s]
-23:49:12  4 of 79 OK loaded seed file main.pdo_reporting_regimes ......................... [INSERT 4 in 0.05s]
-23:49:12  5 of 79 START seed file main.severity_levels ................................... [RUN]
-23:49:12  2 of 79 OK created sql view model main.stg_units ............................... [OK in 0.05s]
-23:49:12  6 of 79 START test not_null_lga_name_aliases_raw_lga_name ...................... [RUN]
-23:49:12  1 of 79 OK created sql view model main.stg_casualties .......................... [OK in 0.06s]
-23:49:12  7 of 79 START test unique_lga_name_aliases_raw_lga_name ........................ [RUN]
-23:49:12  8 of 79 START test not_null_pdo_reporting_regimes_regime_id .................... [RUN]
-23:49:12  6 of 79 PASS not_null_lga_name_aliases_raw_lga_name ............................ [PASS in 0.03s]
-23:49:12  7 of 79 PASS unique_lga_name_aliases_raw_lga_name .............................. [PASS in 0.02s]
-23:49:12  8 of 79 PASS not_null_pdo_reporting_regimes_regime_id .......................... [PASS in 0.02s]
-23:49:12  9 of 79 START test unique_pdo_reporting_regimes_regime_id ...................... [RUN]
-23:49:12  10 of 79 START test non_negative_stg_units_casualties_in_unit .................. [RUN]
-23:49:12  11 of 79 START test not_null_stg_units_crash_id ................................ [RUN]
-23:49:12  5 of 79 OK loaded seed file main.severity_levels ............................... [INSERT 4 in 0.03s]
-23:49:12  12 of 79 START test accepted_values_stg_casualties_injury_extent__Fatal__Admitted_to_Hospital__Treated_at_Hospital__By_Private  [RUN]
-23:49:12  9 of 79 PASS unique_pdo_reporting_regimes_regime_id ............................ [PASS in 0.02s]
-23:49:12  13 of 79 START test non_negative_stg_casualties_age ............................ [RUN]
-23:49:12  10 of 79 PASS non_negative_stg_units_casualties_in_unit ........................ [PASS in 0.03s]
-23:49:12  11 of 79 PASS not_null_stg_units_crash_id ...................................... [PASS in 0.03s]
-23:49:12  12 of 79 PASS accepted_values_stg_casualties_injury_extent__Fatal__Admitted_to_Hospital__Treated_at_Hospital__By_Private  [PASS in 0.02s]
-23:49:12  14 of 79 START test not_null_stg_casualties_crash_id ........................... [RUN]
-23:49:12  15 of 79 START sql view model main.stg_crashes ................................. [RUN]
-23:49:12  16 of 79 START test not_null_severity_levels_severity_code ..................... [RUN]
-23:49:12  13 of 79 PASS non_negative_stg_casualties_age .................................. [PASS in 0.02s]
-23:49:12  17 of 79 START test unique_severity_levels_severity_code ....................... [RUN]
-23:49:12  14 of 79 PASS not_null_stg_casualties_crash_id ................................. [PASS in 0.02s]
-23:49:12  16 of 79 PASS not_null_severity_levels_severity_code ........................... [PASS in 0.02s]
-23:49:12  18 of 79 START sql view model main.int_casualty_counts ......................... [RUN]
-23:49:12  15 of 79 OK created sql view model main.stg_crashes ............................ [OK in 0.03s]
-23:49:12  17 of 79 PASS unique_severity_levels_severity_code ............................. [PASS in 0.02s]
-23:49:12  19 of 79 START test accepted_values_stg_crashes_severity_code__False__1__2__3__4  [RUN]
-23:49:12  20 of 79 START test accepted_values_stg_crashes_stats_area__City__Metropolitan__Country  [RUN]
-23:49:12  21 of 79 START test assert_lga_names_stable_across_releases .................... [RUN]
-23:49:12  18 of 79 OK created sql view model main.int_casualty_counts .................... [OK in 0.02s]
-23:49:12  22 of 79 START test assert_month_within_release ................................ [RUN]
-23:49:12  20 of 79 PASS accepted_values_stg_crashes_stats_area__City__Metropolitan__Country  [PASS in 0.02s]
-23:49:12  19 of 79 PASS accepted_values_stg_crashes_severity_code__False__1__2__3__4 ..... [PASS in 0.02s]
-23:49:12  21 of 79 PASS assert_lga_names_stable_across_releases .......................... [PASS in 0.02s]
-23:49:12  23 of 79 START test assert_release_years_disjoint .............................. [RUN]
-23:49:12  24 of 79 START test assert_unit_rows_match_totals .............................. [RUN]
-23:49:12  25 of 79 START test non_negative_stg_crashes_total_cas ......................... [RUN]
-23:49:12  22 of 79 PASS assert_month_within_release ...................................... [PASS in 0.03s]
-23:49:12  23 of 79 PASS assert_release_years_disjoint .................................... [PASS in 0.02s]
-23:49:12  26 of 79 START test non_negative_stg_crashes_total_fats ........................ [RUN]
-23:49:12  27 of 79 START test non_negative_stg_crashes_total_mi .......................... [RUN]
-23:49:12  25 of 79 PASS non_negative_stg_crashes_total_cas ............................... [PASS in 0.03s]
-23:49:12  24 of 79 PASS assert_unit_rows_match_totals .................................... [PASS in 0.03s]
-23:49:12  28 of 79 START test non_negative_stg_crashes_total_si .......................... [RUN]
-23:49:12  29 of 79 START test non_negative_stg_crashes_total_units ....................... [RUN]
-23:49:12  26 of 79 PASS non_negative_stg_crashes_total_fats .............................. [PASS in 0.02s]
-23:49:12  27 of 79 PASS non_negative_stg_crashes_total_mi ................................ [PASS in 0.02s]
-23:49:12  30 of 79 START test not_null_stg_crashes_crash_hour ............................ [RUN]
-23:49:12  31 of 79 START test not_null_stg_crashes_crash_id .............................. [RUN]
-23:49:12  28 of 79 PASS non_negative_stg_crashes_total_si ................................ [PASS in 0.02s]
-23:49:12  29 of 79 PASS non_negative_stg_crashes_total_units ............................. [PASS in 0.02s]
-23:49:12  32 of 79 START test not_null_stg_crashes_crash_month ........................... [RUN]
-23:49:12  33 of 79 START test not_null_stg_crashes_crash_year ............................ [RUN]
-23:49:12  31 of 79 PASS not_null_stg_crashes_crash_id .................................... [PASS in 0.02s]
-23:49:12  30 of 79 PASS not_null_stg_crashes_crash_hour .................................. [PASS in 0.03s]
-23:49:12  34 of 79 START test not_null_stg_crashes_lga_name .............................. [RUN]
-23:49:12  32 of 79 PASS not_null_stg_crashes_crash_month ................................. [PASS in 0.02s]
-23:49:12  35 of 79 START test not_null_stg_crashes_release_id ............................ [RUN]
-23:49:12  36 of 79 START test not_null_stg_crashes_severity_code ......................... [RUN]
-23:49:12  33 of 79 PASS not_null_stg_crashes_crash_year .................................. [PASS in 0.03s]
-23:49:12  37 of 79 START test relationships_stg_casualties_crash_id__crash_id__ref_stg_crashes_  [RUN]
-23:49:12  34 of 79 PASS not_null_stg_crashes_lga_name .................................... [PASS in 0.03s]
-23:49:12  35 of 79 PASS not_null_stg_crashes_release_id .................................. [PASS in 0.02s]
-23:49:12  36 of 79 PASS not_null_stg_crashes_severity_code ............................... [PASS in 0.02s]
-23:49:12  38 of 79 START test relationships_stg_crashes_release_id__release_id__source_lake_releases_  [RUN]
-23:49:12  39 of 79 START test relationships_stg_crashes_severity_code__severity_code__ref_severity_levels_  [RUN]
-23:49:12  40 of 79 START test relationships_stg_units_crash_id__crash_id__ref_stg_crashes_  [RUN]
-23:49:12  37 of 79 PASS relationships_stg_casualties_crash_id__crash_id__ref_stg_crashes_  [PASS in 0.02s]
-23:49:12  41 of 79 START test unique_stg_crashes_crash_id ................................ [RUN]
-23:49:12  39 of 79 PASS relationships_stg_crashes_severity_code__severity_code__ref_severity_levels_  [PASS in 0.03s]
-23:49:12  38 of 79 PASS relationships_stg_crashes_release_id__release_id__source_lake_releases_  [PASS in 0.04s]
-23:49:12  41 of 79 PASS unique_stg_crashes_crash_id ...................................... [PASS in 0.02s]
-23:49:12  42 of 79 START sql table model main.fct_crashes ................................ [RUN]
-23:49:12  40 of 79 PASS relationships_stg_units_crash_id__crash_id__ref_stg_crashes_ ..... [PASS in 0.05s]
-23:49:13  42 of 79 OK created sql table model main.fct_crashes ........................... [OK in 0.52s]
-23:49:13  43 of 79 START test accepted_values_fct_crashes_severity_code__False__1__2__3__4  [RUN]
-23:49:13  44 of 79 START test accepted_values_fct_crashes_severity_name__Property_damage_only__Minor_injury__Serious_injury__Fatal  [RUN]
-23:49:13  45 of 79 START test assert_casualty_rows_match_totals .......................... [RUN]
-23:49:13  46 of 79 START test assert_fatal_casualties_match_total_fats ................... [RUN]
-23:49:13  46 of 79 PASS assert_fatal_casualties_match_total_fats ......................... [PASS in 0.02s]
-23:49:13  43 of 79 PASS accepted_values_fct_crashes_severity_code__False__1__2__3__4 ..... [PASS in 0.02s]
-23:49:13  45 of 79 PASS assert_casualty_rows_match_totals ................................ [PASS in 0.02s]
-23:49:13  47 of 79 START test non_negative_fct_crashes_casualty_rows ..................... [RUN]
-23:49:13  44 of 79 PASS accepted_values_fct_crashes_severity_name__Property_damage_only__Minor_injury__Serious_injury__Fatal  [PASS in 0.02s]
-23:49:13  48 of 79 START test non_negative_fct_crashes_total_fats ........................ [RUN]
-23:49:13  49 of 79 START test not_null_fct_crashes_crash_id .............................. [RUN]
-23:49:13  50 of 79 START test not_null_fct_crashes_pdo_regime_id ......................... [RUN]
-23:49:13  47 of 79 PASS non_negative_fct_crashes_casualty_rows ........................... [PASS in 0.02s]
-23:49:13  48 of 79 PASS non_negative_fct_crashes_total_fats .............................. [PASS in 0.02s]
-23:49:13  49 of 79 PASS not_null_fct_crashes_crash_id .................................... [PASS in 0.02s]
-23:49:13  50 of 79 PASS not_null_fct_crashes_pdo_regime_id ............................... [PASS in 0.02s]
-23:49:13  51 of 79 START test not_null_fct_crashes_severity_code ......................... [RUN]
-23:49:13  52 of 79 START test unique_fct_crashes_crash_id ................................ [RUN]
-23:49:13  51 of 79 PASS not_null_fct_crashes_severity_code ............................... [PASS in 0.01s]
-23:49:13  52 of 79 PASS unique_fct_crashes_crash_id ...................................... [PASS in 0.02s]
-23:49:13  53 of 79 START sql table model main.dim_lga .................................... [RUN]
-23:49:13  54 of 79 START sql table model main.fct_casualties ............................. [RUN]
-23:49:13  55 of 79 START sql table model main.rpt_crash_type_severity .................... [RUN]
-23:49:13  56 of 79 START sql table model main.rpt_monthly_severity ....................... [RUN]
-23:49:13  53 of 79 OK created sql table model main.dim_lga ............................... [OK in 0.03s]
-23:49:13  57 of 79 START sql table model main.rpt_region_fsi ............................. [RUN]
-23:49:13  55 of 79 OK created sql table model main.rpt_crash_type_severity ............... [OK in 0.03s]
-23:49:13  56 of 79 OK created sql table model main.rpt_monthly_severity .................. [OK in 0.03s]
-23:49:13  58 of 79 START test accepted_values_dim_lga_main_stats_area__City__Metropolitan__Country  [RUN]
-23:49:13  59 of 79 START test not_null_dim_lga_lga_name .................................. [RUN]
-23:49:13  58 of 79 PASS accepted_values_dim_lga_main_stats_area__City__Metropolitan__Country  [PASS in 0.01s]
-23:49:13  59 of 79 PASS not_null_dim_lga_lga_name ........................................ [PASS in 0.01s]
-23:49:13  60 of 79 START test unique_dim_lga_lga_name .................................... [RUN]
-23:49:13  61 of 79 START test non_negative_rpt_crash_type_severity_fsi_crashes ........... [RUN]
-23:49:13  57 of 79 OK created sql table model main.rpt_region_fsi ........................ [OK in 0.03s]
-23:49:13  62 of 79 START test not_null_rpt_crash_type_severity_crash_type ................ [RUN]
-23:49:13  60 of 79 PASS unique_dim_lga_lga_name .......................................... [PASS in 0.02s]
-23:49:13  61 of 79 PASS non_negative_rpt_crash_type_severity_fsi_crashes ................. [PASS in 0.02s]
-23:49:13  63 of 79 START test unique_rpt_crash_type_severity_crash_type .................. [RUN]
-23:49:13  64 of 79 START test non_negative_rpt_monthly_severity_fsi_crashes .............. [RUN]
-23:49:13  62 of 79 PASS not_null_rpt_crash_type_severity_crash_type ...................... [PASS in 0.02s]
-23:49:13  65 of 79 START test not_null_rpt_monthly_severity_crash_month .................. [RUN]
-23:49:13  63 of 79 PASS unique_rpt_crash_type_severity_crash_type ........................ [PASS in 0.02s]
-23:49:13  66 of 79 START test unique_rpt_monthly_severity_crash_month .................... [RUN]
-23:49:13  64 of 79 PASS non_negative_rpt_monthly_severity_fsi_crashes .................... [PASS in 0.02s]
-23:49:13  67 of 79 START test not_null_rpt_region_fsi_stats_area ......................... [RUN]
-23:49:13  65 of 79 PASS not_null_rpt_monthly_severity_crash_month ........................ [PASS in 0.02s]
-23:49:13  68 of 79 START test unique_rpt_region_fsi_stats_area ........................... [RUN]
-23:49:13  54 of 79 OK created sql table model main.fct_casualties ........................ [OK in 0.11s]
-23:49:13  69 of 79 START sql table model main.rpt_lga_fsi ................................ [RUN]
-23:49:13  66 of 79 PASS unique_rpt_monthly_severity_crash_month .......................... [PASS in 0.02s]
-23:49:13  67 of 79 PASS not_null_rpt_region_fsi_stats_area ............................... [PASS in 0.02s]
-23:49:13  70 of 79 START test not_null_fct_casualties_crash_id ........................... [RUN]
-23:49:13  71 of 79 START test relationships_fct_casualties_crash_id__crash_id__ref_fct_crashes_  [RUN]
-23:49:13  68 of 79 PASS unique_rpt_region_fsi_stats_area ................................. [PASS in 0.02s]
-23:49:13  72 of 79 START sql table model main.rpt_kpis ................................... [RUN]
-23:49:13  70 of 79 PASS not_null_fct_casualties_crash_id ................................. [PASS in 0.02s]
-23:49:13  71 of 79 PASS relationships_fct_casualties_crash_id__crash_id__ref_fct_crashes_  [PASS in 0.02s]
-23:49:13  73 of 79 START sql table model main.rpt_annual_people .......................... [RUN]
-23:49:13  69 of 79 OK created sql table model main.rpt_lga_fsi ........................... [OK in 0.03s]
-23:49:13  74 of 79 START test not_null_rpt_lga_fsi_lga_name .............................. [RUN]
-23:49:13  75 of 79 START test unique_rpt_lga_fsi_lga_name ................................ [RUN]
-23:49:13  72 of 79 OK created sql table model main.rpt_kpis .............................. [OK in 0.13s]
-23:49:13  74 of 79 PASS not_null_rpt_lga_fsi_lga_name .................................... [PASS in 0.11s]
-23:49:13  75 of 79 PASS unique_rpt_lga_fsi_lga_name ...................................... [PASS in 0.12s]
-23:49:13  73 of 79 OK created sql table model main.rpt_annual_people ..................... [OK in 0.12s]
-23:49:13  76 of 79 START test non_negative_rpt_annual_people_admitted_to_hospital ........ [RUN]
-23:49:13  77 of 79 START test non_negative_rpt_annual_people_fatalities .................. [RUN]
-23:49:13  78 of 79 START test not_null_rpt_annual_people_crash_year ...................... [RUN]
-23:49:13  79 of 79 START test unique_rpt_annual_people_crash_year ........................ [RUN]
-23:49:13  78 of 79 PASS not_null_rpt_annual_people_crash_year ............................ [PASS in 0.02s]
-23:49:13  77 of 79 PASS non_negative_rpt_annual_people_fatalities ........................ [PASS in 0.02s]
-23:49:13  76 of 79 PASS non_negative_rpt_annual_people_admitted_to_hospital .............. [PASS in 0.02s]
-23:49:13  79 of 79 PASS unique_rpt_annual_people_crash_year .............................. [PASS in 0.02s]
-23:49:13  
-23:49:13  Finished running 3 seeds, 9 table models, 63 data tests, 4 view models in 0 hours 0 minutes and 1.26 seconds (1.26s).
-23:49:13  
-23:49:13  Completed successfully
-23:49:13  
-23:49:13  Done. PASS=79 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=79
-10:19:15.383 | INFO    | Task run 'dbt_build-166' - dbt build finished: pass=63, success=16
-10:19:15.384 | INFO    | Task run 'dbt_build-166' - Finished in state Completed()
-10:19:15.499 | INFO    | Task run 'benchmark_warehouse-cc5' - 
+10:29:09.332 | INFO    | Flow run 'jade-crab' - Beginning flow run 'jade-crab' for flow 'sa_crash_pipeline'
+10:29:09.337 | INFO    | Flow run 'jade-crab' - manifest: 10 releases covering 2012-2025 (14 years)
+10:29:11.679 | INFO    | Task run 'fetch_release-143' - sa_crash_2012_as_at_20210527: downloaded 2012_data_sa_as_at_20210527.zip (1628505 bytes, sha256 02380fee078e...)
+10:29:11.681 | INFO    | Task run 'fetch_release-143' - Finished in state Completed()
+10:29:11.856 | INFO    | Task run 'validate_schema-8d7' - sa_crash_2012_as_at_20210527: header contract ok; rows crash=22829 casualty=7479 units=48320
+10:29:11.857 | INFO    | Task run 'validate_schema-8d7' - Finished in state Completed()
+10:29:12.135 | INFO    | Task run 'load_to_lake-31a' - sa_crash_2012_as_at_20210527: wrote years 2012-2012 to lake; crash=22829 casualty=7479 units=48320
+10:29:12.136 | INFO    | Task run 'load_to_lake-31a' - Finished in state Completed()
+10:29:12.564 | INFO    | Task run 'fetch_release-126' - sa_crash_2013_as_at_20210527: downloaded 2013_data_sa_as_at_20210527.zip (1257991 bytes, sha256 697e5ae5b0dd...)
+10:29:12.567 | INFO    | Task run 'fetch_release-126' - Finished in state Completed()
+10:29:12.710 | INFO    | Task run 'validate_schema-3ef' - sa_crash_2013_as_at_20210527: header contract ok; rows crash=16675 casualty=7177 units=35865
+10:29:12.711 | INFO    | Task run 'validate_schema-3ef' - Finished in state Completed()
+10:29:12.925 | INFO    | Task run 'load_to_lake-e9f' - sa_crash_2013_as_at_20210527: wrote years 2013-2013 to lake; crash=16675 casualty=7177 units=35865
+10:29:12.926 | INFO    | Task run 'load_to_lake-e9f' - Finished in state Completed()
+10:29:13.337 | INFO    | Task run 'fetch_release-3e0' - sa_crash_2014_as_at_20210527: downloaded 2014_data_sa_as_at_20210527.zip (1221928 bytes, sha256 d6ff9170c6ef...)
+10:29:13.341 | INFO    | Task run 'fetch_release-3e0' - Finished in state Completed()
+10:29:13.486 | INFO    | Task run 'validate_schema-cd1' - sa_crash_2014_as_at_20210527: header contract ok; rows crash=16162 casualty=6982 units=34552
+10:29:13.487 | INFO    | Task run 'validate_schema-cd1' - Finished in state Completed()
+10:29:13.701 | INFO    | Task run 'load_to_lake-7dc' - sa_crash_2014_as_at_20210527: wrote years 2014-2014 to lake; crash=16162 casualty=6982 units=34552
+10:29:13.702 | INFO    | Task run 'load_to_lake-7dc' - Finished in state Completed()
+10:29:14.105 | INFO    | Task run 'fetch_release-585' - sa_crash_2015_as_at_20210527: downloaded 2015_data_sa_as_at_20210527.zip (1168394 bytes, sha256 8aa9d4b9bca0...)
+10:29:14.107 | INFO    | Task run 'fetch_release-585' - Finished in state Completed()
+10:29:14.228 | INFO    | Task run 'validate_schema-472' - sa_crash_2015_as_at_20210527: header contract ok; rows crash=15431 casualty=6660 units=33084
+10:29:14.229 | INFO    | Task run 'validate_schema-472' - Finished in state Completed()
+10:29:14.433 | INFO    | Task run 'load_to_lake-b7b' - sa_crash_2015_as_at_20210527: wrote years 2015-2015 to lake; crash=15431 casualty=6660 units=33084
+10:29:14.433 | INFO    | Task run 'load_to_lake-b7b' - Finished in state Completed()
+10:29:14.851 | INFO    | Task run 'fetch_release-191' - sa_crash_2016_as_at_20210527: downloaded 2016_data_sa_as_at_20210527.zip (1259179 bytes, sha256 3d1ce02ebe9d...)
+10:29:14.852 | INFO    | Task run 'fetch_release-191' - Finished in state Completed()
+10:29:15.014 | INFO    | Task run 'validate_schema-a52' - sa_crash_2016_as_at_20210527: header contract ok; rows crash=16775 casualty=6565 units=35861
+10:29:15.015 | INFO    | Task run 'validate_schema-a52' - Finished in state Completed()
+10:29:15.230 | INFO    | Task run 'load_to_lake-533' - sa_crash_2016_as_at_20210527: wrote years 2016-2016 to lake; crash=16775 casualty=6565 units=35861
+10:29:15.231 | INFO    | Task run 'load_to_lake-533' - Finished in state Completed()
+10:29:16.007 | INFO    | Task run 'fetch_release-219' - sa_crash_2017_as_at_20210527: downloaded 2017_data_sa_as_at_20210527.zip (1001803 bytes, sha256 a97b3c4e877c...)
+10:29:16.010 | INFO    | Task run 'fetch_release-219' - Finished in state Completed()
+10:29:16.133 | INFO    | Task run 'validate_schema-247' - sa_crash_2017_as_at_20210527: header contract ok; rows crash=13236 casualty=6237 units=28161
+10:29:16.134 | INFO    | Task run 'validate_schema-247' - Finished in state Completed()
+10:29:16.316 | INFO    | Task run 'load_to_lake-00f' - sa_crash_2017_as_at_20210527: wrote years 2017-2017 to lake; crash=13236 casualty=6237 units=28161
+10:29:16.317 | INFO    | Task run 'load_to_lake-00f' - Finished in state Completed()
+10:29:18.146 | INFO    | Task run 'fetch_release-d27' - sa_crash_2018_as_at_20210527: downloaded 2018_data_sa_as_at_20210527.zip (1024690 bytes, sha256 c7fad62e2f7b...)
+10:29:18.149 | INFO    | Task run 'fetch_release-d27' - Finished in state Completed()
+10:29:18.284 | INFO    | Task run 'validate_schema-097' - sa_crash_2018_as_at_20210527: header contract ok; rows crash=13599 casualty=6124 units=29033
+10:29:18.285 | INFO    | Task run 'validate_schema-097' - Finished in state Completed()
+10:29:18.471 | INFO    | Task run 'load_to_lake-35c' - sa_crash_2018_as_at_20210527: wrote years 2018-2018 to lake; crash=13599 casualty=6124 units=29033
+10:29:18.472 | INFO    | Task run 'load_to_lake-35c' - Finished in state Completed()
+10:29:19.203 | INFO    | Task run 'fetch_release-ad7' - sa_crash_2019_as_at_20210527: downloaded 2019_data_sa_as_at_20210527.zip (980081 bytes, sha256 aef9a66aef27...)
+10:29:19.204 | INFO    | Task run 'fetch_release-ad7' - Finished in state Completed()
+10:29:19.319 | INFO    | Task run 'validate_schema-f49' - sa_crash_2019_as_at_20210527: header contract ok; rows crash=12964 casualty=6031 units=27714
+10:29:19.320 | INFO    | Task run 'validate_schema-f49' - Finished in state Completed()
+10:29:19.505 | INFO    | Task run 'load_to_lake-702' - sa_crash_2019_as_at_20210527: wrote years 2019-2019 to lake; crash=12964 casualty=6031 units=27714
+10:29:19.506 | INFO    | Task run 'load_to_lake-702' - Finished in state Completed()
+10:29:20.226 | INFO    | Task run 'fetch_release-fbe' - sa_crash_2020_as_at_20210527: downloaded 2020_data_sa_as_at_20210527.zip (865285 bytes, sha256 8a5f4269d900...)
+10:29:20.229 | INFO    | Task run 'fetch_release-fbe' - Finished in state Completed()
+10:29:20.355 | INFO    | Task run 'validate_schema-74c' - sa_crash_2020_as_at_20210527: header contract ok; rows crash=11534 casualty=4877 units=24539
+10:29:20.357 | INFO    | Task run 'validate_schema-74c' - Finished in state Completed()
+10:29:20.525 | INFO    | Task run 'load_to_lake-18c' - sa_crash_2020_as_at_20210527: wrote years 2020-2020 to lake; crash=11534 casualty=4877 units=24539
+10:29:20.526 | INFO    | Task run 'load_to_lake-18c' - Finished in state Completed()
+10:29:22.109 | INFO    | Task run 'fetch_release-cd4' - sa_crash_2021_2025_as_at_20261009: downloaded 2021-2025_data_sa_crash_as_at_20261009.zip (5155745 bytes, sha256 2c6df4a4bcae...)
+10:29:22.110 | INFO    | Task run 'fetch_release-cd4' - Finished in state Completed()
+10:29:22.385 | INFO    | Task run 'validate_schema-7bb' - sa_crash_2021_2025_as_at_20261009: header contract ok; rows crash=65655 casualty=23751 units=140150
+10:29:22.386 | INFO    | Task run 'validate_schema-7bb' - Finished in state Completed()
+10:29:22.907 | INFO    | Task run 'load_to_lake-30a' - sa_crash_2021_2025_as_at_20261009: wrote years 2021-2025 to lake; crash=65655 casualty=23751 units=140150
+10:29:22.908 | INFO    | Task run 'load_to_lake-30a' - Finished in state Completed()
+10:29:22.931 | INFO    | Flow run 'jade-crab' - lake has 14 crash year partitions (2012-2025); removed 0 stale
+23:59:23  Running with dbt=1.12.6
+23:59:23  Registered adapter: duckdb=1.11.0
+23:59:23  Unable to do partial parsing because saved manifest not found. Starting full parse.
+23:59:24  Found 13 models, 63 data tests, 3 seeds, 4 sources, 501 macros
+23:59:24  
+23:59:24  Concurrency: 4 threads (target='dev')
+23:59:24  
+23:59:24  1 of 79 START sql view model main.stg_casualties ............................... [RUN]
+23:59:24  2 of 79 START sql view model main.stg_units .................................... [RUN]
+23:59:24  3 of 79 START seed file main.lga_name_aliases .................................. [RUN]
+23:59:24  4 of 79 START seed file main.pdo_reporting_regimes ............................. [RUN]
+23:59:24  3 of 79 OK loaded seed file main.lga_name_aliases .............................. [INSERT 33 in 0.05s]
+23:59:24  4 of 79 OK loaded seed file main.pdo_reporting_regimes ......................... [INSERT 4 in 0.05s]
+23:59:24  5 of 79 START seed file main.severity_levels ................................... [RUN]
+23:59:24  6 of 79 START test not_null_lga_name_aliases_raw_lga_name ...................... [RUN]
+23:59:24  2 of 79 OK created sql view model main.stg_units ............................... [OK in 0.06s]
+23:59:24  1 of 79 OK created sql view model main.stg_casualties .......................... [OK in 0.06s]
+23:59:24  7 of 79 START test unique_lga_name_aliases_raw_lga_name ........................ [RUN]
+23:59:24  8 of 79 START test not_null_pdo_reporting_regimes_regime_id .................... [RUN]
+23:59:24  6 of 79 PASS not_null_lga_name_aliases_raw_lga_name ............................ [PASS in 0.03s]
+23:59:24  9 of 79 START test unique_pdo_reporting_regimes_regime_id ...................... [RUN]
+23:59:24  7 of 79 PASS unique_lga_name_aliases_raw_lga_name .............................. [PASS in 0.03s]
+23:59:24  5 of 79 OK loaded seed file main.severity_levels ............................... [INSERT 4 in 0.03s]
+23:59:24  8 of 79 PASS not_null_pdo_reporting_regimes_regime_id .......................... [PASS in 0.03s]
+23:59:24  10 of 79 START test non_negative_stg_units_casualties_in_unit .................. [RUN]
+23:59:24  11 of 79 START test not_null_stg_units_crash_id ................................ [RUN]
+23:59:24  12 of 79 START test accepted_values_stg_casualties_injury_extent__Fatal__Admitted_to_Hospital__Treated_at_Hospital__By_Private  [RUN]
+23:59:24  9 of 79 PASS unique_pdo_reporting_regimes_regime_id ............................ [PASS in 0.02s]
+23:59:24  13 of 79 START test non_negative_stg_casualties_age ............................ [RUN]
+23:59:24  12 of 79 PASS accepted_values_stg_casualties_injury_extent__Fatal__Admitted_to_Hospital__Treated_at_Hospital__By_Private  [PASS in 0.03s]
+23:59:24  11 of 79 PASS not_null_stg_units_crash_id ...................................... [PASS in 0.03s]
+23:59:24  10 of 79 PASS non_negative_stg_units_casualties_in_unit ........................ [PASS in 0.03s]
+23:59:24  14 of 79 START test not_null_stg_casualties_crash_id ........................... [RUN]
+23:59:24  15 of 79 START sql view model main.stg_crashes ................................. [RUN]
+23:59:24  16 of 79 START test not_null_severity_levels_severity_code ..................... [RUN]
+23:59:24  13 of 79 PASS non_negative_stg_casualties_age .................................. [PASS in 0.02s]
+23:59:24  17 of 79 START test unique_severity_levels_severity_code ....................... [RUN]
+23:59:24  16 of 79 PASS not_null_severity_levels_severity_code ........................... [PASS in 0.02s]
+23:59:24  14 of 79 PASS not_null_stg_casualties_crash_id ................................. [PASS in 0.02s]
+23:59:24  18 of 79 START sql view model main.int_casualty_counts ......................... [RUN]
+23:59:24  17 of 79 PASS unique_severity_levels_severity_code ............................. [PASS in 0.01s]
+23:59:24  15 of 79 OK created sql view model main.stg_crashes ............................ [OK in 0.03s]
+23:59:24  19 of 79 START test accepted_values_stg_crashes_severity_code__False__1__2__3__4  [RUN]
+23:59:24  20 of 79 START test accepted_values_stg_crashes_stats_area__City__Metropolitan__Country  [RUN]
+23:59:24  21 of 79 START test assert_lga_names_stable_across_releases .................... [RUN]
+23:59:24  18 of 79 OK created sql view model main.int_casualty_counts .................... [OK in 0.02s]
+23:59:24  22 of 79 START test assert_month_within_release ................................ [RUN]
+23:59:24  19 of 79 PASS accepted_values_stg_crashes_severity_code__False__1__2__3__4 ..... [PASS in 0.02s]
+23:59:24  23 of 79 START test assert_release_years_disjoint .............................. [RUN]
+23:59:24  20 of 79 PASS accepted_values_stg_crashes_stats_area__City__Metropolitan__Country  [PASS in 0.02s]
+23:59:24  21 of 79 PASS assert_lga_names_stable_across_releases .......................... [PASS in 0.03s]
+23:59:24  24 of 79 START test assert_unit_rows_match_totals .............................. [RUN]
+23:59:24  25 of 79 START test non_negative_stg_crashes_total_cas ......................... [RUN]
+23:59:24  22 of 79 PASS assert_month_within_release ...................................... [PASS in 0.03s]
+23:59:24  25 of 79 PASS non_negative_stg_crashes_total_cas ............................... [PASS in 0.02s]
+23:59:24  23 of 79 PASS assert_release_years_disjoint .................................... [PASS in 0.03s]
+23:59:24  26 of 79 START test non_negative_stg_crashes_total_fats ........................ [RUN]
+23:59:24  27 of 79 START test non_negative_stg_crashes_total_mi .......................... [RUN]
+23:59:24  28 of 79 START test non_negative_stg_crashes_total_si .......................... [RUN]
+23:59:24  24 of 79 PASS assert_unit_rows_match_totals .................................... [PASS in 0.03s]
+23:59:24  29 of 79 START test non_negative_stg_crashes_total_units ....................... [RUN]
+23:59:24  26 of 79 PASS non_negative_stg_crashes_total_fats .............................. [PASS in 0.02s]
+23:59:24  27 of 79 PASS non_negative_stg_crashes_total_mi ................................ [PASS in 0.03s]
+23:59:24  28 of 79 PASS non_negative_stg_crashes_total_si ................................ [PASS in 0.03s]
+23:59:24  30 of 79 START test not_null_stg_crashes_crash_hour ............................ [RUN]
+23:59:24  31 of 79 START test not_null_stg_crashes_crash_id .............................. [RUN]
+23:59:24  32 of 79 START test not_null_stg_crashes_crash_month ........................... [RUN]
+23:59:24  29 of 79 PASS non_negative_stg_crashes_total_units ............................. [PASS in 0.02s]
+23:59:24  33 of 79 START test not_null_stg_crashes_crash_year ............................ [RUN]
+23:59:24  31 of 79 PASS not_null_stg_crashes_crash_id .................................... [PASS in 0.02s]
+23:59:24  34 of 79 START test not_null_stg_crashes_lga_name .............................. [RUN]
+23:59:24  30 of 79 PASS not_null_stg_crashes_crash_hour .................................. [PASS in 0.03s]
+23:59:24  33 of 79 PASS not_null_stg_crashes_crash_year .................................. [PASS in 0.02s]
+23:59:24  32 of 79 PASS not_null_stg_crashes_crash_month ................................. [PASS in 0.02s]
+23:59:24  35 of 79 START test not_null_stg_crashes_release_id ............................ [RUN]
+23:59:24  36 of 79 START test not_null_stg_crashes_severity_code ......................... [RUN]
+23:59:24  37 of 79 START test relationships_stg_casualties_crash_id__crash_id__ref_stg_crashes_  [RUN]
+23:59:24  34 of 79 PASS not_null_stg_crashes_lga_name .................................... [PASS in 0.02s]
+23:59:24  38 of 79 START test relationships_stg_crashes_release_id__release_id__source_lake_releases_  [RUN]
+23:59:24  35 of 79 PASS not_null_stg_crashes_release_id .................................. [PASS in 0.03s]
+23:59:24  36 of 79 PASS not_null_stg_crashes_severity_code ............................... [PASS in 0.03s]
+23:59:24  37 of 79 PASS relationships_stg_casualties_crash_id__crash_id__ref_stg_crashes_  [PASS in 0.03s]
+23:59:24  39 of 79 START test relationships_stg_crashes_severity_code__severity_code__ref_severity_levels_  [RUN]
+23:59:24  40 of 79 START test relationships_stg_units_crash_id__crash_id__ref_stg_crashes_  [RUN]
+23:59:24  41 of 79 START test unique_stg_crashes_crash_id ................................ [RUN]
+23:59:24  38 of 79 PASS relationships_stg_crashes_release_id__release_id__source_lake_releases_  [PASS in 0.03s]
+23:59:24  39 of 79 PASS relationships_stg_crashes_severity_code__severity_code__ref_severity_levels_  [PASS in 0.03s]
+23:59:24  41 of 79 PASS unique_stg_crashes_crash_id ...................................... [PASS in 0.03s]
+23:59:24  42 of 79 START sql table model main.fct_crashes ................................ [RUN]
+23:59:24  40 of 79 PASS relationships_stg_units_crash_id__crash_id__ref_stg_crashes_ ..... [PASS in 0.05s]
+23:59:25  42 of 79 OK created sql table model main.fct_crashes ........................... [OK in 0.52s]
+23:59:25  43 of 79 START test accepted_values_fct_crashes_severity_code__False__1__2__3__4  [RUN]
+23:59:25  44 of 79 START test accepted_values_fct_crashes_severity_name__Property_damage_only__Minor_injury__Serious_injury__Fatal  [RUN]
+23:59:25  45 of 79 START test assert_casualty_rows_match_totals .......................... [RUN]
+23:59:25  46 of 79 START test assert_fatal_casualties_match_total_fats ................... [RUN]
+23:59:25  45 of 79 PASS assert_casualty_rows_match_totals ................................ [PASS in 0.02s]
+23:59:25  43 of 79 PASS accepted_values_fct_crashes_severity_code__False__1__2__3__4 ..... [PASS in 0.02s]
+23:59:25  46 of 79 PASS assert_fatal_casualties_match_total_fats ......................... [PASS in 0.02s]
+23:59:25  44 of 79 PASS accepted_values_fct_crashes_severity_name__Property_damage_only__Minor_injury__Serious_injury__Fatal  [PASS in 0.02s]
+23:59:25  47 of 79 START test non_negative_fct_crashes_casualty_rows ..................... [RUN]
+23:59:25  48 of 79 START test non_negative_fct_crashes_total_fats ........................ [RUN]
+23:59:25  49 of 79 START test not_null_fct_crashes_crash_id .............................. [RUN]
+23:59:25  50 of 79 START test not_null_fct_crashes_pdo_regime_id ......................... [RUN]
+23:59:25  47 of 79 PASS non_negative_fct_crashes_casualty_rows ........................... [PASS in 0.02s]
+23:59:25  48 of 79 PASS non_negative_fct_crashes_total_fats .............................. [PASS in 0.02s]
+23:59:25  49 of 79 PASS not_null_fct_crashes_crash_id .................................... [PASS in 0.02s]
+23:59:25  50 of 79 PASS not_null_fct_crashes_pdo_regime_id ............................... [PASS in 0.02s]
+23:59:25  51 of 79 START test not_null_fct_crashes_severity_code ......................... [RUN]
+23:59:25  52 of 79 START test unique_fct_crashes_crash_id ................................ [RUN]
+23:59:25  51 of 79 PASS not_null_fct_crashes_severity_code ............................... [PASS in 0.01s]
+23:59:25  52 of 79 PASS unique_fct_crashes_crash_id ...................................... [PASS in 0.02s]
+23:59:25  53 of 79 START sql table model main.dim_lga .................................... [RUN]
+23:59:25  54 of 79 START sql table model main.fct_casualties ............................. [RUN]
+23:59:25  55 of 79 START sql table model main.rpt_crash_type_severity .................... [RUN]
+23:59:25  56 of 79 START sql table model main.rpt_monthly_severity ....................... [RUN]
+23:59:25  53 of 79 OK created sql table model main.dim_lga ............................... [OK in 0.03s]
+23:59:25  55 of 79 OK created sql table model main.rpt_crash_type_severity ............... [OK in 0.03s]
+23:59:25  57 of 79 START sql table model main.rpt_region_fsi ............................. [RUN]
+23:59:25  56 of 79 OK created sql table model main.rpt_monthly_severity .................. [OK in 0.03s]
+23:59:25  58 of 79 START test accepted_values_dim_lga_main_stats_area__City__Metropolitan__Country  [RUN]
+23:59:25  59 of 79 START test not_null_dim_lga_lga_name .................................. [RUN]
+23:59:25  58 of 79 PASS accepted_values_dim_lga_main_stats_area__City__Metropolitan__Country  [PASS in 0.01s]
+23:59:25  59 of 79 PASS not_null_dim_lga_lga_name ........................................ [PASS in 0.01s]
+23:59:25  60 of 79 START test unique_dim_lga_lga_name .................................... [RUN]
+23:59:25  61 of 79 START test non_negative_rpt_crash_type_severity_fsi_crashes ........... [RUN]
+23:59:25  57 of 79 OK created sql table model main.rpt_region_fsi ........................ [OK in 0.03s]
+23:59:25  62 of 79 START test not_null_rpt_crash_type_severity_crash_type ................ [RUN]
+23:59:25  60 of 79 PASS unique_dim_lga_lga_name .......................................... [PASS in 0.02s]
+23:59:25  61 of 79 PASS non_negative_rpt_crash_type_severity_fsi_crashes ................. [PASS in 0.02s]
+23:59:25  63 of 79 START test unique_rpt_crash_type_severity_crash_type .................. [RUN]
+23:59:25  64 of 79 START test non_negative_rpt_monthly_severity_fsi_crashes .............. [RUN]
+23:59:25  62 of 79 PASS not_null_rpt_crash_type_severity_crash_type ...................... [PASS in 0.02s]
+23:59:25  65 of 79 START test not_null_rpt_monthly_severity_crash_month .................. [RUN]
+23:59:25  63 of 79 PASS unique_rpt_crash_type_severity_crash_type ........................ [PASS in 0.02s]
+23:59:25  64 of 79 PASS non_negative_rpt_monthly_severity_fsi_crashes .................... [PASS in 0.02s]
+23:59:25  66 of 79 START test unique_rpt_monthly_severity_crash_month .................... [RUN]
+23:59:25  67 of 79 START test not_null_rpt_region_fsi_stats_area ......................... [RUN]
+23:59:25  65 of 79 PASS not_null_rpt_monthly_severity_crash_month ........................ [PASS in 0.02s]
+23:59:25  68 of 79 START test unique_rpt_region_fsi_stats_area ........................... [RUN]
+23:59:25  66 of 79 PASS unique_rpt_monthly_severity_crash_month .......................... [PASS in 0.02s]
+23:59:25  54 of 79 OK created sql table model main.fct_casualties ........................ [OK in 0.11s]
+23:59:25  67 of 79 PASS not_null_rpt_region_fsi_stats_area ............................... [PASS in 0.02s]
+23:59:25  69 of 79 START sql table model main.rpt_lga_fsi ................................ [RUN]
+23:59:25  70 of 79 START sql table model main.rpt_kpis ................................... [RUN]
+23:59:25  71 of 79 START test not_null_fct_casualties_crash_id ........................... [RUN]
+23:59:25  68 of 79 PASS unique_rpt_region_fsi_stats_area ................................. [PASS in 0.02s]
+23:59:25  72 of 79 START test relationships_fct_casualties_crash_id__crash_id__ref_fct_crashes_  [RUN]
+23:59:25  71 of 79 PASS not_null_fct_casualties_crash_id ................................. [PASS in 0.02s]
+23:59:25  70 of 79 OK created sql table model main.rpt_kpis .............................. [OK in 0.03s]
+23:59:25  69 of 79 OK created sql table model main.rpt_lga_fsi ........................... [OK in 0.03s]
+23:59:25  73 of 79 START test not_null_rpt_lga_fsi_lga_name .............................. [RUN]
+23:59:25  74 of 79 START test unique_rpt_lga_fsi_lga_name ................................ [RUN]
+23:59:25  72 of 79 PASS relationships_fct_casualties_crash_id__crash_id__ref_fct_crashes_  [PASS in 0.02s]
+23:59:25  75 of 79 START sql table model main.rpt_annual_people .......................... [RUN]
+23:59:25  73 of 79 PASS not_null_rpt_lga_fsi_lga_name .................................... [PASS in 0.01s]
+23:59:25  74 of 79 PASS unique_rpt_lga_fsi_lga_name ...................................... [PASS in 0.01s]
+23:59:25  75 of 79 OK created sql table model main.rpt_annual_people ..................... [OK in 0.11s]
+23:59:25  76 of 79 START test non_negative_rpt_annual_people_admitted_to_hospital ........ [RUN]
+23:59:25  77 of 79 START test non_negative_rpt_annual_people_fatalities .................. [RUN]
+23:59:25  78 of 79 START test not_null_rpt_annual_people_crash_year ...................... [RUN]
+23:59:25  79 of 79 START test unique_rpt_annual_people_crash_year ........................ [RUN]
+23:59:25  77 of 79 PASS non_negative_rpt_annual_people_fatalities ........................ [PASS in 0.02s]
+23:59:25  76 of 79 PASS non_negative_rpt_annual_people_admitted_to_hospital .............. [PASS in 0.02s]
+23:59:25  78 of 79 PASS not_null_rpt_annual_people_crash_year ............................ [PASS in 0.02s]
+23:59:25  79 of 79 PASS unique_rpt_annual_people_crash_year .............................. [PASS in 0.02s]
+23:59:25  
+23:59:25  Finished running 3 seeds, 9 table models, 63 data tests, 4 view models in 0 hours 0 minutes and 1.27 seconds (1.27s).
+23:59:25  
+23:59:25  Completed successfully
+23:59:25  
+23:59:25  Done. PASS=79 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=79
+10:29:27.231 | INFO    | Task run 'dbt_build-070' - dbt build finished: pass=63, success=16
+10:29:27.233 | INFO    | Task run 'dbt_build-070' - Finished in state Completed()
+10:29:27.351 | INFO    | Task run 'benchmark_warehouse-ce5' - 
 EXPLAIN ANALYZE (tile2_monthly_fsi_2021_2025, curated layout)
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
@@ -263,7 +263,7 @@ EXPLAIN ANALYZE (tile2_monthly_fsi_2021_2025, curated layout)
 explain analyze select crash_month, count(*) filter (where is_fsi) as fsi_crashes from read_parquet('/private/tmp/de-w7-build/original/project/data/lake/curated/fct_crashes/*/*.parquet', hive_partitioning=true) where crash_year between 2021 and 2025 group by crash_month order by crash_month
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0019s             ││
+││              Total Time: 0.0015s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -359,7 +359,7 @@ explain analyze select crash_month, count(*) filter (where is_fsi) as fsi_crashe
 │        65,655 rows        │
 │           0.00s           │
 └───────────────────────────┘
-10:19:15.519 | INFO    | Task run 'benchmark_warehouse-cc5' - 
+10:29:27.370 | INFO    | Task run 'benchmark_warehouse-ce5' - 
 EXPLAIN ANALYZE (tile1_crash_type_fsi_2024, curated layout)
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
@@ -445,24 +445,24 @@ explain analyze select crash_type, count(*) as fsi_crashes from read_parquet('/p
 │          864 rows         │
 │           0.00s           │
 └───────────────────────────┘
-10:19:15.543 | INFO    | Task run 'benchmark_warehouse-cc5' - 
+10:29:27.391 | INFO    | Task run 'benchmark_warehouse-ce5' - 
 Partitioning and clustering benchmark (same rows, 8,192-row row groups)
-10:19:15.543 | INFO    | Task run 'benchmark_warehouse-cc5' - query                              layout       files   row groups     rows to read  median ms
-10:19:15.543 | INFO    | Task run 'benchmark_warehouse-cc5' - ----------------------------------------------------------------------------------------------
-10:19:15.543 | INFO    | Task run 'benchmark_warehouse-cc5' - tile2_monthly_fsi_2021_2025        flat           1/1        10/26     73788/204860       1.39
-10:19:15.543 | INFO    | Task run 'benchmark_warehouse-cc5' - tile2_monthly_fsi_2021_2025        curated       5/14        10/31     65655/204860       1.12
-10:19:15.543 | INFO    | Task run 'benchmark_warehouse-cc5' -                                    same result on both layouts: True
-10:19:15.544 | INFO    | Task run 'benchmark_warehouse-cc5' - tile1_crash_type_fsi_2024          flat           1/1         3/26     24576/204860       1.15
-10:19:15.544 | INFO    | Task run 'benchmark_warehouse-cc5' - tile1_crash_type_fsi_2024          curated       1/14         2/31     13140/204860       0.84
-10:19:15.544 | INFO    | Task run 'benchmark_warehouse-cc5' -                                    same result on both layouts: True
-10:19:15.544 | INFO    | Task run 'benchmark_warehouse-cc5' - lga_drilldown_adelaide_q1_2024     flat           1/1         2/26     16384/204860       1.05
-10:19:15.544 | INFO    | Task run 'benchmark_warehouse-cc5' - lga_drilldown_adelaide_q1_2024     curated      14/14         1/31      8192/204860       1.19
-10:19:15.544 | INFO    | Task run 'benchmark_warehouse-cc5' -                                    same result on both layouts: True
-10:19:15.545 | INFO    | Task run 'benchmark_warehouse-cc5' - 
+10:29:27.391 | INFO    | Task run 'benchmark_warehouse-ce5' - query                              layout       files   row groups     rows to read  median ms
+10:29:27.391 | INFO    | Task run 'benchmark_warehouse-ce5' - ----------------------------------------------------------------------------------------------
+10:29:27.391 | INFO    | Task run 'benchmark_warehouse-ce5' - tile2_monthly_fsi_2021_2025        flat           1/1        10/26     73788/204860       1.36
+10:29:27.391 | INFO    | Task run 'benchmark_warehouse-ce5' - tile2_monthly_fsi_2021_2025        curated       5/14        10/31     65655/204860       1.11
+10:29:27.392 | INFO    | Task run 'benchmark_warehouse-ce5' -                                    same result on both layouts: True
+10:29:27.392 | INFO    | Task run 'benchmark_warehouse-ce5' - tile1_crash_type_fsi_2024          flat           1/1         3/26     24576/204860       1.16
+10:29:27.392 | INFO    | Task run 'benchmark_warehouse-ce5' - tile1_crash_type_fsi_2024          curated       1/14         2/31     13140/204860       0.79
+10:29:27.392 | INFO    | Task run 'benchmark_warehouse-ce5' -                                    same result on both layouts: True
+10:29:27.392 | INFO    | Task run 'benchmark_warehouse-ce5' - lga_drilldown_adelaide_q1_2024     flat           1/1         2/26     16384/204860       0.99
+10:29:27.392 | INFO    | Task run 'benchmark_warehouse-ce5' - lga_drilldown_adelaide_q1_2024     curated      14/14         1/31      8192/204860       1.14
+10:29:27.392 | INFO    | Task run 'benchmark_warehouse-ce5' -                                    same result on both layouts: True
+10:29:27.393 | INFO    | Task run 'benchmark_warehouse-ce5' - 
 benchmark written to /private/tmp/de-w7-build/original/project/data/warehouse/benchmark.json
-10:19:15.546 | INFO    | Task run 'benchmark_warehouse-cc5' - Finished in state Completed()
-10:19:15.560 | INFO    | Task run 'export_dashboard-c85' - exported 168 months, 13 crash types; crashes=204860 fsi_crashes=10204 fatalities=1337 serious_injuries=10435
-10:19:15.560 | INFO    | Task run 'export_dashboard-c85' - 
+10:29:27.393 | INFO    | Task run 'benchmark_warehouse-ce5' - Finished in state Completed()
+10:29:27.407 | INFO    | Task run 'export_dashboard-c73' - exported 168 months, 13 crash types; crashes=204860 fsi_crashes=10204 fatalities=1337 serious_injuries=10435
+10:29:27.407 | INFO    | Task run 'export_dashboard-c73' - 
 Dashboard summary (from the exported JSON)
 FSI crashes by crash type:
    1. Hit Fixed Object             fsi= 2674 fatal= 393 serious= 2281 share_of_fsi=26.21% crashes= 31722 fsi_pct_of_casualty_crashes=26.99%
@@ -498,10 +498,10 @@ FSI crashes by statistical area:
   Country       fsi= 3973 share_of_fsi=38.94% crashes= 31941 fsi_pct_of_casualty_crashes=32.51%
   City          fsi=  340 share_of_fsi=3.33% crashes= 10374 fsi_pct_of_casualty_crashes=10.72%
 Monthly FSI: peak month 2024-03 (96); 12-month mean lowest 46.17 (to 2018-10), highest 73.25 (to 2024-08)
-10:19:15.560 | INFO    | Task run 'export_dashboard-c85' - dashboard JSON written to /private/tmp/de-w7-build/web/app/project/dashboard-data.json (69590 bytes)
-10:19:15.561 | INFO    | Task run 'export_dashboard-c85' - Finished in state Completed()
-10:19:15.793 | INFO    | Flow run 'loyal-crayfish' - Finished in state Completed()
-10:19:15.803 | INFO    | prefect - Stopping temporary server on http://127.0.0.1:8452
+10:29:27.407 | INFO    | Task run 'export_dashboard-c73' - dashboard JSON written to /private/tmp/de-w7-build/web/app/project/dashboard-data.json (69590 bytes)
+10:29:27.408 | INFO    | Task run 'export_dashboard-c73' - Finished in state Completed()
+10:29:27.471 | INFO    | Flow run 'jade-crab' - Finished in state Completed()
+10:29:27.479 | INFO    | prefect - Stopping temporary server on http://127.0.0.1:8743
 /Applications/Xcode.app/Contents/Developer/usr/bin/make test
 .venv/bin/python -m pytest -m "not integration" -v
 ============================= test session starts ==============================
@@ -540,7 +540,7 @@ tests/test_sources.py::test_malformed_checksum_is_rejected PASSED        [ 92%]
 tests/test_sources.py::test_duplicate_release_ids_are_rejected PASSED    [ 96%]
 tests/test_sources.py::test_missing_keys_are_rejected PASSED             [100%]
 
-====================== 26 passed, 17 deselected in 8.65s =======================
+====================== 26 passed, 17 deselected in 8.84s =======================
 .venv/bin/python -m pytest -m integration -v
 ============================= test session starts ==============================
 platform darwin -- Python 3.11.14, pytest-9.1.1, pluggy-1.7.0 -- /private/tmp/de-w7-build/original/project/.venv/bin/python
@@ -569,10 +569,10 @@ tests/test_warehouse.py::test_every_dbt_node_passed PASSED               [ 88%]
 tests/test_warehouse.py::test_benchmark_shows_less_data_to_read_on_the_curated_layout PASSED [ 94%]
 tests/test_warehouse.py::test_lga_aliases_leave_no_trailing_full_stops PASSED [100%]
 
-====================== 17 passed, 26 deselected in 1.36s =======================
+====================== 17 passed, 26 deselected in 1.49s =======================
 make all finished in 37s
 $ du -sh data/landing data/lake/raw data/lake/curated data/warehouse/sa_crash.duckdb
- 17M	data/landing
+ 16M	data/landing
 8.9M	data/lake/raw
 4.3M	data/lake/curated
  12M	data/warehouse/sa_crash.duckdb
