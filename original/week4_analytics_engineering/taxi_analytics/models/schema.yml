@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw NYC taxi trip data from week 2 data lake
+    tables:
+      - name: yellow_trips
+        description: Yellow taxi trip records
+        meta:
+          external_location: "read_parquet('../week2_workflow_orchestration/data_lake/yellow_taxi/**/*.parquet')"
+
+models:
+  - name: stg_yellow_trips
+    description: Staging model for yellow taxi trips with basic cleaning
+    columns:
+      - name: trip_id
+        description: Unique trip identifier
+        tests:
+          - not_null
+      - name: pickup_datetime
+        description: Trip start timestamp
+      - name: dropoff_datetime
+        description: Trip end timestamp
+      - name: passenger_count
+        description: Number of passengers
+      - name: trip_distance
+        description: Trip distance in miles
+      - name: fare_amount
+        description: Fare amount in dollars
+
+  - name: fact_trips
+    description: Fact table with trip metrics
+    columns:
+      - name: trip_id
+        tests:
+          - not_null
+      - name: revenue
+        description: Total trip revenue (fare + tolls + tips + extras)
+
+  - name: monthly_revenue
+    description: Monthly aggregated revenue metrics

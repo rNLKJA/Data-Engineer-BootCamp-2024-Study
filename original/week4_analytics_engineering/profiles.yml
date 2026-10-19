@@ -1,0 +1,8 @@
+taxi_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: 'taxi.duckdb'
+      schema: analytics
+      threads: 4
