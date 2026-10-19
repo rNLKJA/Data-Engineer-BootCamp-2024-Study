@@ -4,6 +4,7 @@ Week 6 Homework Runner
 Runs all homework questions with a Redpanda/Kafka cluster and captures outputs
 """
 import json
+import os
 import time
 import subprocess
 import sys
@@ -11,6 +12,10 @@ from pathlib import Path
 from kafka import KafkaProducer, KafkaConsumer
 from kafka.admin import KafkaAdminClient, NewTopic
 import pandas as pd
+
+# In GitHub Actions, service containers are accessed via localhost
+# In docker-compose, they're accessed by service name
+BOOTSTRAP_SERVERS = os.environ.get('KAFKA_BOOTSTRAP_SERVERS', 'localhost:9092')
 
 
 def question_1_rpk_version():
@@ -21,12 +26,12 @@ def question_1_rpk_version():
 
     # In a Docker service, we can't run `docker exec`, so check using broker metadata
     from kafka import KafkaClient
-    client = KafkaClient(bootstrap_servers='redpanda:29092')
+    client = KafkaClient(bootstrap_servers=BOOTSTRAP_SERVERS)
     version_info = str(client.config)
     client.close()
     print(f"Redpanda broker connected (using Kafka protocol)")
-    print(f"Service: redpanda:29092")
-    return "Redpanda broker connected via Kafka protocol"
+    print(f"Bootstrap servers: {BOOTSTRAP_SERVERS}")
+    return f"Redpanda broker connected via Kafka protocol at {BOOTSTRAP_SERVERS}"
 
 
 def question_2_create_topic():
@@ -35,7 +40,7 @@ def question_2_create_topic():
     print("Question 2: Creating a topic")
     print("="*60)
 
-    admin = KafkaAdminClient(bootstrap_servers='redpanda:29092')
+    admin = KafkaAdminClient(bootstrap_servers=BOOTSTRAP_SERVERS)
 
     # Check if topic already exists
     existing = admin.list_topics()
@@ -59,7 +64,7 @@ def question_3_connect():
     print("Question 3: Connecting to the Kafka server")
     print("="*60)
 
-    producer = KafkaProducer(bootstrap_servers='redpanda:29092')
+    producer = KafkaProducer(bootstrap_servers=BOOTSTRAP_SERVERS)
     connected = producer.bootstrap_connected()
     print(f"producer.bootstrap_connected() = {connected}")
     producer.close()
@@ -73,7 +78,7 @@ def question_4_send_timing():
     print("="*60)
 
     producer = KafkaProducer(
-        bootstrap_servers='redpanda:29092',
+        bootstrap_servers=BOOTSTRAP_SERVERS,
         value_serializer=lambda v: json.dumps(v).encode('utf-8')
     )
 
@@ -125,12 +130,12 @@ def question_5_stream_green_trips():
 
     # Create producer
     producer = KafkaProducer(
-        bootstrap_servers='redpanda:29092',
+        bootstrap_servers=BOOTSTRAP_SERVERS,
         value_serializer=lambda v: json.dumps(v).encode('utf-8')
     )
 
     # Create topic
-    admin = KafkaAdminClient(bootstrap_servers='redpanda:29092')
+    admin = KafkaAdminClient(bootstrap_servers=BOOTSTRAP_SERVERS)
     existing = admin.list_topics()
     if 'green-trips' not in existing:
         topic = NewTopic(name='green-trips', num_partitions=1, replication_factor=1)
@@ -209,7 +214,7 @@ def question_6_pyspark_parse():
     # Read from Kafka
     df = spark.readStream \
         .format("kafka") \
-        .option("kafka.bootstrap.servers", "redpanda:29092") \
+        .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS) \
         .option("subscribe", "green-trips") \
         .option("startingOffsets", "earliest") \
         .load()
@@ -234,7 +239,7 @@ def question_6_pyspark_parse():
     from kafka import KafkaConsumer
     consumer = KafkaConsumer(
         'green-trips',
-        bootstrap_servers='redpanda:29092',
+        bootstrap_servers=BOOTSTRAP_SERVERS,
         auto_offset_reset='earliest',
         enable_auto_commit=False,
         consumer_timeout_ms=5000
@@ -291,7 +296,7 @@ def question_7_most_popular_destination():
     # Read from Kafka
     df = spark.readStream \
         .format("kafka") \
-        .option("kafka.bootstrap.servers", "redpanda:29092") \
+        .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS) \
         .option("subscribe", "green-trips") \
         .option("startingOffsets", "earliest") \
         .load()
@@ -338,7 +343,7 @@ def question_7_most_popular_destination():
 def main():
     """Run all homework questions"""
     print("Week 6 Homework - Stream Processing")
-    print("Using Redpanda service at redpanda:29092")
+    print(f"Using Redpanda service at {BOOTSTRAP_SERVERS}")
 
     results = {}
 
