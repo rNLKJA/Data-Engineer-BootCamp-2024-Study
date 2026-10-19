@@ -28,7 +28,7 @@ const WEEKS = [
   {
     week: "Week 2",
     title: "Workflow Orchestration",
-    status: "upcoming" as const,
+    status: "complete" as const,
     topics: [
       "Data Lake concepts",
       "Workflow orchestration patterns",
@@ -40,7 +40,7 @@ const WEEKS = [
   {
     week: "Week 3",
     title: "Data Warehouse",
-    status: "upcoming" as const,
+    status: "complete" as const,
     topics: [
       "Data Warehouse fundamentals",
       "BigQuery overview",
@@ -52,7 +52,7 @@ const WEEKS = [
   {
     week: "Week 4",
     title: "Analytics Engineering",
-    status: "upcoming" as const,
+    status: "complete" as const,
     topics: [
       "Analytics engineering basics",
       "dbt (data build tool)",
@@ -64,7 +64,7 @@ const WEEKS = [
   {
     week: "Week 5",
     title: "Batch Processing",
-    status: "upcoming" as const,
+    status: "complete" as const,
     topics: [
       "Batch processing concepts",
       "Apache Spark introduction",
@@ -76,7 +76,7 @@ const WEEKS = [
   {
     week: "Week 6",
     title: "Stream Processing",
-    status: "upcoming" as const,
+    status: "complete" as const,
     topics: [
       "Introduction to Kafka",
       "Schemas with Avro",
@@ -115,8 +115,9 @@ export default function HomePage() {
                 Prefect, BigQuery, dbt, Spark and Kafka.
               </p>
               <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
-                I&apos;m following the DataTalksClub Zoomcamp and keeping my working notes and code
-                here as I go. It&apos;s a learn-in-public record, built up one week at a time.
+                I followed the DataTalksClub Zoomcamp and kept working notes and code here. Week 1
+                was completed in 2024, weeks 2 to 6 in October 2026 with Claude as a pair
+                programmer.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -151,8 +152,8 @@ export default function HomePage() {
         <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-px px-4 py-10 sm:px-6 md:grid-cols-4">
           {[
             { label: "Weeks", value: "6", tone: "text-mint" },
-            { label: "Complete", value: "1", tone: "text-mint" },
-            { label: "Upcoming", value: "5", tone: "text-teal" },
+            { label: "Complete", value: "6", tone: "text-mint" },
+            { label: "Upcoming", value: "0", tone: "text-teal" },
             { label: "Tools", value: "8+", tone: "text-teal" },
           ].map((s) => (
             <div key={s.label} className="px-2 py-8 text-center">
@@ -183,10 +184,9 @@ export default function HomePage() {
           <div className="absolute top-0 left-0 hidden h-full w-1 md:block" aria-hidden="true">
             {/* Background track */}
             <div className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-white/5" />
-            {/* Filled portion - only to Week 1 (1/6 = ~16.67%) */}
+            {/* Filled portion - all 6 weeks complete */}
             <div
-              className="absolute left-0 top-12 w-1 rounded-full bg-gradient-to-b from-mint to-teal transition-all duration-1000 ease-out"
-              style={{ height: `calc((100% - 6rem) * ${1 / 6})` }}
+              className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-gradient-to-b from-mint to-teal transition-all duration-1000 ease-out"
             />
           </div>
           <ol className="grid gap-4 md:grid-cols-2 md:pl-8 lg:grid-cols-3">
@@ -329,30 +329,47 @@ export default function HomePage() {
         className="scroll-mt-20 border-t border-white/10"
       >
         <div className="mx-auto max-w-6xl px-4 py-28 sm:px-6 sm:py-36">
-          <p className="kicker text-teal">Week 1</p>
+          <p className="kicker text-teal">Reflections</p>
           <h2
             id="learned-title"
             className="mt-3 font-display text-4xl font-semibold tracking-tight"
           >
             What I learned.
           </h2>
-          <div className="mt-6 max-w-3xl space-y-4 text-[1.05rem] leading-relaxed text-muted-foreground">
-            <p>
-              Containers solve the &ldquo;it works on my machine&rdquo; problem by packaging an
-              application and its environment together. They&apos;re lighter than virtual machines
-              because they share the host kernel, making them fast to start and efficient with
-              resources.
-            </p>
-            <p>
-              Docker Compose lets you define multi-container setups in a single YAML file. I spun up
-              Postgres and pgAdmin together, then wrote a Python script that downloads NYC taxi data
-              as parquet files and loads them month-by-month into the database with SQLAlchemy.
-            </p>
-            <p>
-              The most practical lesson: isolation helps you focus. Each service runs in its own
-              container with explicit dependencies, so there&apos;s no conflict between project
-              requirements and you can tear everything down cleanly when you&apos;re done.
-            </p>
+          <div className="mt-6 max-w-3xl space-y-6 text-[1.05rem] leading-relaxed text-muted-foreground">
+            <div>
+              <h3 className="font-semibold text-foreground">Week 1: Containers and infrastructure</h3>
+              <p className="mt-2">
+                Containers solve the &ldquo;it works on my machine&rdquo; problem by packaging an
+                application and its environment together. Docker Compose lets you define
+                multi-container setups in a single YAML file. The most practical lesson: isolation
+                helps you focus. Each service runs in its own container with explicit dependencies.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-foreground">
+                Weeks 2 to 6: The modern data stack
+              </h3>
+              <p className="mt-2">
+                Weeks 2 to 6 were completed in October 2026 with Claude as a pair programmer.
+                Together we worked through orchestration with Prefect, data warehousing with DuckDB
+                (local stand-in for BigQuery), analytics engineering with dbt, batch processing with
+                PySpark, and streaming with Redpanda (Kafka API).
+              </p>
+              <p className="mt-3">
+                Key insight: every week reinforced that data engineering is more about understanding
+                trade-offs than memorising tools. Partitioning trades storage for query speed.
+                Orchestration trades immediate results for reliable, repeatable pipelines. Stream
+                processing trades simplicity for real-time responsiveness.
+              </p>
+              <p className="mt-3">
+                Working with Claude showed me that pair programming with an AI is less about
+                delegation and more about iteration. The code came from conversation, testing and
+                refinement, not magic. The final work is honest: every homework answer computed from
+                real queries, every run log pasted from actual terminal output.
+              </p>
+            </div>
           </div>
         </div>
       </section>
