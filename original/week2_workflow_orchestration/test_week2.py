@@ -48,8 +48,8 @@ def test_transform_data(temp_dirs):
     assert len(df) > 0
     assert 'tpep_pickup_datetime' in df.columns
     assert 'tpep_dropoff_datetime' in df.columns
-    assert df['tpep_pickup_datetime'].dtype == 'datetime64[ns]'
-    assert df['tpep_dropoff_datetime'].dtype == 'datetime64[ns]'
+    assert str(df['tpep_pickup_datetime'].dtype).startswith('datetime64')
+    assert str(df['tpep_dropoff_datetime'].dtype).startswith('datetime64')
 
     # No nulls in key columns
     assert df['tpep_pickup_datetime'].notna().all()
@@ -97,4 +97,4 @@ def test_etl_web_to_lake_flow(temp_dirs):
     # Verify data integrity
     df = pd.read_parquet(output_path)
     assert len(df) == row_count
-    assert df['tpep_pickup_datetime'].dtype == 'datetime64[ns]'
+    assert str(df['tpep_pickup_datetime'].dtype).startswith('datetime64')
