@@ -247,7 +247,10 @@ def question_6_pyspark_parse():
     # Create Spark session with correct Scala 2.13 package for PySpark 3.5.0
     spark = SparkSession.builder \
         .appName("Week6Homework") \
-        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0") \
+        .config("spark.jars.packages",
+                "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0,"
+                "org.scala-lang:scala-library:2.13.8") \
+        .config("spark.jars.ivy", "/tmp/.ivy2") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
