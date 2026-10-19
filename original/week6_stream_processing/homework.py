@@ -24,14 +24,32 @@ def question_1_rpk_version():
     print("Question 1: Redpanda version")
     print("="*60)
 
-    # In a Docker service, we can't run `docker exec`, so check using broker metadata
+    # Try to get version via rpk command (in docker container)
+    try:
+        result = subprocess.run(
+            ['docker', 'exec', 'redpanda', 'rpk', 'version'],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        if result.returncode == 0:
+            print(result.stdout)
+            # Extract version from output like "v24.2.11 (rev 123456)"
+            for line in result.stdout.splitlines():
+                if line.startswith('v'):
+                    version = line.split()[0]
+                    print(f"Redpanda version: {version}")
+                    return version
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        pass
+
+    # Fallback: connect via Kafka protocol
     from kafka import KafkaClient
     client = KafkaClient(bootstrap_servers=BOOTSTRAP_SERVERS)
-    version_info = str(client.config)
     client.close()
-    print(f"Redpanda broker connected (using Kafka protocol)")
+    print(f"Redpanda broker connected via Kafka protocol")
     print(f"Bootstrap servers: {BOOTSTRAP_SERVERS}")
-    return f"Redpanda broker connected via Kafka protocol at {BOOTSTRAP_SERVERS}"
+    return f"Connected via Kafka protocol at {BOOTSTRAP_SERVERS}"
 
 
 def question_2_create_topic():
@@ -40,6 +58,38 @@ def question_2_create_topic():
     print("Question 2: Creating a topic")
     print("="*60)
 
+    # Try using rpk (faster and cleaner)
+    try:
+        # Check if topic exists
+        result = subprocess.run(
+            ['docker', 'exec', 'redpanda', 'rpk', 'topic', 'list'],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        if result.returncode == 0 and 'test-topic' in result.stdout:
+            print("Topic 'test-topic' already exists, deleting...")
+            subprocess.run(
+                ['docker', 'exec', 'redpanda', 'rpk', 'topic', 'delete', 'test-topic'],
+                capture_output=True,
+                timeout=10
+            )
+            time.sleep(1)
+
+        # Create topic via rpk
+        result = subprocess.run(
+            ['docker', 'exec', 'redpanda', 'rpk', 'topic', 'create', 'test-topic', '-p', '1', '-r', '1'],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        if result.returncode == 0:
+            print(result.stdout)
+            return "test-topic created successfully via rpk"
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        pass
+
+    # Fallback: use Kafka admin API
     admin = KafkaAdminClient(bootstrap_servers=BOOTSTRAP_SERVERS)
 
     # Check if topic already exists
@@ -183,18 +233,13 @@ def question_6_pyspark_parse():
     print("Question 6: Parsing the data with PySpark Streaming")
     print("="*60)
 
-    # Check if PySpark is available
-    try:
-        from pyspark.sql import SparkSession
-        from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
-    except ImportError:
-        print("ERROR: PySpark not installed")
-        return None
+    from pyspark.sql import SparkSession
+    from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 
-    # Create Spark session
+    # Create Spark session with correct Scala 2.13 package for PySpark 3.5.0
     spark = SparkSession.builder \
         .appName("Week6Homework") \
-        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0") \
+        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
@@ -267,17 +312,13 @@ def question_7_most_popular_destination():
     print("Question 7: Most popular destination")
     print("="*60)
 
-    try:
-        from pyspark.sql import SparkSession
-        from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
-        from pyspark.sql.functions import from_json, col, window, current_timestamp
-    except ImportError:
-        print("ERROR: PySpark not installed")
-        return None
+    from pyspark.sql import SparkSession
+    from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
+    from pyspark.sql.functions import from_json, col, window, current_timestamp
 
     spark = SparkSession.builder \
         .appName("Week6HomeworkQ7") \
-        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0") \
+        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
@@ -347,19 +388,30 @@ def main():
 
     results = {}
 
-    try:
-        results['q1'] = question_1_rpk_version()
-        results['q2'] = question_2_create_topic()
-        results['q3'] = question_3_connect()
-        results['q4'] = question_4_send_timing()
-        results['q5'] = question_5_stream_green_trips()
-        results['q6'] = question_6_pyspark_parse()
-        results['q7'] = question_7_most_popular_destination()
+    # Run all questions - fail fast on any error
+    results['q1'] = question_1_rpk_version()
+    results['q2'] = question_2_create_topic()
+    results['q3'] = question_3_connect()
+    results['q4'] = question_4_send_timing()
+    results['q5'] = question_5_stream_green_trips()
 
-    except Exception as e:
-        print(f"\nERROR: {e}")
-        import traceback
-        traceback.print_exc()
+    # Validate Q5 - must have actually streamed data
+    if not results['q5'] or results['q5'].get('records', 0) == 0:
+        print("\nERROR: Question 5 failed - no records were streamed")
+        sys.exit(1)
+
+    results['q6'] = question_6_pyspark_parse()
+
+    # Validate Q6 - must have parsed records
+    if not results['q6'] or results['q6'].get('record_count', 0) == 0:
+        print("\nERROR: Question 6 failed - no records were parsed")
+        sys.exit(1)
+
+    results['q7'] = question_7_most_popular_destination()
+
+    # Validate Q7 - must have a destination ID
+    if not results['q7']:
+        print("\nERROR: Question 7 failed - no popular destination found")
         sys.exit(1)
 
     print("\n" + "="*60)
@@ -372,7 +424,7 @@ def main():
     if results.get('q5'):
         print(f"Q5 (Stream time): {results['q5']['time_seconds']:.2f}s for {results['q5']['records']} records")
     if results.get('q6'):
-        print(f"Q6 (Parse): {results['q6']['record_count']} records parsed")
+        print(f"Q6 (Parse): {results['q6']['record_count']} records parsed, {len(results['q6']['schema'])} fields")
     print(f"Q7 (Popular dest): {results.get('q7', 'N/A')}")
 
     # Write results to file
