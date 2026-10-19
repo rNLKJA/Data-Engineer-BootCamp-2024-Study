@@ -98,6 +98,8 @@ What is the code that our CI job will run? Where is this code coming from?
 
 What is the count of records in the model fact_fhv_trips after running all dependencies with the test run variable disabled (:false)?
 
+**Answer**: 23,014,060 records
+
 Create a staging model for the fhv data for year 2019, a core model fact_fhv_trips selecting from stg_fhv_tripdata and joining with dim_zones, keeping only records with known pickup and dropoff locations.
 
 **Query:**
@@ -124,8 +126,6 @@ WHERE pickup_location_id IS NOT NULL
   AND pickup_location_id NOT IN (264, 265)
   AND dropoff_location_id NOT IN (264, 265)
 ```
-
-**Answer**: 23,014,060 records
 
 See [RUN_LOG.md](RUN_LOG.md) for before/after counts and filtering logic. The count is 15,338 records (0.067%) higher than the official homework answer of 22,998,722, likely due to minor data download variations.
 
