@@ -130,34 +130,51 @@ See [RUN_LOG.md](RUN_LOG.md#question-4-sending-data-to-the-stream) for timing br
 
 Create a `green-trips` topic and stream green taxi data. How long did it take in seconds?
 
-**Answer**: 0.06 seconds (100 records streamed at 1,662 records/second)  
-See [RUN_LOG.md](RUN_LOG.md#question-5-sending-the-trip-data) for elapsed time and throughput from CI run 39247363333.
+**Data Source**: Official green_tripdata_2019-10.csv.gz (https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz)
+
+**Columns Used**: lpep_pickup_datetime, lpep_dropoff_datetime, PULocationID, DOLocationID, passenger_count, trip_distance, tip_amount
+
+**Answer**: [Value will be computed from actual CI run]  
+See [RUN_LOG.md](RUN_LOG.md#question-5-sending-the-trip-data) for elapsed time and record count from CI.
 
 ### Question 6: Parsing the data with PySpark Streaming
 
-Read from the kafka stream with PySpark and parse the JSON schema. Count records.
+Read from the kafka stream with PySpark and parse the JSON schema. What does the record look like after parsing?
 
-**Answer**: Parsed 8 fields (trip_id, vendor_id, lpep_pickup_datetime, lpep_dropoff_datetime, PULocationID, DOLocationID, trip_distance, fare_amount)  
-See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed schema and Spark startup output from CI run 39247363333.
+**Schema Definition**:
+```python
+from pyspark.sql import types
+schema = types.StructType() \
+    .add("lpep_pickup_datetime", types.StringType()) \
+    .add("lpep_dropoff_datetime", types.StringType()) \
+    .add("PULocationID", types.IntegerType()) \
+    .add("DOLocationID", types.IntegerType()) \
+    .add("passenger_count", types.DoubleType()) \
+    .add("trip_distance", types.DoubleType()) \
+    .add("tip_amount", types.DoubleType())
+```
+
+**Answer**: [First parsed record will be shown from actual CI run]  
+See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed record example from CI.
 
 ### Question 7: Most popular destination
 
 Using PySpark Streaming, find the most popular destination (DOLocationID) by grouping with a 5-minute window based on timestamp and ordering by count.
 
-**Code:**
+**Code**:
 ```python
 from pyspark.sql.functions import col, current_timestamp, window
 
-df = df.withColumn("timestamp", current_timestamp())
+green_stream = green_stream.withColumn("timestamp", current_timestamp())
 
-popular_destinations = df \
+popular_destinations = green_stream \
     .groupBy(window(col("timestamp"), "5 minutes"), "DOLocationID") \
     .count() \
-    .orderBy("count", ascending=False)
+    .orderBy(col("count").desc())
 ```
 
-**Answer**: DOLocationID 42 (3 trips in 5-minute window [2026-10-19 11:50:00, 2026-10-19 11:55:00])  
-See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for windowed aggregation output from CI run 39247363333.
+**Answer**: [Most popular DOLocationID will be computed from actual CI run]  
+See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for windowed aggregation output from CI.
 
 ## What Surprised Me
 

@@ -123,8 +123,8 @@ jobs:
         run: |
           mkdir -p original/week2_workflow_orchestration/downloads
           cd original/week2_workflow_orchestration/downloads
-          wget -q https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2019-10.parquet
-          ls -lh green_tripdata_2019-10.parquet
+          wget -q https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz
+          ls -lh green_tripdata_2019-10.csv.gz
 
       - name: Install dependencies
         run: |

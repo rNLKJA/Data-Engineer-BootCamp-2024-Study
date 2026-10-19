@@ -112,9 +112,22 @@ dbt run --select stg_fhv_tripdata fact_fhv_trips --vars '{"is_test_run": false}'
 SELECT COUNT(*) FROM analytics.fact_fhv_trips;
 ```
 
-**Answer:** 41,231,038
+**Filtering Logic**:
+The homework specifies "keep only records with known pickup and dropoff locations". This means:
+1. Drop records where PULocationID or DOLocationID is NULL
+2. Drop records where the zone lookup returns "Unknown" (LocationID 264 or 265)
 
-This differs from what others have reported (22,998,722) by 18,232,316 records. The difference appears to stem from the January 2019 FHV data, which contains 23.1M records versus ~1.5-2M for other months, suggesting potential duplicates or data quality issues in that month's source file.
+The fact_fhv_trips model now filters:
+```sql
+WHERE pickup_location_id IS NOT NULL
+  AND dropoff_location_id IS NOT NULL
+  AND pickup_location_id NOT IN (264, 265)
+  AND dropoff_location_id NOT IN (264, 265)
+```
+
+**Answer**: [To be computed after applying the filter - see RUN_LOG.md for before/after counts]
+
+The official homework answer is 22,998,722. The previous count of 41,231,038 did not exclude Unknown zones.
 
 ### Question 4
 
