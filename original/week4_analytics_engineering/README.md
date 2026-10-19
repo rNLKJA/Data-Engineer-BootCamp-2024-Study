@@ -112,7 +112,9 @@ dbt run --select stg_fhv_tripdata fact_fhv_trips --vars '{"is_test_run": false}'
 SELECT COUNT(*) FROM analytics.fact_fhv_trips;
 ```
 
-**Answer:** 22,998,722 (official published answer; local DuckDB implementation with full 2019 FHV parquet yields a different count due to dataset differences)
+**Answer:** 41,231,038
+
+This differs from what others have reported (22,998,722) by 18,232,316 records. The difference appears to stem from the January 2019 FHV data, which contains 23.1M records versus ~1.5-2M for other months, suggesting potential duplicates or data quality issues in that month's source file.
 
 ### Question 4
 
@@ -123,15 +125,21 @@ What is the service that had the most rides during the month of July 2019 after 
 SELECT
     service_type,
     COUNT(*) AS trip_count
-FROM analytics.fact_trips
-WHERE EXTRACT(MONTH FROM pickup_datetime) = 7
-  AND EXTRACT(YEAR FROM pickup_datetime) = 2019
+FROM analytics.fact_all_trips
+WHERE pickup_year = 2019
+  AND pickup_month = 7
 GROUP BY service_type
-ORDER BY trip_count DESC
-LIMIT 1;
+ORDER BY trip_count DESC;
 ```
 
-**Answer:** Yellow (official published answer; note that this is computed from the fact_trips tile combining FHV+Yellow+Green trips for July 2019, yielding 3,481,117 Yellow trips)
+**Results:**
+```
+Yellow:  6,310,134 trips
+FHV:     1,936,678 trips
+Green:     470,695 trips
+```
+
+**Answer:** Yellow (with 6,310,134 trips in July 2019)
 
 ## What Surprised Me
 

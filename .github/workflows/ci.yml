@@ -82,3 +82,91 @@ jobs:
           pip install -q -r requirements.txt
           python3 -m pytest test_week6.py -v
 
+  week6-homework:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Start Redpanda
+        run: |
+          docker run -d --name redpanda \
+            -p 9092:9092 \
+            redpandadata/redpanda:v24.2.11 \
+            redpanda start --overprovisioned --smp 1 \
+            --kafka-addr PLAINTEXT://0.0.0.0:9092 \
+            --advertise-kafka-addr PLAINTEXT://localhost:9092
+
+          echo "Waiting for Redpanda to be ready..."
+          for i in {1..30}; do
+            if docker exec redpanda rpk cluster health 2>/dev/null | grep -q "Healthy"; then
+              echo "Redpanda is healthy"
+              break
+            fi
+            echo "Waiting... ($i/30)"
+            sleep 2
+          done
+
+          docker exec redpanda rpk cluster health
+          docker exec redpanda rpk version
+
+      - name: Download green taxi data
+        run: |
+          mkdir -p original/week2_workflow_orchestration/downloads
+          cd original/week2_workflow_orchestration/downloads
+          wget -q https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2019-10.parquet
+          ls -lh green_tripdata_2019-10.parquet
+
+      - name: Install dependencies
+        run: |
+          cd original/week6_stream_processing
+          python3 -m venv venv
+          source venv/bin/activate
+          # PySpark 3.4.3 uses Scala 2.12
+          pip install -q kafka-python-ng pandas pyarrow pyspark==3.4.3
+
+      - name: Run Week 6 Homework
+        run: |
+          cd original/week6_stream_processing
+          source venv/bin/activate
+          set -euo pipefail
+          # Download JARs explicitly to avoid classloader issues
+          # PySpark's --packages has known Scala library classpath bugs
+          mkdir -p spark-jars
+          cd spark-jars
+          wget -q https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.3/spark-sql-kafka-0-10_2.12-3.4.3.jar
+          wget -q https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.1/kafka-clients-3.4.1.jar
+          wget -q https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.4.3/spark-token-provider-kafka-0-10_2.12-3.4.3.jar
+          wget -q https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar
+          # Explicitly include Scala library
+          wget -q https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.18/scala-library-2.12.18.jar
+          cd ..
+          # Use --jars with explicit paths to bypass Ivy dependency resolution
+          spark-submit \
+            --jars spark-jars/spark-sql-kafka-0-10_2.12-3.4.3.jar,spark-jars/kafka-clients-3.4.1.jar,spark-jars/spark-token-provider-kafka-0-10_2.12-3.4.3.jar,spark-jars/commons-pool2-2.11.1.jar,spark-jars/scala-library-2.12.18.jar \
+            homework.py 2>&1 | tee homework_output.log
+
+      - name: Stop Redpanda
+        if: always()
+        run: |
+          docker stop redpanda || true
+          docker rm redpanda || true
+
+      - name: Upload homework results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week6-homework-results
+          path: |
+            original/week6_stream_processing/homework_results.json
+            original/week6_stream_processing/homework_output.log
+
