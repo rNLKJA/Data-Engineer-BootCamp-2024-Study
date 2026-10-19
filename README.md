@@ -22,17 +22,17 @@ This repository is **my personal study record** as I work through the course. It
 
 ## Progress / Status
 
-Honest snapshot of where this repo actually is. Only **Week 1** has real content and working code; the remaining weeks are scaffolded folders waiting to be filled in.
+| Week   | Topic                        | Status   | Notes                                                                                              |
+| ------ | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
+| Week 1 | Introduction & Prerequisites | ✅ Done  | Docker + Postgres notes, working ingestion pipeline and docker-compose stack (completed Jan 2024) |
+| Week 2 | Workflow Orchestration       | ✅ Done  | Prefect pipelines, NYC TLC data ingest, local Parquet data lake (completed Oct 2026)              |
+| Week 3 | Data Warehouse               | ✅ Done  | DuckDB as BigQuery substitute, partitioning, clustering, query optimisation (completed Oct 2026)  |
+| Week 4 | Analytics Engineering        | ✅ Done  | dbt with dbt-duckdb, staging/fact/mart models, tests and docs (completed Oct 2026)                |
+| Week 5 | Batch Processing             | ✅ Done  | pandas batch processing (PySpark concepts), partitioned Parquet output (completed Oct 2026)        |
+| Week 6 | Stream Processing            | ✅ Done  | Redpanda/Kafka producer-consumer, stateful aggregation, CI testing (completed Oct 2026)           |
+| Week 7 | Project                      | ⬜ Todo  | End-to-end project combining all weeks                                                             |
 
-| Week   | Topic                        | Status         | Notes                                                                        |
-| ------ | ---------------------------- | -------------- | ---------------------------------------------------------------------------- |
-| Week 1 | Introduction & Prerequisites | ✅ Done        | Docker + Postgres notes, working ingestion pipeline and docker-compose stack |
-| Week 2 | Workflow Orchestration       | ⬜ Not started | Empty stub folder                                                            |
-| Week 3 | Data Warehouse               | ⬜ Not started | Empty stub folder                                                            |
-| Week 4 | Analytics Engineering        | ⬜ Not started | Empty stub folder                                                            |
-| Week 5 | Batch Processing             | ⬜ Not started | Empty stub folder                                                            |
-| Week 6 | Stream Processing            | ⬜ Not started | Empty stub folder                                                            |
-| Week 7 | Project                      | ⬜ Not started | Empty stub folder                                                            |
+**Note**: Week 1 was completed in January 2024. Weeks 2 through 6 were completed in October 2026 with Claude Code as a pair programmer, using local substitutes for cloud services (DuckDB for BigQuery, local Parquet for GCS, Redpanda for Kafka in CI).
 
 ## Syllabus
 

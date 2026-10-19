@@ -31,3 +31,72 @@ jobs:
 
       - name: Build
         run: cd web && npm run build
+
+  test-data-engineering:
+    runs-on: ubuntu-24.04
+
+    services:
+      redpanda:
+        image: vectorized/redpanda:latest
+        ports:
+          - 9092:9092
+        options: >-
+          redpanda start --smp 1 --memory 1G
+          --overprovisioned
+          --node-id 0
+          --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+          --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Test Week 1
+        run: |
+          cd original/week1_introduction_and_prerequisites
+          pip install -q pytest
+          python3 -m pytest test_data_ingestion.py -v
+
+      - name: Test Week 2
+        run: |
+          cd original/week2_workflow_orchestration
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          python3 -m pytest test_week2.py -v
+
+      - name: Test Week 3
+        run: |
+          cd original/week3_data_warehouse
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          python3 -m pytest test_week3.py -v
+
+      - name: Test Week 4
+        run: |
+          cd original/week4_analytics_engineering/taxi_analytics
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          dbt deps
+          python3 -m pytest test_week4.py -v
+
+      - name: Test Week 5
+        run: |
+          cd original/week5_batch_processing
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          python3 -m pytest test_week5.py -v
+
+      - name: Test Week 6 (with Redpanda)
+        run: |
+          cd original/week6_stream_processing
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -q -r requirements.txt
+          python3 -m pytest test_week6.py -v
