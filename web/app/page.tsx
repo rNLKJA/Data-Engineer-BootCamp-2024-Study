@@ -369,6 +369,7 @@ export default function HomePage() {
               >
                 Made by Rin in Adelaide
               </a>
+              <span className="sr-only"> DE</span>
             </p>
           </div>
         </div>
