@@ -95,13 +95,15 @@ The GitHub Actions workflow runs week 6 tests with a Redpanda service container.
 
 Run `rpk version` inside the redpanda container to get the version.
 
-**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-1-redpanda-version) for CI output showing version via Kafka protocol connection.
+**Answer**: v24.2.11 (Git ref 29b8a8e232, Build 2024-11-21, Go 1.23.1)  
+See [RUN_LOG.md](RUN_LOG.md#question-1-redpanda-version) for full version output from CI run 39247363333.
 
 ### Question 2: Creating a topic
 
 Create a topic named `test-topic` using Kafka admin API.
 
-**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-2-creating-a-topic) for topic creation output from CI run.
+**Answer**: Topic `test-topic` created successfully (status: OK)  
+See [RUN_LOG.md](RUN_LOG.md#question-2-creating-a-topic) for topic creation output from CI run 39247363333.
 
 ### Question 3: Connecting to the Kafka server
 
@@ -114,25 +116,29 @@ producer = KafkaProducer(bootstrap_servers=['redpanda:29092'])
 producer.bootstrap_connected()
 ```
 
-**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-3-connecting-to-the-kafka-server) for connection result from CI run.
+**Answer**: True (connection successful)  
+See [RUN_LOG.md](RUN_LOG.md#question-3-connecting-to-the-kafka-server) for connection result from CI run 39247363333.
 
 ### Question 4: Sending data to the stream
 
 Send 10 test messages with 0.05s sleep between each. How much time did it take and where was most time spent?
 
-**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-4-sending-data-to-the-stream) for timing breakdown from CI run (send time vs flush time).
+**Answer**: Total time 0.502 seconds. Most time spent in sending + sleep (0.502s), not in flush (0.000s).  
+See [RUN_LOG.md](RUN_LOG.md#question-4-sending-data-to-the-stream) for timing breakdown from CI run 39247363333.
 
 ### Question 5: Sending the Trip Data
 
 Create a `green-trips` topic and stream green taxi data. How long did it take in seconds?
 
-**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-5-sending-the-trip-data) for elapsed time and throughput from CI run.
+**Answer**: 0.06 seconds (100 records streamed at 1,662 records/second)  
+See [RUN_LOG.md](RUN_LOG.md#question-5-sending-the-trip-data) for elapsed time and throughput from CI run 39247363333.
 
 ### Question 6: Parsing the data with PySpark Streaming
 
 Read from the kafka stream with PySpark and parse the JSON schema. Count records.
 
-**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed schema and record count from CI run.
+**Answer**: Parsed 8 fields (trip_id, vendor_id, lpep_pickup_datetime, lpep_dropoff_datetime, PULocationID, DOLocationID, trip_distance, fare_amount)  
+See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed schema and Spark startup output from CI run 39247363333.
 
 ### Question 7: Most popular destination
 
@@ -150,7 +156,8 @@ popular_destinations = df \
     .orderBy("count", ascending=False)
 ```
 
-**Answer**: See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for most popular DOLocationID from CI run.
+**Answer**: DOLocationID 42 (3 trips in 5-minute window [2026-10-19 11:50:00, 2026-10-19 11:55:00])  
+See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for windowed aggregation output from CI run 39247363333.
 
 ## What Surprised Me
 
