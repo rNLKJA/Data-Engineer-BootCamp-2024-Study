@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Database, GitBranch, Server, Sparkles, Workflow } from "lucide-react";
+import { BookOpen, Database, GitBranch, Server, Sparkles, Workflow, ArrowRight, Calendar } from "lucide-react";
 import { HeroVisual } from "./components/hero-visual";
 
 const WEEKS = [
@@ -93,21 +93,25 @@ export default function HomePage() {
         />
         <main id="main">
           {/* Hero */}
-          <section className="mx-auto grid max-w-6xl items-center gap-14 px-4 pt-20 pb-32 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:pt-32 lg:pb-40">
+          <section className="mx-auto grid max-w-6xl items-center gap-14 px-4 pt-10 pb-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:pt-16 lg:pb-28">
             <div>
               <p className="kicker text-mint">Data Engineering BootCamp</p>
-              <h1 className="mt-6 font-display text-5xl leading-[1.02] font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+              <h1 className="mt-4 font-display text-5xl leading-[1.02] font-semibold tracking-tight sm:text-6xl lg:text-7xl">
                 Six weeks of hands-on <em className="text-mint not-italic">data engineering</em>.
               </h1>
-              <p className="mt-12 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
                 Learn orchestration, warehousing, analytics, batch and stream processing through
                 practical training built on real-world tools. From Docker and Terraform through
                 Prefect, BigQuery, dbt, Spark and Kafka.
               </p>
-              <div className="mt-12 flex flex-wrap gap-3">
+              <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
+                I&apos;m following the DataTalksClub Zoomcamp and keeping my working notes and code
+                here as I go. It&apos;s a learn-in-public record, built up one week at a time.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="#curriculum"
-                  className="inline-flex h-12 items-center rounded-full bg-mint px-6 text-[0.95rem] font-medium text-graphite-deep transition-colors hover:bg-mint/90"
+                  className="inline-flex h-12 items-center rounded-full bg-mint px-6 text-[0.95rem] font-semibold text-graphite-deep transition-colors hover:bg-mint/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
                 >
                   See the curriculum
                 </Link>
@@ -115,15 +119,11 @@ export default function HomePage() {
                   href="https://dezoomcamp.streamlit.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center rounded-full border border-white/10 bg-card px-6 text-[0.95rem] font-medium transition-colors hover:border-mint/50"
+                  className="inline-flex h-12 items-center rounded-full border border-white/10 bg-card px-6 text-[0.95rem] font-medium transition-colors hover:border-mint/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 >
                   Original course
                 </a>
               </div>
-              <p className="mt-8 text-sm text-muted-foreground">
-                I&apos;m following the DataTalksClub Zoomcamp and keeping my working notes and code
-                here as I go. It&apos;s a learn-in-public record, built up one week at a time.
-              </p>
             </div>
             <HeroVisual />
           </section>
@@ -133,18 +133,19 @@ export default function HomePage() {
       {/* Status */}
       <section
         aria-labelledby="status"
-        className="border-y border-white/10 bg-gradient-to-br from-graphite-deep/70 to-graphite-deep/50 py-16"
+        className="border-y border-white/10 bg-gradient-to-br from-graphite-deep/70 to-graphite-deep/50"
       >
         <h2 id="status" className="sr-only">
           Course progress
         </h2>
-        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-px px-4 sm:px-6 md:grid-cols-3">
+        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-px px-4 py-10 sm:px-6 md:grid-cols-4">
           {[
             { label: "Weeks", value: "6", tone: "text-mint" },
             { label: "Complete", value: "1", tone: "text-mint" },
             { label: "Upcoming", value: "5", tone: "text-teal" },
+            { label: "Tools", value: "8+", tone: "text-teal" },
           ].map((s) => (
-            <div key={s.label} className="px-2 py-8 text-center md:py-10">
+            <div key={s.label} className="px-2 py-8 text-center">
               <dt className="kicker text-muted-foreground">{s.label}</dt>
               <dd className={`mt-2 font-display text-4xl font-semibold sm:text-5xl ${s.tone}`}>
                 {s.value}
@@ -158,7 +159,7 @@ export default function HomePage() {
       <section
         id="curriculum"
         aria-labelledby="curriculum-title"
-        className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-32 sm:px-6 sm:py-40"
+        className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6"
       >
         <p className="kicker text-teal">Curriculum</p>
         <h2
@@ -213,6 +214,33 @@ export default function HomePage() {
             })}
           </ol>
         </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <Link
+            href="#about"
+            className="group flex items-center gap-4 rounded-3xl border border-white/10 bg-card p-6 transition-colors hover:border-mint/50"
+          >
+            <Calendar className="size-8 shrink-0 text-mint" aria-hidden="true" />
+            <span>
+              <span className="block font-semibold">Six-week schedule</span>
+              <span className="text-sm text-muted-foreground">
+                Build from Docker basics to streaming pipelines.
+              </span>
+            </span>
+            <ArrowRight
+              className="ml-auto size-5 shrink-0 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            />
+          </Link>
+          <div className="flex items-center gap-4 rounded-3xl border border-white/10 bg-card p-6">
+            <BookOpen className="size-8 shrink-0 text-teal" aria-hidden="true" />
+            <span>
+              <span className="block font-semibold">Learn-in-public notes</span>
+              <span className="text-sm text-muted-foreground">
+                Working notes and code as each week is completed.
+              </span>
+            </span>
+          </div>
+        </div>
       </section>
 
       {/* About */}
@@ -221,7 +249,7 @@ export default function HomePage() {
         aria-labelledby="about-title"
         className="scroll-mt-20 border-t border-white/10 bg-gradient-to-br from-graphite-deep/60 to-graphite-deep/40"
       >
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-32 sm:px-6 sm:py-40 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1fr]">
           <div>
             <p className="kicker text-mint">About this curriculum</p>
             <h2
@@ -244,30 +272,30 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid content-start gap-4">
-            <div className="rounded-2xl border border-white/10 bg-card p-5">
-              <h3 className="font-semibold">Course structure</h3>
-              <dl className="mt-3 grid gap-2 text-sm">
+            <div className="rounded-3xl border border-white/10 bg-card p-6">
+              <h3 className="font-display text-2xl font-semibold">Course structure</h3>
+              <dl className="mt-4 grid gap-3 text-sm">
                 <div className="flex justify-between">
                   <dt className="text-muted-foreground">Duration</dt>
-                  <dd>6 weeks</dd>
+                  <dd className="font-medium">6 weeks</dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-muted-foreground">Format</dt>
-                  <dd>Hands-on lessons</dd>
+                  <dd className="font-medium">Hands-on lessons</dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-muted-foreground">Prerequisites</dt>
-                  <dd>Basic programming</dd>
+                  <dd className="font-medium">Basic programming</dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-muted-foreground">Level</dt>
-                  <dd>Beginner to intermediate</dd>
+                  <dd className="font-medium">Beginner to intermediate</dd>
                 </div>
               </dl>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-card p-5">
-              <h3 className="font-semibold">Original course</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
+            <div className="rounded-3xl border border-white/10 bg-card p-6">
+              <h3 className="font-display text-xl font-semibold">Original course</h3>
+              <p className="mt-3 text-sm text-muted-foreground">
                 See the original course materials and lectures at the official DataTalks.Club
                 platform.
               </p>
@@ -275,7 +303,7 @@ export default function HomePage() {
                 href="https://dezoomcamp.streamlit.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block font-mono text-sm text-mint underline-offset-4 hover:underline"
+                className="mt-4 inline-block font-mono text-sm text-mint underline-offset-4 hover:underline"
               >
                 dezoomcamp.streamlit.app
               </a>
