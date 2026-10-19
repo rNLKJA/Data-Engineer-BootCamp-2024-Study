@@ -12,7 +12,10 @@ from dataclasses import dataclass
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-REPO_ROOT = PROJECT_ROOT.parents[1]
+# original/project sits two levels below the repository root. Inside the Docker
+# image the project is /app, which has no such parents; SA_CRASH_DASHBOARD_JSON
+# is set there instead.
+REPO_ROOT = PROJECT_ROOT.parents[1] if len(PROJECT_ROOT.parents) > 1 else PROJECT_ROOT
 
 
 def _path(env_name: str, default: Path) -> Path:

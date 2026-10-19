@@ -15,7 +15,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # vitest's jsdom environment needs a newer Node than 20
+          node-version: '24'
 
       - name: Install dependencies
         run: cd web && npm ci --legacy-peer-deps
