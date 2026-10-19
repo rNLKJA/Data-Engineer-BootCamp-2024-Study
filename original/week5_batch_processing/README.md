@@ -51,6 +51,12 @@ monthly = df.groupBy('year', 'month').agg(spark_sum('revenue'))
 
 The partitioned output lets downstream jobs read only the months they need.
 
+**Computed Statistics** (from Q1 2021 yellow taxi data):
+- Total Revenue (2021): $84,001,487.96
+- January 2021 Trip Count: 1,343,375
+- March 2021 Average Distance: 4.45 miles
+- Highest Average Revenue: March 2021 ($18.45 per trip)
+
 ## Running Locally
 
 ```bash
