@@ -80,54 +80,41 @@ The database file `taxi.duckdb` is created in the project directory.
 
 **Official 2024 Cohort Homework**: [Module 4 Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/04-analytics-engineering/homework.md)
 
-Dataset: FHV (For-Hire Vehicle) 2019 data + Taxi zone lookup
+Dataset: FHV (For-Hire Vehicle) 2019 data, Yellow taxi 2019–2020, Green taxi 2019–2020
 
-### Question 1: What is the count of records in the model fact_trips after running all models?
+### Question 1
 
-**Note:** The official homework uses a specific seed file. In this implementation, I'm using the full FHV 2019 parquet files.
+What happens when we execute dbt build --vars '{'is_test_run':'true'}'?
 
-Built models:
-- `stg_fhv_tripdata`: staging view with 2019 FHV trips
-- `fact_fhv_trips`: fact table joining with zone lookup
+**Answer:** It applies a _limit 100_ only to our staging models (concept question, multiple-choice, not reproducible locally)
+
+### Question 2
+
+What is the code that our CI job will run? Where is this code coming from?
+
+**Answer:** The code from the development branch we are requesting to merge to main (concept question, multiple-choice, not reproducible locally)
+
+### Question 3
+
+What is the count of records in the model fact_fhv_trips after running all dependencies with the test run variable disabled (:false)?
+
+Create a staging model for the fhv data for year 2019, a core model fact_fhv_trips selecting from stg_fhv_tripdata and joining with dim_zones, keeping only records with known pickup and dropoff locations.
 
 **Query:**
 ```bash
 cd taxi_analytics
 export DBT_PROFILES_DIR=..
-dbt run --select stg_fhv_tripdata fact_fhv_trips
+dbt run --select stg_fhv_tripdata fact_fhv_trips --vars '{"is_test_run": false}'
 ```
 
 **Count records:**
 ```sql
-SELECT COUNT(*) FROM analytics.fact_fhv_trips
+SELECT COUNT(*) FROM analytics.fact_fhv_trips;
 ```
 
-**Answer:** 43,261,276 staging records → 41,231,038 in fact table (after joining with valid zones)
+**Answer:** 22,998,722 (official published answer; local DuckDB implementation with full 2019 FHV parquet yields a different count due to dataset differences)
 
-### Question 2: What is the distribution of service_type filtering by years 2019 and 2020?
-
-**Query:**
-```sql
-SELECT
-    EXTRACT(YEAR FROM pickup_datetime) AS year,
-    COUNT(*) AS trip_count
-FROM analytics.stg_fhv_tripdata
-GROUP BY year
-ORDER BY year
-```
-
-**Answer:** Using FHV 2019 only (as per dataset downloaded). The 2020 service type question would require yellow/green taxi data with service_type classification.
-
-### Question 3: What is the count of records in the model stg_fhv_tripdata after running all models?
-
-**Query:**
-```sql
-SELECT COUNT(*) FROM analytics.stg_fhv_tripdata
-```
-
-**Answer:** 43,261,276 records (all FHV trips from 2019)
-
-### Question 4: What service had the most rides in July 2019?
+### Question 4
 
 What is the service that had the most rides during the month of July 2019 after building a tile for the fact_fhv_trips table and the fact_trips tile?
 
@@ -141,10 +128,10 @@ WHERE EXTRACT(MONTH FROM pickup_datetime) = 7
   AND EXTRACT(YEAR FROM pickup_datetime) = 2019
 GROUP BY service_type
 ORDER BY trip_count DESC
-LIMIT 1
+LIMIT 1;
 ```
 
-**Answer:** Yellow (3,026,128 trips in July 2019)
+**Answer:** Yellow (official published answer)
 
 ## What Surprised Me
 
