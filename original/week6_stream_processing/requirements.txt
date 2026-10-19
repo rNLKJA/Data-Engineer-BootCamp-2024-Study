@@ -1,2 +1,4 @@
 kafka-python-ng
-pytest
+pandas
+pytest>=8.0.0
+

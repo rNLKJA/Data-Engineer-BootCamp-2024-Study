@@ -161,3 +161,4 @@ cython_debug/
 week1_introduction_and_prerequisites/ny_taxi_postgres_data/*
 .vercel
 .env*.local
+*.duckdb
