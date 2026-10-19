@@ -3,9 +3,20 @@ Week 3: Data Warehouse Queries with DuckDB
 ================================================================================
 
 [Q1] Row count for January 2021:
-     1,369,769 rows
+┌──────────────┐
+│ count_star() │
+│    int64     │
+├──────────────┤
+│      1369769 │
+└──────────────┘
 
 [Q2] Total trip distance for Q1 2021 (Jan, Feb, Mar):
+┌────────────────────┐
+│ total_trip_dist_q1 │
+│       double       │
+├────────────────────┤
+│       2.0658914e07 │
+└────────────────────┘
      20,658,913.80 miles
 
 [Q6a] Full scan EXPLAIN (all partitions):
@@ -34,16 +45,26 @@ Week 3: Data Warehouse Queries with DuckDB
 
 
 [Bonus] Top 5 pickup locations in Q1 2021:
-     Location 236: 248,310 trips
-     Location 237: 247,818 trips
-     Location 141: 155,513 trips
-     Location 239: 152,012 trips
-     Location 161: 151,680 trips
+┌────────────────────┬──────────────┐
+│ PULocationID       │ trip_count   │
+│      int64         │    int64     │
+├────────────────────┼──────────────┤
+│                236 │       248310 │
+│                237 │       247818 │
+│                141 │       155513 │
+│                239 │       152012 │
+│                161 │       151680 │
+└────────────────────┴──────────────┘
 
 [Bonus] Row count per partition (month):
-     Month 01: 1,369,769 rows
-     Month 02: 1,371,709 rows
-     Month 03: 1,925,152 rows
+┌─────────────┬──────────────┐
+│ pickup_month│ count_star() │
+│    int64    │    int64     │
+├─────────────┼──────────────┤
+│           1 │      1369769 │
+│           2 │      1371709 │
+│           3 │      1925152 │
+└─────────────┴──────────────┘
 
 ================================================================================
 All queries complete!
