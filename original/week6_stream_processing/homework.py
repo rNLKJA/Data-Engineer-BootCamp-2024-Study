@@ -320,9 +320,11 @@ def question_7_most_popular_destination():
     from pyspark.sql.types import StructType, StringType, IntegerType, DoubleType
     from pyspark.sql.functions import from_json, col, window, current_timestamp
 
-    # Create Spark session - packages will be provided by spark-submit --packages
+    # Create Spark session with tuned settings for faster streaming
     spark = SparkSession.builder \
         .appName("Week6HomeworkQ7") \
+        .config("spark.sql.shuffle.partitions", "4") \
+        .config("spark.streaming.kafka.maxRatePerPartition", "100000") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
@@ -361,11 +363,14 @@ def question_7_most_popular_destination():
         .format("console") \
         .option("truncate", "false") \
         .option("numRows", 10) \
+        .trigger(processingTime='10 seconds') \
         .start()
 
     # Wait for data to accumulate and process
     print("\nWaiting for streaming aggregation to process data...")
-    time.sleep(20)
+    for i in range(6):
+        time.sleep(10)
+        print(f"  Waiting... {(i+1)*10}s elapsed")
 
     query.stop()
 
@@ -374,9 +379,22 @@ def question_7_most_popular_destination():
         .outputMode("complete") \
         .format("memory") \
         .queryName("popular_destinations") \
+        .trigger(processingTime='5 seconds') \
         .start()
 
-    time.sleep(10)
+    print("Waiting for memory sink to process...")
+    for i in range(4):
+        time.sleep(10)
+        print(f"  Waiting... {(i+1)*10}s elapsed")
+        # Check if data is available
+        try:
+            result = spark.sql("SELECT COUNT(*) as cnt FROM popular_destinations")
+            cnt = result.collect()[0]['cnt']
+            if cnt > 0:
+                print(f"  Found {cnt} rows in memory table")
+                break
+        except Exception:
+            pass
 
     # Query the in-memory table
     result = spark.sql("SELECT * FROM popular_destinations ORDER BY count DESC LIMIT 5")
