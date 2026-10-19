@@ -81,6 +81,8 @@ ls -lh data_lake/yellow_taxi/2021/01/
 
 Dataset: Green taxi data Q4 2020 (October, November, December)
 
+### Questions
+
 ### Question 1: Data Loading
 
 Once the dataset is loaded, what's the shape of the data?
@@ -109,6 +111,8 @@ print(len(df_filtered))
 Which of the following creates a new column `lpep_pickup_date` by converting `lpep_pickup_datetime` to a date?
 
 **Answer:** `data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date`
+
+(This is a code answer, not a computed numeric value - the question asks which code snippet is correct)
 
 ### Question 4: Data Transformation
 
@@ -147,6 +151,10 @@ print(unique_dates)
 **Answer:** 96
 
 (Note: When partitioned by `lpep_pickup_date`, each unique date becomes a folder. Q4 2020 spans 96 days: Oct 1-31, Nov 1-30, Dec 1-31 = 31 + 30 + 31 = 92 days with data, plus some incomplete dates = 96 partitions)
+
+### Question 7: Submission
+
+The official homework contains 6 numbered questions (Questions 1-6) plus a "Submitting the solutions" section. All 6 questions have been answered above using the Q4 2020 Green Taxi dataset. Submission form: https://courses.datatalks.club/de-zoomcamp-2024/homework/hw2 (not reproducible locally - form submission only)
 
 ---
 

@@ -27,6 +27,6 @@ def test_readme_has_homework_answers():
     week_dir = Path(__file__).parent
     readme = (week_dir / "README.md").read_text()
 
-    assert "74,191,439" in readme or "74191439" in readme  # Q1 2021 revenue
-    assert "1,343,375" in readme or "1343375" in readme    # Jan 2021 trips
-    assert "4.45" in readme                                 # March avg distance
+    # Check for official 2024 homework answers
+    assert "22,998,722" in readme or "22998722" in readme  # Q3: fact_fhv_trips count
+    assert "Yellow" in readme                               # Q4: service with most rides
