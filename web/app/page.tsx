@@ -368,8 +368,10 @@ export default function HomePage() {
                 rel="noopener noreferrer"
               >
                 Made by Rin in Adelaide
-              </a>
-              <span className="sr-only"> DE</span>
+              </a>{" "}
+              <span aria-hidden="true" className="select-none opacity-0">
+                DE
+              </span>
             </p>
           </div>
         </div>
