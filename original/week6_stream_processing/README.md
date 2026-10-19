@@ -89,23 +89,29 @@ The GitHub Actions workflow runs week 6 tests with a Redpanda service container.
 
 The 2024 homework focused on Kafka Streams or Flink. This implementation uses the Kafka consumer API with manual aggregation.
 
-**Question 1: What is the average revenue per trip in the stream?**
+### Question 1: What is the average revenue per trip in the stream?
 
 Run the consumer on 1000 events. The final summary shows avg_revenue.
 
 **Answer: ~$16.50** (varies with sample data)
 
-**Question 2: How many events were processed by vendor?**
+### Question 2: How many events were processed by vendor?
 
 The vendor_stats field in the summary breaks down trips and revenue per vendor.
 
 **Answer: Vendor 1: ~400 trips, Vendor 2: ~600 trips** (sample-dependent)
 
-**Question 3: What is the total distance travelled?**
+### Question 3: What is the total distance travelled?
 
 The summary's total_distance field.
 
 **Answer: ~4,700 miles** (for 1000 trip sample)
+
+### Question 4: What is the total revenue from all streamed trips?
+
+The summary's total_revenue field gives the cumulative revenue.
+
+**Answer: ~$16,500** (for 1000 trip sample)
 
 ## What Surprised Me
 

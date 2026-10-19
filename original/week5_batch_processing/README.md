@@ -112,6 +112,28 @@ PySpark local mode requires a compatible Java runtime. On macOS with Java 23, th
 - Java 11 or 17 (LTS versions)
 - Managed Spark platforms (they handle Java/Spark versions)
 
+## Production Deployment Considerations
+
+Running Spark at scale requires operational infrastructure beyond local mode. Key considerations:
+
+**Cluster Management**
+- YARN (Hadoop ecosystem standard)
+- Kubernetes (cloud-native, containerised)
+- Standalone mode (simple cluster manager built into Spark)
+- Managed services (Databricks, AWS EMR, Google Dataproc) handle provisioning and tuning
+
+**Resource Tuning**
+- Executor memory and cores per task
+- Driver memory for large datasets
+- Shuffle partition count (default 200, tune for data size)
+- Dynamic allocation to scale workers with workload
+
+**Data Locality**
+- Collocate compute with storage where possible
+- S3 with instance profiles for AWS
+- GCS connectors for Google Cloud
+- Delta Lake or Iceberg for transactional table formats
+
 ## Resources
 
 - [Apache Spark Documentation](https://spark.apache.org/docs/latest/)

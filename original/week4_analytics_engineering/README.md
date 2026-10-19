@@ -78,7 +78,7 @@ The database file `taxi.duckdb` is created in the project directory.
 
 ## Homework Questions (2024 Cohort)
 
-**Question 1: What is the total revenue for Q1 2021 (Jan-Mar)?**
+### Question 1: What is the total revenue for Q1 2021 (Jan-Mar)?
 
 Query:
 ```sql
@@ -91,7 +91,7 @@ WHERE pickup_year = 2021 AND pickup_month_num BETWEEN 1 AND 3;
 
 (Computed from monthly_revenue: $21,567,312.70 + $21,794,089.30 + $30,830,037.46)
 
-**Question 2: How many trips in January 2021?**
+### Question 2: How many trips in January 2021?
 
 Query:
 ```sql
@@ -102,7 +102,7 @@ WHERE pickup_year = 2021 AND pickup_month_num = 1;
 
 **Answer: 1,343,375 trips**
 
-**Question 3: Average trip distance in March 2021?**
+### Question 3: Average trip distance in March 2021?
 
 Query:
 ```sql
@@ -113,7 +113,7 @@ WHERE pickup_year = 2021 AND pickup_month_num = 3;
 
 **Answer: 4.45 miles**
 
-**Question 4: Month with highest average revenue per trip?**
+### Question 4: Month with highest average revenue per trip?
 
 Query:
 ```sql
