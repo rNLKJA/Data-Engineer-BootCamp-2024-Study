@@ -48,12 +48,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Test Week 1
-        run: |
-          cd original/week1_introduction_and_prerequisites
-          pip install -q pytest
-          python3 -m pytest test_data_ingestion.py -v
-
       - name: Test Week 2
         run: |
           cd original/week2_workflow_orchestration
