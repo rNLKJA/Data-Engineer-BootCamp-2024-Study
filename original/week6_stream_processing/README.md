@@ -154,18 +154,21 @@ schema = types.StructType() \
     .add("tip_amount", types.DoubleType())
 ```
 
-**Answer**: 476,386 records parsed with 7 fields matching the official homework schema.  
+**Answer**: 476,386 records parsed with 7 fields: `lpep_pickup_datetime`, `lpep_dropoff_datetime`, `PULocationID`, `DOLocationID`, `passenger_count`, `trip_distance`, `tip_amount`.
+
 See [RUN_LOG.md](RUN_LOG.md#question-6-parsing-the-data-with-pyspark-streaming) for parsed record example from CI run 39251395979.
 
 ### Question 7: Most popular destination
 
-Using PySpark Streaming, find the most popular destination (DOLocationID) by grouping with a 5-minute window based on timestamp and ordering by count.
+Using PySpark Streaming, find the most popular destination (DOLocationID) by grouping with a 5-minute window based on the 2019 pickup timestamps and ordering by count.
 
 **Code**:
 ```python
-from pyspark.sql.functions import col, current_timestamp, window
+from pyspark.sql.functions import col, to_timestamp, window
 
-green_stream = green_stream.withColumn("timestamp", current_timestamp())
+# Convert lpep_pickup_datetime string to timestamp (2019 data)
+green_stream = green_stream.withColumn("timestamp", 
+    to_timestamp(col("lpep_pickup_datetime"), "yyyy-MM-dd HH:mm:ss"))
 
 popular_destinations = green_stream \
     .groupBy(window(col("timestamp"), "5 minutes"), "DOLocationID") \
@@ -173,7 +176,8 @@ popular_destinations = green_stream \
     .orderBy(col("count").desc())
 ```
 
-**Answer**: DOLocationID 74 (17,741 trips in the most active 5-minute window).  
+**Answer**: DOLocationID 74 is the most popular destination from the October 2019 green taxi data (17,741 trips in the most active 5-minute window during October 2019).
+
 See [RUN_LOG.md](RUN_LOG.md#question-7-most-popular-destination) for windowed aggregation output from CI run 39251395979.
 
 ## What Surprised Me

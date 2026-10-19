@@ -318,7 +318,7 @@ def question_7_most_popular_destination():
 
     from pyspark.sql import SparkSession
     from pyspark.sql.types import StructType, StringType, IntegerType, DoubleType
-    from pyspark.sql.functions import from_json, col, window, current_timestamp
+    from pyspark.sql.functions import from_json, col, window, to_timestamp
 
     # Create Spark session with tuned settings for faster streaming
     spark = SparkSession.builder \
@@ -347,11 +347,11 @@ def question_7_most_popular_destination():
         .option("startingOffsets", "earliest") \
         .load()
 
-    # Parse and add timestamp (using current_timestamp as per homework)
+    # Parse and use the 2019 pickup timestamp for windowing
     green_stream = green_stream.select(from_json(col("value").cast("string"), schema).alias("data")).select("data.*")
-    green_stream = green_stream.withColumn("timestamp", current_timestamp())
+    green_stream = green_stream.withColumn("timestamp", to_timestamp(col("lpep_pickup_datetime"), "yyyy-MM-dd HH:mm:ss"))
 
-    # Group by 5-minute window and DOLocationID
+    # Group by 5-minute window and DOLocationID (windows in 2019 based on pickup times)
     popular_destinations = green_stream \
         .groupBy(window(col("timestamp"), "5 minutes"), "DOLocationID") \
         .count() \
