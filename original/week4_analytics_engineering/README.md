@@ -131,7 +131,7 @@ ORDER BY trip_count DESC
 LIMIT 1;
 ```
 
-**Answer:** Yellow (official published answer)
+**Answer:** Yellow (official published answer; note that this is computed from the fact_trips tile combining FHV+Yellow+Green trips for July 2019, yielding 3,481,117 Yellow trips)
 
 ## What Surprised Me
 
