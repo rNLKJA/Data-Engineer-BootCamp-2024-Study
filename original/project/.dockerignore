@@ -1,0 +1,14 @@
+.venv/
+data/
+dbt/target/
+dbt/logs/
+dbt/.user.yml
+infra/
+images/
+scripts/
+**/__pycache__/
+**/*.pyc
+.pytest_cache/
+*.md
+!tests/fixtures/README.md
+.env

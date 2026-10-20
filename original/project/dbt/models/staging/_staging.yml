@@ -1,0 +1,99 @@
+version: 2
+
+models:
+  - name: stg_crashes
+    description: One row per crash from the lake, renamed to snake_case with parsed types.
+    columns:
+      - name: crash_id
+        description: DIT REPORT_ID, unique across every release.
+        data_tests:
+          - unique
+          - not_null
+      - name: crash_year
+        data_tests:
+          - not_null
+      - name: crash_month
+        description: First day of the crash month, built from Year and Month.
+        data_tests:
+          - not_null
+      - name: crash_hour
+        description: Hour of day parsed from the 12-hour Time text.
+        data_tests:
+          - not_null
+      - name: severity_code
+        description: CSEF severity (1 PDO, 2 minor injury, 3 serious injury, 4 fatal).
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4]
+                quote: false
+          - relationships:
+              arguments:
+                to: ref('severity_levels')
+                field: severity_code
+      - name: stats_area
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["City", "Metropolitan", "Country"]
+      - name: lga_name
+        description: Council area; missing values become UNINCORPORATED OR UNKNOWN.
+        data_tests:
+          - not_null
+      - name: total_units
+        data_tests:
+          - non_negative
+      - name: total_cas
+        data_tests:
+          - non_negative
+      - name: total_fats
+        data_tests:
+          - non_negative
+      - name: total_si
+        data_tests:
+          - non_negative
+      - name: total_mi
+        data_tests:
+          - non_negative
+      - name: release_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('lake', 'releases')
+                field: release_id
+
+  - name: stg_casualties
+    description: One row per casualty.
+    columns:
+      - name: crash_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_crashes')
+                field: crash_id
+      - name: injury_extent
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Fatal", "Admitted to Hospital", "Treated at Hospital", "By Private"]
+      - name: age
+        description: Age in years; NULL where DIT records XXX (unknown).
+        data_tests:
+          - non_negative
+
+  - name: stg_units
+    description: One row per unit involved in a crash.
+    columns:
+      - name: crash_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_crashes')
+                field: crash_id
+      - name: casualties_in_unit
+        data_tests:
+          - non_negative

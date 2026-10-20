@@ -1,0 +1,10 @@
+# Top-level dependencies for the SA road crash pipeline (Python 3.11).
+# Exact pins in requirements.txt come from:
+#   uv pip compile requirements.in --python-version 3.11 --universal -o requirements.txt
+prefect==3.8.8
+dbt-core==1.12.6
+dbt-duckdb==1.11.0
+duckdb==1.5.6
+requests==2.34.2
+pytest==9.1.1
+pyyaml

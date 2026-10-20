@@ -9,6 +9,7 @@ import {
   Workflow,
   ArrowRight,
   Calendar,
+  ChartLine,
 } from "lucide-react";
 import { HeroVisual } from "./components/hero-visual";
 
@@ -85,9 +86,22 @@ const WEEKS = [
       "Real-time data pipelines",
     ],
   },
+  {
+    week: "Week 7",
+    title: "Course Project",
+    status: "complete" as const,
+    href: "/project",
+    topics: [
+      "SA road crash data, 2012 to 2025",
+      "Prefect batch pipeline to a Parquet lake",
+      "dbt on DuckDB with data tests",
+      "Partitioning, clustering and Terraform",
+      "Two-tile dashboard, built from the pipeline",
+    ],
+  },
 ] as const;
 
-const WEEK_ICONS = [BookOpen, Workflow, Database, GitBranch, Server, Sparkles] as const;
+const WEEK_ICONS = [BookOpen, Workflow, Database, GitBranch, Server, Sparkles, ChartLine] as const;
 
 export default function HomePage() {
   return (
@@ -107,7 +121,7 @@ export default function HomePage() {
             <div>
               <p className="kicker text-mint">Data Engineering BootCamp</p>
               <h1 className="mt-4 font-display text-5xl leading-[1.02] font-semibold tracking-tight sm:text-6xl lg:text-7xl">
-                Six weeks of hands-on <em className="text-mint not-italic">data engineering</em>.
+                Seven weeks of hands-on <em className="text-mint not-italic">data engineering</em>.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
                 Learn orchestration, warehousing, analytics, batch and stream processing through
@@ -116,8 +130,8 @@ export default function HomePage() {
               </p>
               <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
                 I followed the DataTalksClub Zoomcamp and kept working notes and code here. Week 1
-                was completed in 2024, weeks 2 to 6 in October 2026 with Claude as a pair
-                programmer.
+                was completed in 2024. Weeks 2 to 6 and the Week 7 course project were completed in
+                October 2026 with Claude as a pair programmer.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -125,6 +139,12 @@ export default function HomePage() {
                   className="inline-flex h-12 items-center rounded-full bg-mint px-6 text-[0.95rem] font-semibold text-graphite-deep transition-colors hover:bg-mint/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
                 >
                   See the curriculum
+                </Link>
+                <Link
+                  href="/project"
+                  className="inline-flex h-12 items-center rounded-full border border-mint/40 bg-card px-6 text-[0.95rem] font-medium transition-colors hover:border-mint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  Course project dashboard
                 </Link>
                 <a
                   href="https://dezoomcamp.streamlit.app/"
@@ -151,8 +171,8 @@ export default function HomePage() {
         </h2>
         <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-px px-4 py-10 sm:px-6 md:grid-cols-4">
           {[
-            { label: "Weeks", value: "6", tone: "text-mint" },
-            { label: "Complete", value: "6", tone: "text-mint" },
+            { label: "Weeks", value: "7", tone: "text-mint" },
+            { label: "Complete", value: "7", tone: "text-mint" },
             { label: "Upcoming", value: "0", tone: "text-teal" },
             { label: "Tools", value: "8+", tone: "text-teal" },
           ].map((s) => (
@@ -177,14 +197,14 @@ export default function HomePage() {
           id="curriculum-title"
           className="mt-3 max-w-2xl font-display text-4xl font-semibold tracking-tight"
         >
-          Six weeks, scaffolded by stage.
+          Seven weeks, scaffolded by stage.
         </h2>
         <div className="relative mt-10">
           {/* Pipeline progress line - connects weeks and fills honestly */}
           <div className="absolute top-0 left-0 hidden h-full w-1 md:block" aria-hidden="true">
             {/* Background track */}
             <div className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-white/5" />
-            {/* Filled portion - all 6 weeks complete */}
+            {/* Filled portion - all 7 weeks complete */}
             <div className="absolute left-0 top-12 bottom-12 w-1 rounded-full bg-gradient-to-b from-mint to-teal transition-all duration-1000 ease-out" />
           </div>
           <ol className="grid gap-4 md:grid-cols-2 md:pl-8 lg:grid-cols-3">
@@ -217,6 +237,15 @@ export default function HomePage() {
                       Complete
                     </div>
                   )}
+                  {"href" in week && (
+                    <Link
+                      href={week.href}
+                      className="mt-4 ml-2 inline-flex items-center gap-1 text-xs font-medium text-mint underline-offset-4 hover:underline"
+                    >
+                      Open the dashboard
+                      <ArrowRight className="size-3.5" aria-hidden="true" />
+                    </Link>
+                  )}
                 </li>
               );
             })}
@@ -229,9 +258,9 @@ export default function HomePage() {
           >
             <Calendar className="size-8 shrink-0 text-mint" aria-hidden="true" />
             <span>
-              <span className="block font-semibold">Six-week schedule</span>
+              <span className="block font-semibold">Seven-week schedule</span>
               <span className="text-sm text-muted-foreground">
-                Build from Docker basics to streaming pipelines.
+                Build from Docker basics to streaming pipelines and a course project.
               </span>
             </span>
             <ArrowRight
@@ -267,7 +296,7 @@ export default function HomePage() {
               What you will learn.
             </h2>
             <p className="mt-4 leading-relaxed text-muted-foreground">
-              This Data Engineer BootCamp curriculum spans six weeks of hands-on data engineering
+              This Data Engineer BootCamp curriculum spans seven weeks of hands-on data engineering
               training. Starting from foundational concepts like Docker and cloud infrastructure, it
               progresses through modern data stack tools including Prefect, BigQuery, dbt, Apache
               Spark, and Kafka.
@@ -285,7 +314,7 @@ export default function HomePage() {
               <dl className="mt-4 grid gap-3 text-sm">
                 <div className="flex justify-between">
                   <dt className="text-muted-foreground">Duration</dt>
-                  <dd className="font-medium">6 weeks</dd>
+                  <dd className="font-medium">7 weeks</dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-muted-foreground">Format</dt>
@@ -366,6 +395,26 @@ export default function HomePage() {
                 delegation and more about iteration. The code came from conversation, testing and
                 refinement, not magic. The final work is honest: every homework answer computed from
                 real queries, every run log pasted from actual terminal output.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-foreground">Week 7: The course project</h3>
+              <p className="mt-2">
+                Week 7 was completed in October 2026 with Claude as a pair programmer. The project
+                is a batch pipeline over South Australia&rsquo;s public road crash data, 2012 to
+                2025: a Prefect flow downloads and checksums ten releases, lands them in a
+                year-partitioned Parquet lake, and dbt on DuckDB models them for a{" "}
+                <Link href="/project" className="text-mint underline-offset-4 hover:underline">
+                  two-tile dashboard
+                </Link>
+                .
+              </p>
+              <p className="mt-3">
+                The lesson I keep coming back to: read the data before trusting it. Council names
+                changed spelling between releases, the property-damage reporting rules changed three
+                times, and the latest year is still being revised. Each of those became a test or a
+                label instead of a silent error.
               </p>
             </div>
           </div>

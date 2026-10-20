@@ -1,0 +1,5 @@
+regime_id,valid_from,valid_to,pdo_rule_summary,source
+1,2003-07-01,2012-12-31,"Property damage only crashes processed when damage was $3000 or more, or a vehicle was towed away","DIT Road Crash Data metadata (metadata-for-road-crash-data-20251215.pdf), CC BY 4.0"
+2,2013-01-01,2016-11-30,"Property damage only crashes processed when aggregated damage was $5000 or more, or a vehicle was towed away","DIT Road Crash Data metadata (metadata-for-road-crash-data-20251215.pdf), CC BY 4.0"
+3,2016-12-01,2016-12-31,"All property damage only crashes for December 2016 processed under the ATSB guidelines","DIT Road Crash Data metadata (metadata-for-road-crash-data-20251215.pdf), CC BY 4.0"
+4,2017-01-01,,"Property damage only crashes processed only when a vehicle was towed away or a motorcycle, bicycle, heavy vehicle, bus, train, tram or pedestrian was involved","DIT Road Crash Data metadata (metadata-for-road-crash-data-20251215.pdf), CC BY 4.0"

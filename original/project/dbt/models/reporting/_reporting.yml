@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: rpt_monthly_severity
+    description: Tile 2. One row per month from January of the first release year to December of the last.
+    columns:
+      - name: crash_month
+        data_tests:
+          - unique
+          - not_null
+      - name: fsi_crashes
+        data_tests:
+          - non_negative
+      - name: fsi_rolling_12_mean
+        description: Mean FSI crashes over the trailing 12 months; NULL for the first 11 months.
+
+  - name: rpt_crash_type_severity
+    description: Tile 1. Severity mix per crash type, ranked by FSI crashes.
+    columns:
+      - name: crash_type
+        data_tests:
+          - unique
+          - not_null
+      - name: fsi_crashes
+        data_tests:
+          - non_negative
+
+  - name: rpt_annual_people
+    description: People killed and admitted to hospital per year, from casualty rows.
+    columns:
+      - name: crash_year
+        data_tests:
+          - unique
+          - not_null
+      - name: fatalities
+        data_tests:
+          - non_negative
+      - name: admitted_to_hospital
+        data_tests:
+          - non_negative
+
+  - name: rpt_lga_fsi
+    description: FSI crashes per council area across all years (counts, not rates).
+    columns:
+      - name: lga_name
+        data_tests:
+          - unique
+          - not_null
+
+  - name: rpt_region_fsi
+    description: FSI crashes per statistical area (City, Metropolitan, Country).
+    columns:
+      - name: stats_area
+        data_tests:
+          - unique
+          - not_null
+
+  - name: rpt_kpis
+    description: One-row headline numbers for the dashboard.

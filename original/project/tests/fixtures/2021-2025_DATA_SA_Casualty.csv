@@ -1,0 +1,76 @@
+"REPORT_ID","UND_UNIT_NUMBER","CASUALTY_NUMBER","Casualty Type","Sex","AGE","Position In Veh","Thrown Out","Injury Extent","Seat Belt","Helmet","Hospital"
+"2023-25658-12/10/2026","01","01","Passenger","Female","035","Other","Thrown Out","Admitted to Hospital","Not Applicable",,"LYELL MCEWIN"
+"2023-25685-12/10/2026","01","01","Driver","Male","029","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-25836-12/10/2026","01","01","Pedestrian","Male","034",,,"Admitted to Hospital",,,"ROYAL ADELAIDE"
+"2023-25903-12/10/2026","01","01","Rider","Male","030",,"Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2023-26134-12/10/2026","01","01","Driver","Female","029","Driver","Not Thrown Out","Treated at Hospital","Fitted - Unknown if Worn",,"XXXXXX"
+"2023-26244-12/10/2026","01","01","Driver","Female","064","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"MODBURY"
+"2023-26371-12/10/2026","02","01","Rider","Male","012",,"Thrown Out","Treated at Hospital",,"Worn","FLINDERS MED CENTRE"
+"2023-26393-12/10/2026","01","01","Driver","Male","025","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2023-26417-12/10/2026","01","01","Driver","Male","018","Driver","Not Thrown Out","Fatal","Fitted - Worn",,
+"2023-26471-12/10/2026","02","01","Driver","Female","026","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-26581-12/10/2026","01","01","Driver","Male","027","Driver","Not Thrown Out","Fatal","Fitted - Worn",,
+"2023-26654-12/10/2026","01","01","Rider","Male","027","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2023-26905-12/10/2026","01","01","Driver","Male","049","Driver","Thrown Out","Fatal","Fitted - Unknown if Worn",,
+"2023-26928-12/10/2026","01","01","Rider","Male","038","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2023-27036-12/10/2026","01","01","Driver","Female","073","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-27186-12/10/2026","01","01","Driver","Male","052","Driver","Not Thrown Out","Fatal","Fitted - Not Worn",,
+"2023-27316-12/10/2026","02","01","Driver","Female","042","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-27387-12/10/2026","02","01","Driver","Female","043","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-27530-12/10/2026","02","01","Pedestrian","Female","085",,,"Fatal",,,
+"2023-27673-12/10/2026","01","01","Driver","Male","072","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-27673-12/10/2026","05","01","Driver","Male","069","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-27737-12/10/2026","01","01","Driver","Female","017","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"NARACOORTE"
+"2023-28277-12/10/2026","01","01","Driver","Male","017","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-28277-12/10/2026","01","02","Passenger","Male","017","Front Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-28277-12/10/2026","02","01","Driver","Female","035","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-28277-12/10/2026","02","02","Passenger","Male","030","Rear Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-28277-12/10/2026","02","03","Passenger","Female","051","Rear Seat Right Passenger","Not Thrown Out","Fatal","Fitted - Worn",,
+"2023-28277-12/10/2026","02","04","Passenger","Female","028","Front Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-28671-12/10/2026","01","01","Driver","Female","024","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-28671-12/10/2026","02","01","Driver","Female","044","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2023-28796-12/10/2026","02","01","Rider","Male","052","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2023-28847-12/10/2026","01","01","Passenger","Female","029","Front Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2023-28915-12/10/2026","01","01","Passenger","Female","014","Rear Seat Right Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-29366-12/10/2026","01","01","Rider","Male","027","Rider of Motorcycle","Thrown Out","Fatal",,"Worn",
+"2023-29393-12/10/2026","01","01","Driver","Female","022","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2023-29548-12/10/2026","01","01","Driver","Female","054","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-29763-12/10/2026","01","01","Driver","Male","048","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-29922-12/10/2026","02","01","Driver","Female","071","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2023-30026-12/10/2026","01","01","Driver","Female","078","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2023-30178-12/10/2026","01","01","Driver","Female","029","Driver","Not Thrown Out","Fatal","Fitted - Worn",,
+"2023-30704-12/10/2026","02","01","Pedestrian","Female","059",,,"Admitted to Hospital",,,"ROYAL ADELAIDE"
+"2023-30934-12/10/2026","01","01","Driver","Male","051","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"MAITLAND"
+"2023-30940-12/10/2026","01","01","Driver","Female","017","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"MODBURY"
+"2023-31053-12/10/2026","01","01","Driver","Male","022","Driver","Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-31518-12/10/2026","01","01","Driver","Female","029","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-32434-12/10/2026","02","01","Passenger","Male","048","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-33235-12/10/2026","01","01","Driver","Female","042","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-33235-12/10/2026","01","02","Passenger","Female","010","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-33235-12/10/2026","02","01","Driver","Female","032","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-33235-12/10/2026","02","02","Passenger","Female","006","Rear Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-33685-12/10/2026","01","01","Passenger","Male","051","Front Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Not Worn",,"XXXXXX"
+"2023-33996-12/10/2026","01","01","Driver","Male","089","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-34068-12/10/2026","01","01","Driver","Female","033","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-34113-12/10/2026","02","01","Pedestrian","Male","028",,,"Fatal",,,
+"2023-34374-12/10/2026","02","01","Driver","Female","088","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2023-35099-12/10/2026","01","01","Rider","Male","053","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2023-35355-12/10/2026","01","01","Rider","Female","055",,"Thrown Out","Treated at Hospital",,"Worn","ASHFORD"
+"2023-35544-12/10/2026","01","01","Driver","Male","073","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2023-35544-12/10/2026","02","01","Driver","Male","047","Driver","Not Thrown Out","Treated at Hospital","Fitted - Unknown if Worn",,"ROYAL ADELAIDE"
+"2023-35555-12/10/2026","02","01","Passenger","Female","036","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2023-36026-12/10/2026","01","01","Driver","Female","023","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-36026-12/10/2026","02","01","Driver","Male","053","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2023-36163-12/10/2026","01","01","Driver","Female","023","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2023-36394-12/10/2026","05","01","Driver","Male","067","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-36409-12/10/2026","01","01","Rider","Male","077",,"Thrown Out","Admitted to Hospital",,"Worn","FLINDERS MED CENTRE"
+"2023-36822-12/10/2026","01","01","Rider","Male","035","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2023-37125-12/10/2026","02","01","Driver","Male","073","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2023-37125-12/10/2026","03","01","Driver","Male","025","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-37453-12/10/2026","01","01","Driver","Male","051","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2023-38100-12/10/2026","01","01","Driver","Male","032","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-38100-12/10/2026","01","02","Passenger","Female","028","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-38100-12/10/2026","02","01","Driver","Female","036","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2023-38384-12/10/2026","01","01","Driver","Male","052","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Unknown if Worn",,"ROYAL ADELAIDE"
+"2023-38445-12/10/2026","01","01","Rider","Male","061","Rider of Motorcycle","Thrown Out","Treated at Hospital",,"Worn","FLINDERS MED CENTRE"
+"2023-38535-12/10/2026","02","01","Rider","Male","024","Rider of Motorcycle","Thrown Out","Fatal",,"Worn",

@@ -22,17 +22,21 @@ This repository is **my personal study record** as I work through the course. It
 
 ## Progress / Status
 
-| Week   | Topic                        | Status   | Notes                                                                                              |
-| ------ | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
-| Week 1 | Introduction & Prerequisites | ✅ Done  | Docker + Postgres notes, working ingestion pipeline and docker-compose stack (completed Jan 2024) |
-| Week 2 | Workflow Orchestration       | ✅ Done  | Prefect pipelines, NYC TLC data ingest, local Parquet data lake (completed Oct 2026)              |
-| Week 3 | Data Warehouse               | ✅ Done  | DuckDB as BigQuery substitute, partitioning, clustering, query optimisation (completed Oct 2026)  |
-| Week 4 | Analytics Engineering        | ✅ Done  | dbt with dbt-duckdb, staging/fact/mart models, tests and docs (completed Oct 2026)                |
-| Week 5 | Batch Processing             | ✅ Done  | pandas batch processing (PySpark concepts), partitioned Parquet output (completed Oct 2026)        |
-| Week 6 | Stream Processing            | ✅ Done  | Redpanda/Kafka producer-consumer, stateful aggregation, CI testing (completed Oct 2026)           |
-| Week 7 | Project                      | ⬜ Todo  | End-to-end project combining all weeks                                                             |
+| Week   | Topic                        | Status | Notes                                                                                                                                                                  |
+| ------ | ---------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Week 1 | Introduction & Prerequisites | Done   | Docker + Postgres notes, working ingestion pipeline and docker-compose stack (completed Jan 2024)                                                                     |
+| Week 2 | Workflow Orchestration       | Done   | Prefect pipelines, NYC TLC data ingest, local Parquet data lake (completed Oct 2026)                                                                                  |
+| Week 3 | Data Warehouse               | Done   | DuckDB as BigQuery substitute, partitioning, clustering, query optimisation (completed Oct 2026)                                                                      |
+| Week 4 | Analytics Engineering        | Done   | dbt with dbt-duckdb, staging/fact/mart models, tests and docs (completed Oct 2026)                                                                                    |
+| Week 5 | Batch Processing             | Done   | pandas batch processing (PySpark concepts), partitioned Parquet output (completed Oct 2026)                                                                           |
+| Week 6 | Stream Processing            | Done   | Redpanda/Kafka producer-consumer, stateful aggregation, CI testing (completed Oct 2026)                                                                               |
+| Week 7 | Project                      | Done   | [SA road crash pipeline and dashboard](original/project/README.md): Prefect, Parquet lake, dbt on DuckDB, Terraform (completed in October 2026 with Claude as a pair programmer) |
 
-**Note**: Week 1 was completed in January 2024. Weeks 2 through 6 were completed in October 2026 with Claude Code as a pair programmer, using local substitutes for cloud services (DuckDB for BigQuery, local Parquet for GCS, Redpanda for Kafka in CI).
+**Note**: Week 1 was completed in January 2024. Weeks 2 through 6 and the Week 7 course project were completed in October 2026 with Claude Code as a pair programmer, using local substitutes for cloud services (DuckDB for BigQuery, local Parquet for GCS, Redpanda for Kafka in CI).
+
+## Course project
+
+The Week 7 course project is a batch pipeline over South Australia's public road crash data, 2012 to 2025. A Prefect flow downloads and checksums ten releases from data.sa.gov.au, lands them in a year-partitioned Parquet lake, builds and tests dbt models on DuckDB, benchmarks the partitioning and clustering, and exports the numbers for a two-tile dashboard: [data-engineer-bootcamp-pink.vercel.app/project](https://data-engineer-bootcamp-pink.vercel.app/project). Terraform manages the local folders and config and, in CI, builds and runs the pipeline as a Docker container. The write-up, with the evaluation criteria, dataset licence and reproduction steps, is in [`original/project/README.md`](original/project/README.md), and the real run output is in [`original/project/RUN_LOG.md`](original/project/RUN_LOG.md). It was completed in October 2026 with Claude as a pair programmer.
 
 ## Syllabus
 
@@ -94,7 +98,7 @@ The seven-week outline from the course, kept here for reference.
 
 ### Week 7: Project
 
-- Working on your end-to-end project
+- Working on your end-to-end project (mine: [SA road crash pipeline and dashboard](original/project/README.md))
 
 ## Week 1 — Getting Started
 

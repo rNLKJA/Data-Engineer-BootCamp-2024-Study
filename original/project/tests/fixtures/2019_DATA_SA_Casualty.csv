@@ -1,0 +1,74 @@
+"REPORT_ID","UND_UNIT_NUMBER","CASUALTY_NUMBER","Casualty Type","Sex","AGE","Position In Veh","Thrown Out","Injury Extent","Seat Belt","Helmet","Hospital"
+"2019-15-27/05/2021","01","01","Driver","Female","031","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"CLARE"
+"2019-107-27/05/2021","01","01","Driver","Male","025","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"MOUNT GAMBIER"
+"2019-107-27/05/2021","01","02","Passenger","Female","028","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"MOUNT GAMBIER"
+"2019-176-27/05/2021","01","01","Driver","Male","032","Driver","Not Thrown Out","Fatal","Fitted - Unknown if Worn",,
+"2019-208-27/05/2021","01","01","Passenger","Male","077","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2019-212-27/05/2021","02","01","Driver","Female","018","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"MODBURY"
+"2019-417-27/05/2021","02","01","Pedestrian","Male","072",,,"Fatal",,,
+"2019-562-27/05/2021","01","01","Rider","Male","027","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","FLINDERS MED CENTRE"
+"2019-781-27/05/2021","02","01","Rider","Male","027","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","NOARLUNGA"
+"2019-1100-27/05/2021","02","01","Driver","Female","029","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"MODBURY"
+"2019-1322-27/05/2021","01","01","Driver","Female","047","Driver","Not Thrown Out","Treated at Hospital","Fitted - Unknown if Worn",,"ROYAL ADELAIDE"
+"2019-1526-27/05/2021","02","01","Driver","Male","025","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2019-1926-27/05/2021","02","01","Driver","Female","019","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-2016-27/05/2021","01","01","Rider","Male","030","Rider of Motorcycle","Thrown Out","Fatal",,"Not Worn",
+"2019-2035-27/05/2021","01","01","Rider","Male","055","Rider of Motorcycle","Thrown Out","Fatal",,"Worn",
+"2019-2299-27/05/2021","01","01","Rider","Male","052","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2019-2640-27/05/2021","02","01","Driver","Female","079","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2019-2678-27/05/2021","01","01","Driver","Male","059","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"RIVERLAND, BERRI"
+"2019-3442-27/05/2021","01","01","Driver","Male","067","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2019-3442-27/05/2021","01","02","Passenger","Female","034","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2019-4000-27/05/2021","01","01","Rider","Male","057","Rider of Motorcycle","Thrown Out","By Private",,"Worn",
+"2019-4107-27/05/2021","03","01","Driver","Male","056","Driver","Not Thrown Out","Treated at Hospital","Fitted - Unknown if Worn",,"FLINDERS MED CENTRE"
+"2019-4471-27/05/2021","01","01","Driver","Female","029","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2019-4803-27/05/2021","01","01","Driver","Female","035","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-5058-27/05/2021","01","01","Rider","Male","069","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2019-5098-27/05/2021","02","01","Pedestrian","Female","051",,,"Treated at Hospital",,,"XXXXXX"
+"2019-5194-27/05/2021","01","01","Driver","Male","082","Driver","Not Thrown Out","Fatal","Fitted - Worn",,
+"2019-5217-27/05/2021","01","01","Driver","Male","032","Driver","Not Thrown Out","Fatal","Fitted - Worn",,
+"2019-5439-27/05/2021","02","01","Pedestrian","Male","067",,,"Admitted to Hospital",,,"ROYAL ADELAIDE"
+"2019-5842-27/05/2021","02","01","Driver","Male","046","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"MODBURY"
+"2019-6248-27/05/2021","01","01","Pedestrian","Male","053",,,"Admitted to Hospital",,,"ROYAL ADELAIDE"
+"2019-6274-27/05/2021","01","01","Rider","Male","031","Rider of Motorcycle","Thrown Out","Treated at Hospital",,"Worn","XXXXXX"
+"2019-6904-27/05/2021","01","01","Driver","Male","056","Driver","Thrown Out","Fatal","Fitted - Not Worn",,
+"2019-7232-27/05/2021","01","01","Driver","Male","027","Driver","Not Thrown Out","Fatal","Fitted - Worn",,
+"2019-7382-27/05/2021","01","01","Driver","Female","023","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-7407-27/05/2021","01","01","Driver","Male","027","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2019-7407-27/05/2021","01","02","Passenger","Male","029","Front Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2019-7480-27/05/2021","01","01","Passenger","Female","074","Front Seat Left Passenger","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-8003-27/05/2021","01","01","Driver","Male","040","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2019-8031-27/05/2021","01","01","Driver","Female","024","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-8032-27/05/2021","02","01","Pedestrian","Female","012",,,"Treated at Hospital",,,"NOARLUNGA"
+"2019-8065-27/05/2021","01","01","Rider","Male","017","Rider of Motorcycle","Thrown Out","Treated at Hospital",,"Worn","WALLAROO"
+"2019-8287-27/05/2021","01","01","Driver","Female","049","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2019-8287-27/05/2021","01","02","Passenger","Male","052","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2019-8675-27/05/2021","01","01","Driver","Female","019","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2019-8675-27/05/2021","02","01","Driver","Female","XXX","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2019-8675-27/05/2021","02","02","Passenger","Female","XXX","Rear Seat Right Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2019-8675-27/05/2021","02","03","Passenger","Female","048","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2019-8876-27/05/2021","02","01","Pedestrian","Female","033",,,"Admitted to Hospital",,,"WHYALLA"
+"2019-8966-27/05/2021","02","01","Driver","Female","019","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"BORDERTOWN"
+"2019-9912-27/05/2021","01","01","Driver","Female","020","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"QUEEN ELIZABETH"
+"2019-10025-27/05/2021","01","01","Driver","Female","080","Driver","Thrown Out","Fatal","Fitted - Not Worn",,
+"2019-10530-27/05/2021","01","01","Driver","Female","053","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
+"2019-10654-27/05/2021","01","01","Driver","Female","029","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-11189-27/05/2021","01","01","Passenger","Female","014","Front Seat Left Passenger","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"WOMEN & CHILD HOSP."
+"2019-11519-27/05/2021","02","01","Driver","Female","036","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"XXXXXX"
+"2019-11546-27/05/2021","01","01","Driver","Female","024","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-11600-27/05/2021","01","01","Rider","Male","059","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","MOUNT BARKER"
+"2019-12143-27/05/2021","01","01","Driver","Male","029","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"WAIKERIE"
+"2019-12143-27/05/2021","01","02","Passenger","Male","029","Front Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"WAIKERIE"
+"2019-12143-27/05/2021","01","03","Passenger","Male","059","Rear Seat Right Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"WAIKERIE"
+"2019-12209-27/05/2021","01","01","Driver","Female","082","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"LYELL MCEWIN"
+"2019-12220-27/05/2021","01","01","Driver","Female","050","Driver","Not Thrown Out","Treated at Hospital","Fitted - Unknown if Worn",,"XXXXXX"
+"2019-12220-27/05/2021","02","01","Rider","Male","039","Rider of Motorcycle","Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2019-12308-27/05/2021","02","01","Rider","Male","033",,"Thrown Out","Admitted to Hospital",,"Worn","FLINDERS MED CENTRE"
+"2019-12333-27/05/2021","01","01","Driver","Male","047","Driver","Not Thrown Out","By Private","Fitted - Worn",,
+"2019-12333-27/05/2021","02","01","Driver","Male","019","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2019-12333-27/05/2021","02","02","Passenger","Female","014","Rear Seat Right Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2019-12333-27/05/2021","02","03","Passenger","Female","016","Front Seat Left Passenger","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2019-12334-27/05/2021","02","01","Rider","Female","024",,"Thrown Out","Admitted to Hospital",,"Worn","ROYAL ADELAIDE"
+"2019-12535-27/05/2021","01","01","Rider","Male","031","Rider of Motorcycle","Thrown Out","Fatal",,"Worn",
+"2019-12894-27/05/2021","01","01","Driver","Male","078","Driver","Not Thrown Out","Admitted to Hospital","Fitted - Worn",,"FLINDERS MED CENTRE"
+"2019-12921-27/05/2021","01","01","Driver","Female","066","Driver","Not Thrown Out","Treated at Hospital","Fitted - Worn",,"ROYAL ADELAIDE"
