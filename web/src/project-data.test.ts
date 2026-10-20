@@ -39,6 +39,15 @@ describe("course project dashboard data", () => {
     });
   });
 
+  it("ranks only councils and lists the rest separately", () => {
+    const top = data.tiles.top_lgas;
+    expect(top.map((r) => r.rank)).toEqual(top.map((_, i) => i + 1));
+    expect(top.some((r) => r.lga_name.includes("UNINCORP"))).toBe(false);
+    const unknown = data.tiles.non_council_lgas.filter((r) => r.is_unknown);
+    expect(unknown.map((r) => r.lga_name)).toEqual(["UNINCORPORATED OR UNKNOWN"]);
+    expect(unknown[0].crashes).toBe(data.kpis.crashes_without_lga);
+  });
+
   it("flags only the latest year as provisional", () => {
     const flagged = data.tiles.annual_people.filter((r) => r.provisional).map((r) => r.year);
     expect(flagged).toEqual([data.coverage.provisional_year]);

@@ -1,6 +1,8 @@
--- One row per local government area (council). Some councils straddle the
--- Metropolitan and Country statistical areas, so main_stats_area is the area
--- holding most of the council's crashes (ties broken alphabetically).
+-- One row per local government area (council) name in the data. Some councils
+-- straddle the Metropolitan and Country statistical areas, so main_stats_area is
+-- the area holding most of the council's crashes (ties broken alphabetically).
+-- Four names are not councils: UNINCORPORATED OR UNKNOWN (no LGA recorded) and
+-- DIT's three unincorporated-area groupings. is_council excludes all of them.
 with by_area as (
     select lga_name, stats_area, count(*) as crashes
     from {{ ref('fct_crashes') }}
@@ -21,7 +23,8 @@ select
     stats_area as main_stats_area,
     stats_areas,
     total_crashes as crashes,
-    lga_name = 'UNINCORPORATED OR UNKNOWN' as is_unknown
+    lga_name = 'UNINCORPORATED OR UNKNOWN' as is_unknown,
+    lga_name not like '%UNINCORP%' as is_council
 from ranked
 where area_rank = 1
 order by lga_name

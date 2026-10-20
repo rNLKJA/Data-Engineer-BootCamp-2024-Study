@@ -16,7 +16,7 @@ const PROJECT_README = `${REPO}/tree/main/original/project#readme`;
 export const metadata: Metadata = {
   title: "Course project: serious road crashes in South Australia",
   description:
-    "Week 7 course project: a batch pipeline (Prefect, Parquet lake, dbt on DuckDB) over South Australia's road crash data, 2012 to 2025, with a two-tile dashboard.",
+    "Week 7 course project: a batch pipeline (Prefect, Parquet lake, dbt on DuckDB) over South Australia's road crash data, 2012 to 2025, with a dashboard of three charts and supporting tables.",
 };
 
 const { kpis, coverage, source, tiles } = data;
@@ -49,6 +49,25 @@ const ruleChanges = data.pdo_regimes
 
 const topType = tiles.crash_type_fsi[0];
 const country = tiles.regions.find((r) => r.stats_area === "Country");
+
+// Names that are not councils are listed under the ranking, not in it.
+const noCouncil = tiles.non_council_lgas.find((r) => r.is_unknown);
+const unincorporated = tiles.non_council_lgas.filter((r) => !r.is_unknown);
+const unincorporatedFsi = unincorporated.reduce((t, r) => t + r.fsi_crashes, 0);
+const SMALL_NUMBERS = "no one two three four five six seven eight nine".split(" ");
+const notRankedNote = [
+  "Councils only.",
+  noCouncil &&
+    `Not ranked: ${nf.format(noCouncil.crashes)} crashes have no council recorded ` +
+      `(${nf.format(noCouncil.fsi_crashes)} FSI, ${nf.format(noCouncil.fatal_crashes)} fatal), ` +
+      `${noCouncil.stats_areas === 1 ? "all" : "the largest share"} in the ${noCouncil.main_stats_area} area; ` +
+      "the pipeline groups them as UNINCORPORATED OR UNKNOWN.",
+  unincorporated.length > 0 &&
+    `DIT's ${SMALL_NUMBERS[unincorporated.length] ?? unincorporated.length} unincorporated-area groupings ` +
+      `(${nf.format(unincorporatedFsi)} FSI crashes in all) are not ranked either.`,
+]
+  .filter(Boolean)
+  .join(" ");
 
 function SourceNote() {
   return (
@@ -287,10 +306,10 @@ export default function ProjectPage() {
               <p>
                 {coverage.months} months from {monthLabel(coverage.first_month)} to{" "}
                 {monthLabel(coverage.last_month)}. Gray columns are monthly counts; the line is the
-                mean of the trailing 12 months. Orange hairlines mark the property-damage-only
-                reporting rule changes ({ruleChanges.join(", ")}): they changed how many minor
-                crashes were recorded, not FSI crashes, which is why this tile counts FSI. The
-                shaded year is provisional.
+                mean of the trailing 12 months. Orange hairlines mark the changes to the rules for
+                recording property-damage-only (PDO) crashes ({ruleChanges.join(", ")}). They
+                changed how many PDO crashes were recorded, not FSI crashes, which is why this tile
+                counts FSI. The shaded year is provisional.
               </p>
             }
           >
@@ -448,9 +467,8 @@ export default function ProjectPage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground">
-                  {nf.format(kpis.crashes_without_lga)} crashes have no council recorded; they are
-                  grouped as UNINCORPORATED OR UNKNOWN.
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  {notRankedNote}
                 </p>
               </div>
             </div>

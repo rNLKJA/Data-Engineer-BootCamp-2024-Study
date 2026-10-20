@@ -46,7 +46,7 @@ models:
                 field: crash_id
 
   - name: dim_lga
-    description: One row per council area with its main statistical area.
+    description: One row per council area name in the data, with its main statistical area.
     columns:
       - name: lga_name
         data_tests:
@@ -57,3 +57,7 @@ models:
           - accepted_values:
               arguments:
                 values: ["City", "Metropolitan", "Country"]
+      - name: is_council
+        description: >
+          False for the four names that are not councils: UNINCORPORATED OR UNKNOWN
+          (no LGA recorded) and DIT's three unincorporated-area groupings.

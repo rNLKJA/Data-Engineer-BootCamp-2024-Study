@@ -2456,6 +2456,48 @@
         "year": 2025
       }
     ],
+    "non_council_lgas": [
+      {
+        "crashes": 1665,
+        "fatal_crashes": 72,
+        "fsi_crashes": 375,
+        "is_unknown": true,
+        "lga_name": "UNINCORPORATED OR UNKNOWN",
+        "main_stats_area": "Country",
+        "serious_injury_crashes": 303,
+        "stats_areas": 1
+      },
+      {
+        "crashes": 10,
+        "fatal_crashes": 0,
+        "fsi_crashes": 1,
+        "is_unknown": false,
+        "lga_name": "UNINCORP (EASTERN)",
+        "main_stats_area": "Country",
+        "serious_injury_crashes": 1,
+        "stats_areas": 1
+      },
+      {
+        "crashes": 35,
+        "fatal_crashes": 1,
+        "fsi_crashes": 1,
+        "is_unknown": false,
+        "lga_name": "UNINCORP (NORTHERN & WESTERN)",
+        "main_stats_area": "Country",
+        "serious_injury_crashes": 0,
+        "stats_areas": 1
+      },
+      {
+        "crashes": 4,
+        "fatal_crashes": 0,
+        "fsi_crashes": 0,
+        "is_unknown": false,
+        "lga_name": "METRO UNINCORPORATED",
+        "main_stats_area": "Metropolitan",
+        "serious_injury_crashes": 0,
+        "stats_areas": 1
+      }
+    ],
     "regions": [
       {
         "casualty_crashes": 50879,
@@ -2553,23 +2595,13 @@
         "serious_injury_crashes": 397
       },
       {
-        "crashes": 1665,
-        "fatal_crashes": 72,
-        "fsi_crashes": 375,
-        "fsi_pct_of_casualty_crashes": 46.88,
-        "lga_name": "UNINCORPORATED OR UNKNOWN",
-        "main_stats_area": "Country",
-        "rank": 7,
-        "serious_injury_crashes": 303
-      },
-      {
         "crashes": 10371,
         "fatal_crashes": 15,
         "fsi_crashes": 340,
         "fsi_pct_of_casualty_crashes": 10.73,
         "lga_name": "CITY OF ADELAIDE",
         "main_stats_area": "City",
-        "rank": 8,
+        "rank": 7,
         "serious_injury_crashes": 325
       },
       {
@@ -2579,7 +2611,7 @@
         "fsi_pct_of_casualty_crashes": 10.34,
         "lga_name": "CC MARION",
         "main_stats_area": "Metropolitan",
-        "rank": 9,
+        "rank": 8,
         "serious_injury_crashes": 317
       },
       {
@@ -2589,8 +2621,18 @@
         "fsi_pct_of_casualty_crashes": 9.77,
         "lga_name": "CITY OF WEST TORRENS",
         "main_stats_area": "Metropolitan",
-        "rank": 10,
+        "rank": 9,
         "serious_injury_crashes": 298
+      },
+      {
+        "crashes": 9507,
+        "fatal_crashes": 27,
+        "fsi_crashes": 307,
+        "fsi_pct_of_casualty_crashes": 10.59,
+        "lga_name": "CC MITCHAM",
+        "main_stats_area": "Metropolitan",
+        "rank": 10,
+        "serious_injury_crashes": 280
       }
     ]
   },

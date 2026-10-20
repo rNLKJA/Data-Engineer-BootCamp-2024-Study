@@ -1,5 +1,7 @@
 # SA road crash pipeline (DE Zoomcamp 2024 course project).
 # Run from original/project. `make all` is the whole pipeline plus tests.
+# `make setup` needs Python 3.11: pass PYTHON=/full/path/to/python3.11 if the
+# python3.11 on PATH is missing or is a pyenv shim that fails.
 
 PYTHON ?= python3.11
 VENV ?= .venv
@@ -15,10 +17,10 @@ export DBT_PROFILES_DIR ?= $(CURDIR)/dbt
 
 help:
 	@echo "make setup        create $(VENV) and install pinned requirements"
-	@echo "make infra-local  terraform (or tofu) apply of infra/terraform/local (optional)"
+	@echo "make infra-local  terraform apply of infra/terraform/local (optional; tested with Terraform 1.16)"
 	@echo "make ingest       download, verify and load every release into the Parquet lake"
 	@echo "make dbt          dbt build (models + data tests) into the DuckDB warehouse"
-	@echo "make benchmark    partitioning/clustering benchmark for the dashboard queries"
+	@echo "make benchmark    partitioning/clustering benchmark on representative year-bounded queries"
 	@echo "make export       write web/app/project/dashboard-data.json"
 	@echo "make test         offline tests, then integration tests against the warehouse"
 	@echo "make all          the whole Prefect flow, then all tests"
@@ -34,7 +36,7 @@ setup: $(PY)
 
 TF ?= $(shell command -v terraform 2>/dev/null || command -v tofu 2>/dev/null)
 infra-local:
-	@test -n "$(TF)" || (echo "Install Terraform or OpenTofu first (brew install opentofu)"; exit 1)
+	@test -n "$(TF)" || (echo "Install Terraform 1.16 first (brew install hashicorp/tap/terraform); OpenTofu is untested"; exit 1)
 	cd infra/terraform/local && $(TF) init -input=false && $(TF) apply -input=false -auto-approve && $(TF) output
 
 ingest: $(PY)

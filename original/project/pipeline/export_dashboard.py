@@ -74,12 +74,21 @@ def build_payload(con: duckdb.DuckDBPyConnection, settings: Settings) -> dict[st
                   serious_injury_crashes, fatalities, fsi_pct_of_casualty_crashes, pct_of_all_fsi
            from rpt_region_fsi order by fsi_crashes desc, stats_area""",
     )
+    # Only councils are ranked. Crashes with no council recorded and DIT's
+    # unincorporated-area groupings are exported separately, not ranked.
     lgas = _rows(
         con,
         f"""select fsi_rank as rank, lga_name, main_stats_area, fsi_crashes, fatal_crashes,
                    serious_injury_crashes, crashes, fsi_pct_of_casualty_crashes
-            from rpt_lga_fsi order by fsi_rank limit {TOP_LGAS}""",
+            from rpt_lga_fsi where is_council order by fsi_rank limit {TOP_LGAS}""",
     )
+    non_councils = _rows(
+        con,
+        """select lga_name, is_unknown, main_stats_area, stats_areas, fsi_crashes, fatal_crashes,
+                  serious_injury_crashes, crashes
+           from rpt_lga_fsi where not is_council order by is_unknown desc, fsi_crashes desc, lga_name""",
+    )
+    lga_fsi_total = con.execute("select sum(fsi_crashes) from rpt_lga_fsi").fetchone()[0]
     regimes = _rows(
         con,
         """select regime_id, valid_from, valid_to, pdo_rule_summary as summary
@@ -92,6 +101,7 @@ def build_payload(con: duckdb.DuckDBPyConnection, settings: Settings) -> dict[st
         "crash type FSI": sum(r["fsi_crashes"] for r in crash_types),
         "annual FSI": sum(r["fsi_crashes"] for r in annual),
         "region FSI": sum(r["fsi_crashes"] for r in regions),
+        "council area FSI": lga_fsi_total,
     }
     for name, total in checks.items():
         if total != kpis["fsi_crashes"]:
@@ -147,6 +157,7 @@ def build_payload(con: duckdb.DuckDBPyConnection, settings: Settings) -> dict[st
             "annual_people": annual,
             "regions": regions,
             "top_lgas": lgas,
+            "non_council_lgas": non_councils,
         },
         "generated_by": "original/project/pipeline/export_dashboard.py from dbt reporting models",
     }
@@ -199,6 +210,18 @@ def summarise(payload: dict[str, Any]) -> str:
         lines.append(
             f"  {row['stats_area']:<13} fsi={row['fsi_crashes']:>5} share_of_fsi={row['pct_of_all_fsi']}% "
             f"crashes={row['crashes']:>6} fsi_pct_of_casualty_crashes={row['fsi_pct_of_casualty_crashes']}%"
+        )
+    lines.append("Top council areas by FSI crashes (councils only):")
+    for row in tiles["top_lgas"]:
+        lines.append(
+            f"  {row['rank']:>2}. {row['lga_name']:<32} fsi={row['fsi_crashes']:>4} fatal={row['fatal_crashes']:>3} "
+            f"crashes={row['crashes']:>6} main_area={row['main_stats_area']}"
+        )
+    lines.append("Not ranked (not a council):")
+    for row in tiles["non_council_lgas"]:
+        lines.append(
+            f"      {row['lga_name']:<32} fsi={row['fsi_crashes']:>4} fatal={row['fatal_crashes']:>3} "
+            f"crashes={row['crashes']:>6} main_area={row['main_stats_area']} stats_areas={row['stats_areas']}"
         )
     monthly = tiles["monthly_fsi"]
     peak = max(monthly, key=lambda r: (r["fsi_crashes"], r["month"]))

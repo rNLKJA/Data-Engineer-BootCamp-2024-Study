@@ -4,7 +4,8 @@
 # equivalents of what a cloud stack would create: the landing zone and lake
 # folders (stand-ins for GCS buckets), the warehouse folder (stand-in for a
 # BigQuery dataset), and the rendered configuration the pipeline and dbt read.
-# Works with Terraform >= 1.6 or OpenTofu.
+# Tested with Terraform 1.16.6. OpenTofu is untested: the lock file is keyed to
+# registry.terraform.io, so `tofu init` would probably rewrite it.
 
 terraform {
   required_version = ">= 1.6.0"

@@ -1,4 +1,4 @@
-"""Measure what partitioning and clustering buy for the dashboard queries.
+"""Measure what partitioning and clustering buy for representative queries.
 
 Two layouts of the same ``fct_crashes`` rows, both with 8,192-row row groups:
 
@@ -7,11 +7,17 @@ Two layouts of the same ``fct_crashes`` rows, both with 8,192-row row groups:
 * ``curated``: the dbt export in ``lake/curated/fct_crashes``, partitioned by
   ``crash_year`` and sorted by ``crash_month, lga_name, severity_code``.
 
-For each dashboard query and layout this reports the files DuckDB opened (from
-EXPLAIN ANALYZE), and the row groups whose min/max statistics could hold a
-matching row, i.e. the row groups a reader cannot skip. At about 200,000 rows
-every query runs in milliseconds either way; the point is how much data is
-skipped, which is what would cost money on a scanned-bytes warehouse.
+The queries are representative, not ones the pipeline runs: two year-bounded
+versions of the dashboard tiles (as a year filter or a reload of the latest
+release would run them) and a council drill-down. The dbt reporting models that
+feed the dashboard aggregate every year from the DuckDB table instead, and this
+module is the only reader of the partitioned copy.
+
+For each query and layout this reports the files DuckDB opened (from EXPLAIN
+ANALYZE), and the row groups whose min/max statistics could hold a matching
+row, i.e. the row groups a reader cannot skip. At about 200,000 rows every
+query runs in milliseconds either way; the point is how much data is skipped,
+which is what would cost money on a scanned-bytes warehouse.
 """
 
 from __future__ import annotations
@@ -56,7 +62,7 @@ class DashboardQuery:
 QUERIES = (
     DashboardQuery(
         name="tile2_monthly_fsi_2021_2025",
-        description="Tile 2 refresh for the latest release window: monthly FSI crashes, 2021-2025",
+        description="Representative: Tile 2 for the latest release window, monthly FSI crashes 2021-2025",
         sql=(
             "select crash_month, count(*) filter (where is_fsi) as fsi_crashes from {src} "
             "where crash_year between 2021 and 2025 group by crash_month order by crash_month"
@@ -66,7 +72,7 @@ QUERIES = (
     ),
     DashboardQuery(
         name="tile1_crash_type_fsi_2024",
-        description="Tile 1 for one year: FSI crashes by crash type, 2024",
+        description="Representative: Tile 1 for one year, FSI crashes by crash type 2024",
         sql=(
             "select crash_type, count(*) as fsi_crashes from {src} "
             "where crash_year = 2024 and severity_code >= 3 group by crash_type order by crash_type"
@@ -79,7 +85,7 @@ QUERIES = (
     ),
     DashboardQuery(
         name="lga_drilldown_adelaide_q1_2024",
-        description="Council drill-down with no year filter: City of Adelaide, Jan-Mar 2024",
+        description="Representative: council drill-down with no year filter, City of Adelaide Jan-Mar 2024",
         sql=(
             "select crash_month, count(*) as crashes from {src} "
             "where crash_month between date '2024-01-01' and date '2024-03-01' "

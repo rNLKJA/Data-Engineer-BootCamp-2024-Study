@@ -40,12 +40,16 @@ models:
           - non_negative
 
   - name: rpt_lga_fsi
-    description: FSI crashes per council area across all years (counts, not rates).
+    description: >
+      FSI crashes per council area across all years (counts, not rates). Only
+      councils are ranked; non-council names keep their rows with a NULL fsi_rank.
     columns:
       - name: lga_name
         data_tests:
           - unique
           - not_null
+      - name: fsi_rank
+        description: Rank among councils by FSI crashes; NULL for names that are not councils.
 
   - name: rpt_region_fsi
     description: FSI crashes per statistical area (City, Metropolitan, Country).

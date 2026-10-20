@@ -32,11 +32,11 @@ This repository is **my personal study record** as I work through the course. It
 | Week 6 | Stream Processing            | Done   | Redpanda/Kafka producer-consumer, stateful aggregation, CI testing (completed Oct 2026)                                                                               |
 | Week 7 | Project                      | Done   | [SA road crash pipeline and dashboard](original/project/README.md): Prefect, Parquet lake, dbt on DuckDB, Terraform (completed in October 2026 with Claude as a pair programmer) |
 
-**Note**: Week 1 was completed in January 2024. Weeks 2 through 6 and the Week 7 course project were completed in October 2026 with Claude Code as a pair programmer, using local substitutes for cloud services (DuckDB for BigQuery, local Parquet for GCS, Redpanda for Kafka in CI).
+**Note**: Week 1 was completed in January 2024. Weeks 2 through 6 and the Week 7 course project were completed in October 2026 with Claude as a pair programmer, using local substitutes for cloud services (DuckDB for BigQuery, local Parquet for GCS, Redpanda for Kafka in CI).
 
 ## Course project
 
-The Week 7 course project is a batch pipeline over South Australia's public road crash data, 2012 to 2025. A Prefect flow downloads and checksums ten releases from data.sa.gov.au, lands them in a year-partitioned Parquet lake, builds and tests dbt models on DuckDB, benchmarks the partitioning and clustering, and exports the numbers for a two-tile dashboard: [data-engineer-bootcamp-pink.vercel.app/project](https://data-engineer-bootcamp-pink.vercel.app/project). Terraform manages the local folders and config and, in CI, builds and runs the pipeline as a Docker container. The write-up, with the evaluation criteria, dataset licence and reproduction steps, is in [`original/project/README.md`](original/project/README.md), and the real run output is in [`original/project/RUN_LOG.md`](original/project/RUN_LOG.md). It was completed in October 2026 with Claude as a pair programmer.
+The Week 7 course project is a batch pipeline over South Australia's public road crash data, 2012 to 2025. A Prefect flow downloads and checksums ten releases from data.sa.gov.au, lands them in a year-partitioned Parquet lake, builds and tests dbt models on DuckDB, benchmarks the partitioning and clustering, and exports the numbers for a dashboard of three charts and supporting tables: [data-engineer-bootcamp-pink.vercel.app/project](https://data-engineer-bootcamp-pink.vercel.app/project). Terraform manages the local folders and config and, in CI, builds and runs the pipeline as a Docker container. The write-up, with the evaluation criteria, dataset licence and reproduction steps, is in [`original/project/README.md`](original/project/README.md), and the real run output is in [`original/project/RUN_LOG.md`](original/project/RUN_LOG.md). It was completed in October 2026 with Claude as a pair programmer.
 
 ## Syllabus
 
@@ -102,10 +102,10 @@ The seven-week outline from the course, kept here for reference.
 
 ## Week 1 — Getting Started
 
-Week 1 is the implemented part of this repo. It spins up Postgres and pgAdmin with Docker Compose, downloads NYC yellow-taxi parquet files, and loads them into the local database with SQLAlchemy. Full notes live in [`week1_introduction_and_prerequisites/README.md`](./week1_introduction_and_prerequisites/README.md).
+Week 1 was the first week I implemented, in January 2024. Every week now lives under [`original/`](original), with the course project in [`original/project/`](original/project). Week 1 spins up Postgres and pgAdmin with Docker Compose, downloads NYC yellow-taxi parquet files, and loads them into the local database with SQLAlchemy. Full notes live in [`original/week1_introduction_and_prerequisites/README.md`](original/week1_introduction_and_prerequisites/README.md).
 
 ```bash
-cd week1_introduction_and_prerequisites
+cd original/week1_introduction_and_prerequisites
 
 # 1. Create and activate a virtual environment
 python3 -m venv my_venv

@@ -96,7 +96,7 @@ const WEEKS = [
       "Prefect batch pipeline to a Parquet lake",
       "dbt on DuckDB with data tests",
       "Partitioning, clustering and Terraform",
-      "Two-tile dashboard, built from the pipeline",
+      "Three-chart dashboard, built from the pipeline",
     ],
   },
 ] as const;
@@ -406,7 +406,7 @@ export default function HomePage() {
                 2025: a Prefect flow downloads and checksums ten releases, lands them in a
                 year-partitioned Parquet lake, and dbt on DuckDB models them for a{" "}
                 <Link href="/project" className="text-mint underline-offset-4 hover:underline">
-                  two-tile dashboard
+                  dashboard of three charts and supporting tables
                 </Link>
                 .
               </p>
