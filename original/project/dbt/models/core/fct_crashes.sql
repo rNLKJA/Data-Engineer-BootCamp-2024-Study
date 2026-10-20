@@ -2,9 +2,12 @@
   Curated crash fact. DuckDB has no CLUSTER BY, so clustering is done by
   writing rows in (crash_month, lga_name, severity_code) order: each row group's
   min/max statistics then cover a narrow range and DuckDB can skip row groups
-  for month-bounded dashboard queries. The post-hook exports the same rows as
-  Parquet partitioned by crash_year with small (8,192-row) row groups, which is
-  the layout pipeline/benchmark.py measures.
+  for month-bounded queries. The post-hook exports the same rows as Parquet
+  partitioned by crash_year with small (8,192-row) row groups, which is the
+  layout pipeline/benchmark.py measures with representative year-bounded
+  queries. The pipeline itself does not run those queries: the reporting models
+  read this DuckDB table (sorted, not partitioned) and aggregate every year, and
+  only the benchmark reads the partitioned copy.
 #}
 {{
   config(

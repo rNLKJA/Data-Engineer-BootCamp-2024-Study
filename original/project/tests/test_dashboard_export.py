@@ -71,6 +71,20 @@ def test_totals_reconcile_with_the_warehouse(committed, con):
     assert sum(r["crashes"] for r in tiles["regions"]) == crashes
 
 
+def test_council_ranking_holds_only_councils(committed, con):
+    tiles = committed["tiles"]
+    top = tiles["top_lgas"]
+    assert [r["rank"] for r in top] == list(range(1, 11))
+    assert not any("UNINCORP" in r["lga_name"] for r in top)
+    unknown = [r for r in tiles["non_council_lgas"] if r["is_unknown"]]
+    assert [r["lga_name"] for r in unknown] == ["UNINCORPORATED OR UNKNOWN"]
+    assert unknown[0]["crashes"] == committed["kpis"]["crashes_without_lga"]
+    non_council_fsi = con.execute(
+        "select count(*) filter (where is_fsi) from fct_crashes where lga_name like '%UNINCORP%'"
+    ).fetchone()[0]
+    assert sum(r["fsi_crashes"] for r in tiles["non_council_lgas"]) == non_council_fsi
+
+
 def test_crash_types_are_sorted_by_fsi(committed):
     fsi = [r["fsi_crashes"] for r in committed["tiles"]["crash_type_fsi"]]
     assert fsi == sorted(fsi, reverse=True)

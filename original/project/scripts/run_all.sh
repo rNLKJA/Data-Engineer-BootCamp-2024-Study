@@ -36,6 +36,7 @@ log="$(mktemp)"
   echo
   echo "Real terminal output of \`scripts/run_all.sh\` (which runs \`make all\`) on the machine"
   echo "and date shown below. Nothing here is edited except that this header was added."
+  echo "Prefect log times are in the machine's local time ($(date +%Z), UTC$(date +%z)); dbt log times are in UTC."
   echo
   echo '```text'
   cat "$log"
